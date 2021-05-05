@@ -69,8 +69,8 @@ class ActionInfectionNumbers(Action):
             if data["state"] == state.title():
                 print(data)
         
-        dispatcher.utter_message(text="Take care of yourself and your family")
+        #dispatcher.utter_message(text="Take care of yourself and your family")
         print("This action is from Corona action")
-        #dispatcher.utter_message(text="Take care of yourself and your family" + state.title())
+        dispatcher.utter_message(text="Take care of yourself and your family in " + state.title())
         return []
 
