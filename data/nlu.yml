@@ -127,12 +127,13 @@ nlu:
     - austria
     - australia 
     - goa
+    - usa
        
 - intent: infection_numbers
   examples: |
-    - covid cases in [germany](country)
-    - corona cases in [germany](country)
-    - infection numbers [france](country)
-    - how many infections in [russia](country)
+    - covid cases in [germany]{"entity": "country"}
+    - corona cases in [germany]{"entity": "country"}
+    - infection numbers [france]{"entity": "country"}
+    - how many infections in [russia]{"entity": "country"}
 
   
