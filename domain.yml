@@ -12,11 +12,15 @@ intents:
   - cars
   - hello_world
   - infection_numbers
+  - travel_restrictions
 
-
+entities:
+  - country
+  
 actions:
   - action_hello_world
   - action_infection_numbers
+  - action_travel_restrictions
 
 responses:
   utter_greet:
@@ -48,9 +52,12 @@ responses:
   - text: "This is Hello World response"
 
   utter_infection_numbers:
-  - text: "This is Corona_App response"
+  - text: "Please be careful."
   
+  utter_travel_restrictions:
+  - text : "Lassen Sie sich bitte impfen!"
 
+  
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

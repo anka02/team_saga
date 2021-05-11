@@ -52,4 +52,11 @@ stories:
   - action: utter_infection_numbers 
   - action: action_infection_numbers
 
+- story: travel_restrictions path
+  steps:
+  - intent: travel_restrictions
+    entities:
+    - country: country
+  - action: utter_travel_restrictions
+  - action: action_travel_restrictions
 

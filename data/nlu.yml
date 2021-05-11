@@ -135,5 +135,16 @@ nlu:
     - corona cases in [germany]{"entity": "country"}
     - infection numbers [france]{"entity": "country"}
     - how many infections in [russia]{"entity": "country"}
+    - covid cases in [canada]{"entity": "country"}
+    - covid cases in [sweden]{"entity": "country"}
+    - covid cases in [portugal]{"entity": "country"}
+    - infection numbers [italy]{"entity": "country"}
 
-  
+- intent: travel_restrictions
+  examples: |
+    - what rules are in [germany]{"entity": "country"}
+    - what restrictions are in [france]{"entity": "country"}
+    - what rules are for travellers in [canada]{"entity": "country"}
+    - what is allowed to do in the covid time in [italy]{"entity": "country"}
+    - how long is the carantin in [portugal]{"entity": "country"}
+    
