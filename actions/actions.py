@@ -39,20 +39,6 @@ with open(iso_file, newline='') as csvfile:
 #
 #         return []
 
-class ActionHelloWorld(Action):
-
-    def name(self) -> Text:
-        return "action_hello_world"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        print("This action is from py file")
-        dispatcher.utter_message(text="Text from my first hello world action")
-
-        return []
-
 class ActionInfectionNumbers(Action):
 
     def name(self) -> Text:
@@ -67,7 +53,7 @@ class ActionInfectionNumbers(Action):
             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
             return []
 
-        print("Last Message Now", entities)
+        print("Message : ", entities)
         #output: [{'entity': 'country', 'start': 12, 'end': 18, 'confidence_entity': 0.9983867406845093, 'value': 'france', 'extractor': 'DIETClassifier'}]
         
         country = None
@@ -75,7 +61,7 @@ class ActionInfectionNumbers(Action):
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
-                print(country) 
+                #print(country) 
         #region = "Saarland"
             
         PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
@@ -107,7 +93,7 @@ class ActionTravelRestrictions(Action):
             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
             return []
 
-        print("Last Message Now", entities)
+        print("Message:", entities)
         #online API testing tool https://reqbin.com
         PARAMS = {'airport':'TXL'} #should be taken from mapped iso and iata code airport dictionary
         r = requests.get(url="https://covid-api.thinklumo.com/data", headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
@@ -117,7 +103,7 @@ class ActionTravelRestrictions(Action):
         data = r.json()
         print("DATA JSON: ", data)
 
-        dispatcher.utter_message(text="Stay safe")
+        dispatcher.utter_message(text="Keep calm and keep distance")
         print("This action is from Restriction action")
 
         return []

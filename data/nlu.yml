@@ -17,14 +17,6 @@ nlu:
     - goodevening
     - good afternoon
 
-- intent: inspiration
-  examples: |
-    - where i find my inspiration?
-
-- intent: cars
-  examples: |
-    - How do German make the cars?
-
 - intent: goodbye
   examples: |
     - good afternoon
@@ -99,52 +91,46 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-- intent: hello_world
-  examples: |
-    - world
-    - programming
-    - first expirience
-
-- lookup: country
-  examples: |
-    - germany
-    - france
-    - china
-    - italy
-    - united kingdom
-    - united states
-    - canada
-    - mexico
-    - portugal
-    - spain
-    - russia
-    - poland
-    - finland
-    - sweden
-    - india
-    - indonesia
-    - switzerland
-    - austria
-    - australia 
-    - goa
-    - usa
+#- lookup: country
+#  examples: |
+#    - germany
+#    - france
+#    - china
+#    - italy
+#    - united kingdom
+#    - united states
+#    - canada
+#    - mexico
+#    - portugal
+#    - spain
+#    - russia
+#    - poland
+#    - finland
+#    - sweden
+#    - india
        
 - intent: infection_numbers
   examples: |
-    - covid cases in [germany]{"entity": "country"}
-    - corona cases in [germany]{"entity": "country"}
-    - infection numbers [france]{"entity": "country"}
-    - how many infections in [russia]{"entity": "country"}
-    - covid cases in [canada]{"entity": "country"}
-    - covid cases in [sweden]{"entity": "country"}
-    - covid cases in [portugal]{"entity": "country"}
-    - infection numbers [italy]{"entity": "country"}
+    - covid cases in [germany](country) 
+    - corona cases in [china](country)
+    - infection numbers [france](country)
+    - how many infections in [russia](country)
+    - covid cases in [sweden](country)
+    - covid cases in [portugal](country)
+    - infection numbers [italy](country)
+    - infection numbers [austria](country)
+    - covid cases in [india](country)
+    - how many infections in [finland](country)
+    - covid cases in [latvia](country)
+    - covid cases in [belarus](country)
+    - infection numbers [armenia](country)
+    - infection numbers [england](country)
+    - covid cases in [luxemburg](country)
 
 - intent: travel_restrictions
   examples: |
-    - what rules are in [germany]{"entity": "country"}
-    - what restrictions are in [france]{"entity": "country"}
-    - what rules are for travellers in [canada]{"entity": "country"}
-    - what is allowed to do in the covid time in [italy]{"entity": "country"}
-    - how long is the carantin in [portugal]{"entity": "country"}
+    - what rules are in [germany](country)
+    - what restrictions are in [france](country)
+    - what is allowed to do in the covid time in [italy](country)
+    - how long is the carantin in [portugal](country)
     

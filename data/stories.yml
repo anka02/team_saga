@@ -9,21 +9,6 @@ stories:
   - intent: mood_great
   - action: utter_happy
 
-- story: inspiration path
-  steps:
-  - intent: inspiration
-  - action: utter_inspiration
-
-- story: cars path
-  steps:
-  - intent: cars
-  - action: utter_cars
-
-- story: hello_world path
-  steps:
-  - intent: hello_world
-  - action: action_hello_world
-
 - story: sad path 1
   steps:
   - intent: greet

@@ -8,9 +8,6 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-  - inspiration
-  - cars
-  - hello_world
   - infection_numbers
   - travel_restrictions
 
@@ -18,7 +15,6 @@ entities:
   - country
   
 actions:
-  - action_hello_world
   - action_infection_numbers
   - action_travel_restrictions
 
@@ -42,20 +38,11 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by SAGA."
 
-  utter_inspiration:
-  - text: "Use spontaneity to your advantage."
-
-  utter_cars:
-  - text: "Perfectly!"
-
-  utter_hello_world:
-  - text: "This is Hello World response"
-
   utter_infection_numbers:
   - text: "Please be careful."
   
   utter_travel_restrictions:
-  - text : "Lassen Sie sich bitte impfen!"
+  - text : "Stay informed stay safe."
 
   
 session_config:
