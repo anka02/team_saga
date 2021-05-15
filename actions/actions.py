@@ -11,6 +11,7 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from spellchecker import SpellChecker
 import requests
 import os.path
 import csv
@@ -63,8 +64,12 @@ class ActionInfectionNumbers(Action):
                 country = e['value'].lower()
                 #print(country) 
         #region = "Saarland"
-            
-        PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
+        try:
+            PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
+        except KeyError:
+            spell = SpellChecker()
+            PARAMS = {'iso': locations_dict[spell.correction(country)]}
+            print(spell.correction(country))
 
         #URL = "https://covid-api.com/api/reports" #gives the information about cities and regions
         
