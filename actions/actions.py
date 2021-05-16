@@ -66,23 +66,35 @@ class ActionInfectionNumbers(Action):
         #region = "Saarland"
         try:
             PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
-        except KeyError:
-            spell = SpellChecker()
-            PARAMS = {'iso': locations_dict[spell.correction(country)]}
-            print(spell.correction(country))
+            URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
+            r = requests.get(url=URL, params=PARAMS)
+            r.raise_for_status()
 
+            data = r.json()
+            print("DATA JSON: ", data)
+
+            dispatcher.utter_message(text="Take care of yourself and your family")
+            print("This action is from Corona action")
+        except KeyError:
+            try:
+                spell = SpellChecker()
+                PARAMS = {'iso': locations_dict[spell.correction(country)]}
+                print(spell.correction(country))
+                URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
+                r = requests.get(url=URL, params=PARAMS)
+                r.raise_for_status()
+
+                data = r.json()
+                print("DATA JSON: ", data)
+
+                dispatcher.utter_message(text="Take care of yourself and your family")
+                print("This action is from Corona action")
+                return []
+            except KeyError:
+                dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
         #URL = "https://covid-api.com/api/reports" #gives the information about cities and regions
-        
-        URL = "https://covid-api.com/api/reports/total" #gives the information just in country
-        r = requests.get(url=URL,params=PARAMS)
-        r.raise_for_status()
-        
-        data = r.json()
-        print("DATA JSON: ", data)
-    
-        dispatcher.utter_message(text="Take care of yourself and your family")
-        print("This action is from Corona action")
-        return []
+
+
 
 class ActionTravelRestrictions(Action):
 

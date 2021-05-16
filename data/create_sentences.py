@@ -3,7 +3,7 @@ countries = []
 with open ("country.yml", encoding = "utf-8", mode = "r") as f:
     for line in f:
         if '-' in line and "lookup" not in line:
-            countries.append(line[:len(line)-2])
+            countries.append(line[:len(line)-1])
 
 
 with open ("test.txt", encoding="utf-8", mode = "w+") as f:
