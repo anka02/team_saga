@@ -8,7 +8,7 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from typing import Any, Text, Dict, List
+from typing import Any, DefaultDict, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from spellchecker import SpellChecker
@@ -16,15 +16,26 @@ import requests
 import os.path
 import csv
 from requests.auth import HTTPBasicAuth
+from collections import defaultdict
+from pprint import pprint
 
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
+iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
+airport_dict = defaultdict(dict)
 
-with open(iso_file, newline='') as csvfile:
-    isoreader = csv.reader(csvfile)
+with open(iso_file, newline='') as csvfile_iso:
+    isoreader = csv.reader(csvfile_iso)
     for row in isoreader:
         locations_dict[row[0].lower()] = row[2]
 
+with open(iata_file,newline='') as csvfile_iata:
+    iatareader = csv.reader(csvfile_iata)
+    for row in iatareader:
+        airport_dict[row[1].lower()][row[0].lower()] = row[2]
+
+with open('iata_country.txt', 'wt') as out:
+    pprint(airport_dict, stream=out)
 #
 #
 # class ActionHelloWorld(Action):
@@ -55,14 +66,12 @@ class ActionInfectionNumbers(Action):
             return []
 
         print("Message : ", entities)
-        #output: [{'entity': 'country', 'start': 12, 'end': 18, 'confidence_entity': 0.9983867406845093, 'value': 'france', 'extractor': 'DIETClassifier'}]
-        
         country = None
         
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
-                #print(country) 
+                
         #region = "Saarland"
         try:
             PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
@@ -112,15 +121,41 @@ class ActionTravelRestrictions(Action):
 
         print("Message:", entities)
         #online API testing tool https://reqbin.com
-        PARAMS = {'airport':'TXL'} #should be taken from mapped iso and iata code airport dictionary
-        r = requests.get(url="https://covid-api.thinklumo.com/data", headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
-       
-        r.raise_for_status()
         
-        data = r.json()
-        print("DATA JSON: ", data)
+        country = None
+        #city = None
+        
+        for e in entities:
+            if e['entity'] == 'country':
+                country = e['value'].lower()
+                #add entity city 
 
-        dispatcher.utter_message(text="Keep calm and keep distance")
-        print("This action is from Restriction action")
+        try:
+            #if city == None:
+            airport_iata = next(iter(airport_dict[country].items()))[1]
+            PARAMS = {'airport': airport_iata} #should be taken from mapped iso and iata code airport dictionary
+            r = requests.get(url="https://covid-api.thinklumo.com/data", headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
+            r.raise_for_status()
+            data = r.json()
+            print("DATA JSON: ", data)
+
+            dispatcher.utter_message(text="Keep calm and keep distance")
+            print("This action is from Travel Restriction action")
+        except KeyError:
+            try:
+                spell = SpellChecker()
+                airport_iata = next(iter(airport_dict[country].items()))[1]
+                PARAMS = {'airport': airport_iata[spell.correction(country)]}
+                print(spell.correction(country))
+                URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
+                r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
+                r.raise_for_status()
+                data = r.json()
+                print("DATA JSON: ", data)
+                dispatcher.utter_message(text="Keep calm and keep distance")
+                print("This action is from Travel Restriction action")
+                return []
+            except KeyError:
+                dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
 
         return []
