@@ -18,6 +18,7 @@ import csv
 from requests.auth import HTTPBasicAuth
 from collections import defaultdict
 from pprint import pprint
+from datetime import datetime, timedelta
 
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
 iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
@@ -67,14 +68,23 @@ class ActionInfectionNumbers(Action):
 
         print("Message : ", entities)
         country = None
-        
+        date = None
+
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
-                
+            if e['entity'] == 'date':
+                date = e['value']
+        if date == 'today':
+            #date = datetime.today().strftime('%Y-%m-%d')
+            #as a rule the last update is for yesterday
+            date = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
+
+        if date == 'yesterday' or None:
+            date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
         #region = "Saarland"
         try:
-            PARAMS = {'iso':locations_dict[country]} #,'region_province' :region}
+            PARAMS = {'iso':locations_dict[country],'date': date } #,'region_province' :region}
             URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
             r = requests.get(url=URL, params=PARAMS)
             r.raise_for_status()
