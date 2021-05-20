@@ -31,6 +31,8 @@ stories:
 
 - story: infection_numbers path
   steps:
+  - intent: greet
+  - action: utter_greet
   - intent: infection_numbers
     entities:
     - country: country
@@ -39,6 +41,8 @@ stories:
 
 - story: travel_restrictions path
   steps:
+  - intent: greet
+  - action: utter_greet
   - intent: travel_restrictions
     entities:
     - country: country
