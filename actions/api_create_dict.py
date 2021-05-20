@@ -19,9 +19,9 @@ with open(iata_file,newline='') as csvfile_iata:
 
 list_of_missing_country = []
 count = 0
-for key_cuntry in locations_dict.keys():
-    if key_cuntry not in airport_dict.keys():
-        list_of_missing_country.append(key_cuntry)
+for key_country in locations_dict.keys():
+    if key_country not in airport_dict.keys():
+        list_of_missing_country.append(key_country)
 to_add = set(list_of_missing_country)
 for i in to_add:
     count += 1
