@@ -343,3 +343,22 @@ nlu:
     - what is allowed to do in the covid time in [italy](country)
     - how long is the carantin in [portugal](country)
     
+- intent: infection_numbers_by_cities
+  examples: |
+    - how much corona cases in [Atchison](city)
+    - how much corona cases in [Coffey](city)
+    - how much corona cases in [Lucas](city)
+    - how much corona cases in [Morgan](city)
+    - how much corona cases in [Putnam](city)
+    - how much corona cases in [Chester](city)
+    - how much corona cases in [Anoka](city)
+    - how much corona cases in [Butte](city)
+    - how much corona cases in [Lake](city)
+    - how much corona cases in [Franklin](city)
+    - how much corona cases in [Mesa](city)
+    - how much corona cases in [Hill](city)
+    - how much corona cases in [Houston](city)
+    - how much corona cases in [Panola](city)
+    - how much corona cases in [Somervell](city)
+    - how much corona cases in [Unassigned](city)
+    - how much corona cases in [Brunswick](city)

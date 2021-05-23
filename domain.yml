@@ -10,13 +10,16 @@ intents:
   - bot_challenge
   - infection_numbers
   - travel_restrictions
+  - infection_numbers_by_cities
 
 entities:
   - country
+  - city
   
 actions:
   - action_infection_numbers
   - action_travel_restrictions
+  - action_infection_numbers_by_cities
 
 responses:
   utter_greet:
