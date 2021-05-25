@@ -362,3 +362,4 @@ nlu:
     - how many corona cases in [Somervell](city)
     - how many corona cases in [Unassigned](city)
     - how many corona cases in [Brunswick](city)
+    - tell me the number of cases in [Houston](city)

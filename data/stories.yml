@@ -45,3 +45,10 @@ stories:
   - action: utter_travel_restrictions
   - action: action_travel_restrictions
 
+- story: infection_numbers_by_cities path
+  steps:
+  - intent: infection_numbers_by_cities
+    entities:
+    - city: city
+  - action: action_infection_numbers_by_cities
+

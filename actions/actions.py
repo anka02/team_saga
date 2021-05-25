@@ -206,7 +206,8 @@ class ActionInfectionNumbersCities(Action):
 
             dispatcher.utter_message(text="There are multiple cities with a similar name:" + str(possible_cities))
         elif len(data['data']) == 1:
-            casenumber = data['data']['confirmed']
+            print(data)
+            casenumber = data['data'][0]['confirmed']
             dispatcher.utter_message(text=f"Current cases in {city} are {casenumber}.")
             dispatcher.utter_message(text="Take care of yourself and your family")
 
