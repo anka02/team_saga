@@ -17,8 +17,8 @@ import os.path
 import csv
 from requests.auth import HTTPBasicAuth
 from collections import defaultdict
-from pprint import pprint
 from datetime import datetime, timedelta
+import pprint
 
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
 iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
@@ -35,8 +35,8 @@ with open(iata_file,newline='') as csvfile_iata:
     for row in iatareader:
         airport_dict[row[1].lower()][row[0].lower()] = row[2]
 
-with open('iata_country.txt', 'wt') as out:
-    pprint(airport_dict, stream=out)
+'''with open('iata_country.txt', 'wt') as out:
+    pprint(airport_dict, stream=out)'''
 #
 #
 # class ActionHelloWorld(Action):
@@ -69,12 +69,15 @@ class ActionInfectionNumbers(Action):
         print("Message : ", entities)
         country = None
         date = None
+        region = None
 
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
             if e['entity'] == 'date':
                 date = e['value']
+            if e['entity'] == 'region':
+                region = e['value'].lower()
         if date == 'today':
             #date = datetime.today().strftime('%Y-%m-%d')
             #as a rule the last update is for yesterday
@@ -82,13 +85,19 @@ class ActionInfectionNumbers(Action):
 
         if date == 'yesterday' or None:
             date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
-        #region = "Saarland"
-        try:
-            PARAMS = {'iso':locations_dict[country],'date': date } #,'region_province' :region}
-            URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
-            r = requests.get(url=URL, params=PARAMS)
-            r.raise_for_status()
 
+
+        try:
+            PARAMS = {'iso':locations_dict[country],'date': date,'region_province': region}
+            URL = "https://covid-api.com/api/reports/total"
+            if region == None:
+                r = requests.get(url=URL, params=PARAMS)
+                r.raise_for_status()
+            else:
+                URL_2 = "https://covid-api.com/api/reports"
+                PARAMS_2 = {'iso':'DEU', 'date': date, 'region_province': region}
+                r = requests.get(url=URL_2, params=PARAMS_2)
+                r.raise_for_status()
             data = r.json()
             print("DATA JSON: ", data)
 
@@ -111,9 +120,6 @@ class ActionInfectionNumbers(Action):
                 return []
             except KeyError:
                 dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
-        #URL = "https://covid-api.com/api/reports" #gives the information about cities and regions
-
-
 
 class ActionTravelRestrictions(Action):
 
@@ -130,24 +136,26 @@ class ActionTravelRestrictions(Action):
             return []
 
         print("Message:", entities)
-        #online API testing tool https://reqbin.com
         
         country = None
-        #city = None
         
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
-                #add entity city 
 
         try:
-            #if city == None:
             airport_iata = next(iter(airport_dict[country].items()))[1]
-            PARAMS = {'airport': airport_iata} #should be taken from mapped iso and iata code airport dictionary
+            PARAMS = {'airport': airport_iata}
             r = requests.get(url="https://covid-api.thinklumo.com/data", headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
             r.raise_for_status()
-            data = r.json()
-            print("DATA JSON: ", data)
+            data = r.json()['covid_info']['entry_exit_info']
+            pp = pprint.PrettyPrinter(indent=4)
+            print("DATA RESTRICTION COVID INFO")
+            pp.pprint(data)
+            parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+            for i in data:
+                for j in parameters:
+                    print("PARAMETER", "\n", j, i[j], '\n')
 
             dispatcher.utter_message(text="Keep calm and keep distance")
             print("This action is from Travel Restriction action")
@@ -160,8 +168,14 @@ class ActionTravelRestrictions(Action):
                 URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
                 r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
                 r.raise_for_status()
-                data = r.json()
-                print("DATA JSON: ", data)
+                data = r.json()['covid_info']['entry_exit_info']
+                pp = pprint.PrettyPrinter(indent=4)
+                print("DATA RESTRICTION COVID INFO")
+                pp.pprint(data)
+                parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+                for i in data:
+                    for j in parameters:
+                        print("PARAMETER", "\n", j, i[j], '\n')
                 dispatcher.utter_message(text="Keep calm and keep distance")
                 print("This action is from Travel Restriction action")
                 return []

@@ -6,11 +6,11 @@ with open ("country.yml", encoding = "utf-8", mode = "r") as f:
             countries.append(line[:len(line)-1])
 
 
-with open ("test.txt", encoding="utf-8", mode = "w+") as f:
+'''with open ("test.txt", encoding="utf-8", mode = "w+") as f:
     for country in countries:
         f.write(("    - covid cases in [" +
                  " ".join(country.split()[1:])) + "]" +
-                "(country)"+ "\n")
+                "(country)"+ "\n")'''
     # else:
     #     length = len(country.split())
     #     print(country.split()[1:])
