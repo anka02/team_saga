@@ -8,6 +8,7 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
+
 from typing import Any, DefaultDict, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -101,6 +102,7 @@ class ActionInfectionNumbers(Action):
             data = r.json()
             print("DATA JSON: ", data)
 
+            dispatcher.utter_message(text=f"Current confirmed cases in {country} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
             dispatcher.utter_message(text="Take care of yourself and your family")
             print("This action is from Corona action")
         except KeyError:
