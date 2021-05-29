@@ -48,4 +48,3 @@ policies:
      constrain_similarities: true
      model_confidence: linear_norm
    - name: RulePolicy
-   

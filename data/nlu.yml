@@ -111,7 +111,20 @@ nlu:
        
 - intent: infection_numbers
   examples: |
-    - covid cases in [germany](country) [today](date)
+    - covid cases in [germany](country) in [Bayern](region) [today](date)
+    - covid cases in [germany](country) in [Baden-Wurttemberg](region) [yesterday](date)
+    - covid cases in [germany](country) in [Brandenburg](region)
+    - covid cases in [germany](country) in [Bremen](region)
+    - covid cases in [germany](country) in [Hamburg](region) [2021-04-04](date)
+    - covid cases in [germany](country) in [Hessen](region)
+    - covid cases in [germany](country) in [Mecklenburg-Vorpommern](region) [2021-04-04](date)
+    - covid cases in [germany](country) in [Niedersachsen](region)
+    - covid cases in [germany](country) in [Nordrhein-Westfalen](region)
+    - covid cases in [germany](country) in [Saarland](region) [2021-04-04](date)
+    - covid cases in [germany](country) in [Sachsen](region)
+    - covid cases in [germany](country) in [Sachsen-Anhalt](region)
+    - covid cases in [germany](country) in [Schleswig-Holstein](region)
+    - covid cases in [germany](country) in [Thuringen](region)
     - corona cases in [china](country) [yesterday](date)
     - infection numbers [france](country) [yesterday](date)
     - how many infections in [russia](country) [today](date)
