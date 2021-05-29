@@ -26,12 +26,12 @@ iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
 airport_dict = defaultdict(dict)
 
-with open(iso_file, newline='') as csvfile_iso:
+with open(iso_file, newline='', encoding = 'utf-8') as csvfile_iso:
     isoreader = csv.reader(csvfile_iso)
     for row in isoreader:
         locations_dict[row[0].lower()] = row[2]
 
-with open(iata_file,newline='') as csvfile_iata:
+with open(iata_file,newline='', encoding = 'utf-8') as csvfile_iata:
     iatareader = csv.reader(csvfile_iata)
     for row in iatareader:
         airport_dict[row[1].lower()][row[0].lower()] = row[2]
@@ -103,6 +103,7 @@ class ActionInfectionNumbers(Action):
             print("DATA JSON: ", data)
 
             dispatcher.utter_message(text=f"Current confirmed cases in {country} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+
             dispatcher.utter_message(text="Take care of yourself and your family")
             print("This action is from Corona action")
         except KeyError:
@@ -118,6 +119,7 @@ class ActionInfectionNumbers(Action):
                 print("DATA JSON: ", data)
 
                 dispatcher.utter_message(text="Take care of yourself and your family")
+
                 print("This action is from Corona action")
                 return []
             except KeyError:
@@ -139,11 +141,15 @@ class ActionTravelRestrictions(Action):
 
         print("Message:", entities)
         
+        #online API testing tool https://reqbin.com
+
         country = None
-        
+        #city = None
+
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
+                #add entity city
 
         try:
             airport_iata = next(iter(airport_dict[country].items()))[1]
@@ -185,3 +191,48 @@ class ActionTravelRestrictions(Action):
                 dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
 
         return []
+
+class ActionInfectionNumbersCities(Action):
+
+    def name(self) -> Text:
+        return "action_infection_numbers_by_cities"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        entities = tracker.latest_message['entities']
+        if not entities:
+            dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
+            return []
+
+        print("Message : ", entities)
+        city = None
+
+        for e in entities:
+            if e['entity'] == 'city':
+                city = e['value'].lower()
+
+        URL = "https://www.trackcorona.live/api/cities/"  # gives the information just in country
+
+        r = requests.get(url= URL + city)
+
+        data = r.json()
+        print("DATA JSON: ", data)
+
+        if len(data['data']) > 1:
+            possible_cities = []
+            for location in data['data']:
+                possible_cities.append(location['location'])
+
+            dispatcher.utter_message(text="There are multiple cities with a similar name:" + str(possible_cities))
+        elif len(data['data']) == 1:
+            print(data)
+            casenumber = data['data'][0]['confirmed']
+            dispatcher.utter_message(text=f"Current cases in {city} are {casenumber}.")
+            dispatcher.utter_message(text="Take care of yourself and your family")
+
+        print("This action is from Corona action")
+
+        return []
+
