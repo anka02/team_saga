@@ -11,6 +11,7 @@ intents:
   - infection_numbers
   - travel_restrictions
   - infection_numbers_by_cities
+  - summarized_info
 
 entities:
   - country
@@ -20,6 +21,7 @@ actions:
   - action_infection_numbers
   - action_travel_restrictions
   - action_infection_numbers_by_cities
+  - action_corona_info_summarize
 
 responses:
   utter_greet:
@@ -46,6 +48,19 @@ responses:
   
   utter_travel_restrictions:
   - text : "Stay informed stay safe."
+
+  utter_bot_information:
+  - text : >
+        You can ask me about a multitude of things all about COVID-19 like:
+          Case numbers for specific countries
+          Case numbers for specific cities
+          Death numbers for specific countries
+          Death numbers for specific cities
+          Information about currently available vaccines
+
+
+  utter_info_summarized:
+  -  text: "This is a placeholder for the summarized info"
 
   
 session_config:

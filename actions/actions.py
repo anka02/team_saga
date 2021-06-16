@@ -236,3 +236,17 @@ class ActionInfectionNumbersCities(Action):
 
         return []
 
+class ActionCoronaInfoSummarize(Action):
+
+    def name(self) -> Text:
+        return "action_corona_info_summarize"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        entities = tracker.latest_message['entities']
+
+        for e in entities:
+            print(e)
+        print("Summarize Action Ran")

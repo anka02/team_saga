@@ -46,6 +46,13 @@ html = urlopen(req).read()
 #pp = pprint.PrettyPrinter(indent=4)
 create_txt(" ".join(text_from_html(html).split()[459:1262]), "Biontech-vaccine.txt")
 
+I want information about the(origin)
+
+{symptom: "Das ist derLink",
+ origin: "Der Link",
+ vaccine: ["Link zu Vaccine1", "Link zu Vaccine 2"]
+ }
+
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3"}
 reg_url = 'https://www.who.int/news-room/feature-stories/detail/the-sinopharm-covid-19-vaccine-what-you-need-to-know'
 req = Request(url=reg_url, headers=headers)

@@ -6,6 +6,7 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_information
   - intent: mood_great
   - action: utter_happy
 
@@ -13,6 +14,7 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_information
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
@@ -23,6 +25,7 @@ stories:
   steps:
   - intent: greet
   - action: utter_greet
+  - action: utter_bot_information
   - intent: mood_unhappy
   - action: utter_cheer_up
   - action: utter_did_that_help
@@ -51,4 +54,16 @@ stories:
     entities:
     - city: city
   - action: action_infection_numbers_by_cities
+
+- story: Asking about summaries path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - action: action_corona_info_summarize
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
 
