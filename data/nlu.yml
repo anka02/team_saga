@@ -376,3 +376,12 @@ nlu:
     - how many corona cases in [Unassigned](city)
     - how many corona cases in [Brunswick](city)
     - tell me the number of cases in [Houston](city)
+
+- intent: summarized_info
+  examples: |
+    - Could you give me summarized info about the vaccines?
+    - I want to know more about the vaccines
+    - I would like to know more about the vaccines
+    - Summarized info vaccine
+    - Info vaccine
+    - give me info about the vaccines
