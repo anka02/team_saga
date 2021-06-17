@@ -53,6 +53,8 @@ with open(iata_file,newline='', encoding = 'utf-8') as csvfile_iata:
 #
 #         return []
 
+
+
 class ActionInfectionNumbers(Action):
 
     def name(self) -> Text:
@@ -67,7 +69,7 @@ class ActionInfectionNumbers(Action):
             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
             return []
 
-        print("Message : ", entities)
+        #print("Message : ", entities)
         country = None
         date = None
         region = None
@@ -94,15 +96,16 @@ class ActionInfectionNumbers(Action):
             if region == None:
                 r = requests.get(url=URL, params=PARAMS)
                 r.raise_for_status()
+                data = r.json()
+                dispatcher.utter_message(text=f"Current confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
             else:
                 URL_2 = "https://covid-api.com/api/reports"
                 PARAMS_2 = {'iso':'DEU', 'date': date, 'region_province': region}
                 r = requests.get(url=URL_2, params=PARAMS_2)
                 r.raise_for_status()
-            data = r.json()
-            print("DATA JSON: ", data)
-
-            dispatcher.utter_message(text=f"Current confirmed cases in {country} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+                data = r.json()
+                dispatcher.utter_message(text=f"Current confirmed cases in Germany in {region.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+            #print("DATA JSON: ", data)
 
             dispatcher.utter_message(text="Take care of yourself and your family")
             print("This action is from Corona action")
@@ -123,7 +126,7 @@ class ActionInfectionNumbers(Action):
                 print("This action is from Corona action")
                 return []
             except KeyError:
-                dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
+                dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
 class ActionTravelRestrictions(Action):
 
@@ -140,16 +143,12 @@ class ActionTravelRestrictions(Action):
             return []
 
         print("Message:", entities)
-        
-        #online API testing tool https://reqbin.com
 
         country = None
-        #city = None
 
         for e in entities:
             if e['entity'] == 'country':
                 country = e['value'].lower()
-                #add entity city
 
         try:
             airport_iata = next(iter(airport_dict[country].items()))[1]
@@ -161,12 +160,13 @@ class ActionTravelRestrictions(Action):
             print("DATA RESTRICTION COVID INFO")
             pp.pprint(data)
             parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+            not_necessary_info = 'No summary available - please follow the link to learn more.'
             for i in data:
                 for j in parameters:
-                    print("PARAMETER", "\n", j, i[j], '\n')
-
-            dispatcher.utter_message(text="Keep calm and keep distance")
-            print("This action is from Travel Restriction action")
+                    if not_necessary_info not in i[j]:
+                        collected_info = j.upper() + ' ' + ''.join(i[j])
+                        dispatcher.utter_message(text=collected_info)
+            #print("This action is from Travel Restriction action")
         except KeyError:
             try:
                 spell = SpellChecker()
@@ -181,11 +181,13 @@ class ActionTravelRestrictions(Action):
                 print("DATA RESTRICTION COVID INFO")
                 pp.pprint(data)
                 parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+                not_necessary_info = 'No summary available - please follow the link to learn more.'
                 for i in data:
                     for j in parameters:
-                        print("PARAMETER", "\n", j, i[j], '\n')
-                dispatcher.utter_message(text="Keep calm and keep distance")
-                print("This action is from Travel Restriction action")
+                        if not_necessary_info not in i[j]:
+                            collected_info = j.upper() + ' ' + ''.join(i[j])
+                            dispatcher.utter_message(text=collected_info)
+                #print("This action is from Travel Restriction action")
                 return []
             except KeyError:
                 dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
@@ -232,7 +234,7 @@ class ActionInfectionNumbersCities(Action):
             dispatcher.utter_message(text=f"Current cases in {city} are {casenumber}.")
             dispatcher.utter_message(text="Take care of yourself and your family")
 
-        print("This action is from Corona action")
+        #print("This action is from Corona action")
 
         return []
 
