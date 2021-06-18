@@ -91,20 +91,20 @@ class ActionInfectionNumbers(Action):
 
 
         try:
-            PARAMS = {'iso':locations_dict[country],'date': date,'region_province': region}
-            URL = "https://covid-api.com/api/reports/total"
             if region == None:
+                PARAMS = {'iso':locations_dict[country],'date': date,'region_province': region}
+                URL = "https://covid-api.com/api/reports/total"
                 r = requests.get(url=URL, params=PARAMS)
                 r.raise_for_status()
                 data = r.json()
                 dispatcher.utter_message(text=f"Current confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
             else:
                 URL_2 = "https://covid-api.com/api/reports"
-                PARAMS_2 = {'iso':'DEU', 'date': date, 'region_province': region}
+                PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
                 r = requests.get(url=URL_2, params=PARAMS_2)
                 r.raise_for_status()
                 data = r.json()
-                dispatcher.utter_message(text=f"Current confirmed cases in Germany in {region.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+                dispatcher.utter_message(text=f"Current confirmed cases in Germany in {region.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases.")
             #print("DATA JSON: ", data)
 
             dispatcher.utter_message(text="Take care of yourself and your family")
@@ -231,7 +231,7 @@ class ActionInfectionNumbersCities(Action):
         elif len(data['data']) == 1:
             print(data)
             casenumber = data['data'][0]['confirmed']
-            dispatcher.utter_message(text=f"Current cases in {city} are {casenumber}.")
+            dispatcher.utter_message(text=f"Current cases in {city.capitalize()} are {casenumber}.")
             dispatcher.utter_message(text="Take care of yourself and your family")
 
         #print("This action is from Corona action")
