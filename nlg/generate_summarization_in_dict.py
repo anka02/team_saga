@@ -7,7 +7,6 @@ import random
 import re
 from itertools import chain
 from string import punctuation
-import measure
 import pandas as pd
 import numpy as np
 import pprint
