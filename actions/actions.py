@@ -37,9 +37,20 @@ iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
 airport_dict = defaultdict(dict)
 
+
 DICTIONARY_FOR_SUMMARIZATION = None
 DICTIONARY_SUMMARIZED = None
 
+
+
+#DICTIONARY_FOR_SUMMARIZATION = None
+#DICTIONARY_SUMMARIZED = None
+
+with open(DICT_FOR_SUMM_PATH) as jsonFile:
+    DICTIONARY_FOR_SUMMARIZATION = json.load(jsonFile)
+with open(DICT_SUM_PATH) as jsonFile:
+    DICTIONARY_SUMMARIZED = json.load(jsonFile)
+print(DICTIONARY_SUMMARIZED)
 
 executor = ThreadPoolExecutor(max_workers=1)
 
@@ -62,6 +73,7 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 
+'''
 # First time the global variables DICTIONARY_FOR_SUMMARIZATION,DICTIONARY_SUMMARIZED
 # need to be created. It take about 5 mins (because of summarizations). Then this dictionary
 # will be dowlnoded and just every our updated
@@ -90,6 +102,7 @@ else:
 
 assert DICTIONARY_FOR_SUMMARIZATION is not None
 
+'''
 
 #
 # class ActionHelloWorld(Action):
@@ -299,7 +312,7 @@ class ActionCoronaInfoSummarize(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        entities = tracker.latest_message['entities']
+        #entities = tracker.latest_message['entities']
 
         file_path = Path().resolve()
         action_path = os.path.join(file_path, "actions")
@@ -330,7 +343,14 @@ class ActionCoronaInfoSummarize(Action):
             base_for_summarization = DICTIONARY_SUMMARIZED[e]
             dispatcher.utter_message(text="summarization action")
 
+        #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
+            #base_for_summarization = DICTIONARY_SUMMARIZED[e]
+        dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'][0])
+
+
         print("Summarize Action Ran")
+        for string in DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info']:
+            print(string)
 
         return []
 

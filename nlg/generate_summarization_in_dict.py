@@ -108,10 +108,10 @@ def do_summarization_in_dict(dictionary_for_summarization):
         if k == 'vaccine':
             for vaccine_name,info in dictionary_for_summarization['vaccine'].items():
                 summarized_dictionary['vaccine'][vaccine_name] = summarize(info, model, tokenizer)
-                print("SUMMARIZED",summarized_dictionary['vaccine'][vaccine_name])
+                #print("SUMMARIZED",summarized_dictionary['vaccine'][vaccine_name])
         else:
             summarized_dictionary[k] = summarize(v, model, tokenizer)
-            print("SUMMARIZED", summarized_dictionary[k])
+            #print("SUMMARIZED", summarized_dictionary[k])
     #pred = summarize(example_text, model, tokenizer)
 
     return summarized_dictionary
