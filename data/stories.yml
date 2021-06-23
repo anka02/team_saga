@@ -63,7 +63,6 @@ stories:
   - intent: summarized_info
   - action: utter_info_summarized
   - action: action_corona_info_summarize
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - intent: access_summary
+  - action: action_access_summary
 
