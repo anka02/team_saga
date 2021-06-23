@@ -21,7 +21,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 import pprint
 from nlg.create_summarization_dict import create_dict_for_summarization,write_dictionary,DICT_FOR_SUMM_PATH #search_info,
-from nlg.generate_summarization_in_dict import do_summarization_in_dict,DICT_SUM_PATH
+from nlg.generate_summarization_in_dict import do_summarization_in_dict,DICT_SUM_PATH,write_in_dict
 from concurrent.futures import ThreadPoolExecutor
 import time
 import signal
@@ -67,6 +67,7 @@ def update_dictionary(wait = False): # Update dictionary with actual every 20 se
     DICTIONARY_FOR_SUMMARIZATION = new_dictionary
     new_summ_dict = do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION)
     DICTIONARY_SUMMARIZED = new_summ_dict
+    write_in_dict(new_summ_dict)
     if wait :
         time.sleep(3600)
     executor.submit(update_dictionary,True)
