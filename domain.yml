@@ -12,16 +12,19 @@ intents:
   - travel_restrictions
   - infection_numbers_by_cities
   - summarized_info
+  - access_summary
 
 entities:
   - country
   - city
+  - summary
   
 actions:
   - action_infection_numbers
   - action_travel_restrictions
   - action_infection_numbers_by_cities
   - action_corona_info_summarize
+  - action_access_summary
 
 responses:
   utter_greet:
@@ -56,7 +59,7 @@ responses:
           Case numbers for specific cities
           Death numbers for specific countries
           Death numbers for specific cities
-          Information about currently available vaccines
+          More information about COVID summarized
 
 
   utter_info_summarized:

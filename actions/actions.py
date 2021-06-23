@@ -12,14 +12,17 @@
 from typing import Any, DefaultDict, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from pathlib import Path
 from spellchecker import SpellChecker
 import requests
 import os.path
 import csv
+import json
 from requests.auth import HTTPBasicAuth
 from collections import defaultdict
 from datetime import datetime, timedelta
 import pprint
+
 from nlg.create_summarization_dict import create_dict_for_summarization,write_dictionary,DICT_FOR_SUMM_PATH #search_info,
 from nlg.generate_summarization_in_dict import do_summarization_in_dict,DICT_SUM_PATH,write_in_dict
 from concurrent.futures import ThreadPoolExecutor
@@ -28,12 +31,15 @@ import signal
 import sys
 import json
 
+
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
 iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
 airport_dict = defaultdict(dict)
+
 DICTIONARY_FOR_SUMMARIZATION = None
 DICTIONARY_SUMMARIZED = None
+
 
 executor = ThreadPoolExecutor(max_workers=1)
 
@@ -46,6 +52,7 @@ with open(iata_file,newline='', encoding = 'utf-8') as csvfile_iata:
     iatareader = csv.reader(csvfile_iata)
     for row in iatareader:
         airport_dict[row[1].lower()][row[0].lower()] = row[2]
+
 
 # To interup update function,otherwise Ctrl+C :
 
@@ -82,6 +89,7 @@ else:
     executor.submit(update_dictionary,True)
 
 assert DICTIONARY_FOR_SUMMARIZATION is not None
+
 
 #
 # class ActionHelloWorld(Action):
@@ -293,6 +301,31 @@ class ActionCoronaInfoSummarize(Action):
 
         entities = tracker.latest_message['entities']
 
+        file_path = Path().resolve()
+        action_path = os.path.join(file_path, "actions")
+
+        with open (os.path.join(action_path, "dict_for_summarization.json")) as summaries:
+            dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
+            dictionary = json.loads(summaries.read())
+            for summary in dictionary.keys():
+                dispatcher.utter_message(f"\t \t {summary}")
+
+        print("Summarize Action Ran")
+
+        return []
+
+class ActionCoronaInfoSummarize(Action):
+
+    def name(self) -> Text:
+        return "action_access_summary"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        entities = tracker.latest_message['entities']
+
+        dispatcher.utter_message("RAN ACCESS")
+ 
         for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
             base_for_summarization = DICTIONARY_SUMMARIZED[e]
             dispatcher.utter_message(text="summarization action")
@@ -300,3 +333,4 @@ class ActionCoronaInfoSummarize(Action):
         print("Summarize Action Ran")
 
         return []
+

@@ -379,9 +379,23 @@ nlu:
 
 - intent: summarized_info
   examples: |
-    - Could you give me summarized info about the vaccines?
-    - I want to know more about the vaccines
-    - I would like to know more about the vaccines
-    - Summarized info vaccine
-    - Info vaccine
-    - give me info about the vaccines
+    - Could you give me more covid info?
+    - I want to know more about covid
+    - I would like to know more about covid
+    - Summarized corona info
+    - Info corona
+    - give me info covid
+    - Info covid please
+    - Summaries corona
+    - More please
+
+- intent: access_summary
+  examples: |
+    - I want to know about the [covid_overview](summary)
+    - Tell me about the [covid_overview](summary)
+    - [covid_overview](summary)
+    - [covid-variants](summary)
+    - [rapid tests](summary)
+    - [symptoms](summary)
+    - [covid_overview](summary)
+    - [covid_overview](summary)
