@@ -20,15 +20,21 @@ from requests.auth import HTTPBasicAuth
 from collections import defaultdict
 from datetime import datetime, timedelta
 import pprint
-from .create_summarization_dict import create_dict_summarization,search_info,write_dictionary
+from nlg.create_summarization_dict import create_dict_for_summarization,write_dictionary,DICT_FOR_SUMM_PATH #search_info,
+from nlg.generate_summarization_in_dict import do_summarization_in_dict,DICT_SUM_PATH
 from concurrent.futures import ThreadPoolExecutor
 import time
+import signal
+import sys
+import json
 
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
 iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
 airport_dict = defaultdict(dict)
-dictionary_for_summarization = None
+DICTIONARY_FOR_SUMMARIZATION = None
+DICTIONARY_SUMMARIZED = None
+
 executor = ThreadPoolExecutor(max_workers=1)
 
 with open(iso_file, newline='', encoding = 'utf-8') as csvfile_iso:
@@ -41,19 +47,41 @@ with open(iata_file,newline='', encoding = 'utf-8') as csvfile_iata:
     for row in iatareader:
         airport_dict[row[1].lower()][row[0].lower()] = row[2]
 
+# To interup update function,otherwise Ctrl+C :
+
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+
+# First time the global variables DICTIONARY_FOR_SUMMARIZATION,DICTIONARY_SUMMARIZED
+# need to be created. It take about 5 mins (because of summarizations). Then this dictionary
+# will be dowlnoded and just every our updated
+# Please add any informational message about loading the program, to .
+
 def update_dictionary(wait = False): # Update dictionary with actual every 20 sec
-    global dictionary_for_summarization
-    new_dictionary = create_dict_summarization()
-    write_dictionary(new_dictionary) # not necessairy could be commented
-    dictionary_for_summarization = new_dictionary
+    global DICTIONARY_FOR_SUMMARIZATION,DICTIONARY_SUMMARIZED
+    new_dictionary = create_dict_for_summarization()
+    write_dictionary(new_dictionary) # not necessairy could be removed
+    DICTIONARY_FOR_SUMMARIZATION = new_dictionary
+    new_summ_dict = do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION)
+    DICTIONARY_SUMMARIZED = new_summ_dict
     if wait :
-        time.sleep(20)
+        time.sleep(3600)
     executor.submit(update_dictionary,True)
     print("UPDATE",time.time())
+if not os.path.isfile(DICT_FOR_SUMM_PATH) or not os.path.isfile(DICT_SUM_PATH):
+    update_dictionary()
+else:
+    with open(DICT_FOR_SUMM_PATH) as jsonFile:
+        DICTIONARY_FOR_SUMMARIZATION = json.load(jsonFile)
+    with open(DICT_SUM_PATH) as jsonFile:
+        DICTIONARY_SUMMARIZED = json.load(jsonFile)
+    executor.submit(update_dictionary,True)
 
-update_dictionary()
+assert DICTIONARY_FOR_SUMMARIZATION is not None
 
-assert dictionary_for_summarization is not None
 #
 # class ActionHelloWorld(Action):
 #
@@ -265,8 +293,8 @@ class ActionCoronaInfoSummarize(Action):
         entities = tracker.latest_message['entities']
 
         for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
-            base_for_summarization = search_info(e,dictionary_for_summarization)
-            #dispatcher.utter_message(text=base_for_summarization)
+            base_for_summarization = DICTIONARY_SUMMARIZED[e]
+            dispatcher.utter_message(text="summarization action")
 
         print("Summarize Action Ran")
 
