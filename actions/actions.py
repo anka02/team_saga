@@ -38,11 +38,6 @@ locations_dict = dict()
 airport_dict = defaultdict(dict)
 
 
-DICTIONARY_FOR_SUMMARIZATION = None
-DICTIONARY_SUMMARIZED = None
-
-
-
 #DICTIONARY_FOR_SUMMARIZATION = None
 #DICTIONARY_SUMMARIZED = None
 
@@ -306,30 +301,6 @@ class ActionInfectionNumbersCities(Action):
 class ActionCoronaInfoSummarize(Action):
 
     def name(self) -> Text:
-        return "action_corona_info_summarize"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        #entities = tracker.latest_message['entities']
-
-        file_path = Path().resolve()
-        action_path = os.path.join(file_path, "actions")
-
-        with open (os.path.join(action_path, "dict_for_summarization.json")) as summaries:
-            dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
-            dictionary = json.loads(summaries.read())
-            for summary in dictionary.keys():
-                dispatcher.utter_message(f"\t \t {summary}")
-
-        print("Summarize Action Ran")
-
-        return []
-
-class ActionCoronaInfoSummarize(Action):
-
-    def name(self) -> Text:
         return "action_access_summary"
 
     def run(self, dispatcher: CollectingDispatcher,
@@ -338,15 +309,19 @@ class ActionCoronaInfoSummarize(Action):
         entities = tracker.latest_message['entities']
 
         dispatcher.utter_message("RAN ACCESS")
- 
-        for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
-            base_for_summarization = DICTIONARY_SUMMARIZED[e]
-            dispatcher.utter_message(text="summarization action")
+
+        file_path = Path().resolve()
+        action_path = os.path.join(file_path, "actions")
+
+        with open(os.path.join(action_path, "dict_for_summarization.json")) as summaries:
+            dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
+            dictionary = json.loads(summaries.read())
+            for summary in dictionary.keys():
+                dispatcher.utter_message(f"\t \t {summary}")
 
         #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
             #base_for_summarization = DICTIONARY_SUMMARIZED[e]
         dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'][0])
-
 
         print("Summarize Action Ran")
         for string in DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info']:
