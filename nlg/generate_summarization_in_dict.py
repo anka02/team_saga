@@ -111,8 +111,6 @@ def do_summarization_in_dict(dictionary_for_summarization):
                 #print("SUMMARIZED",summarized_dictionary['vaccine'][vaccine_name])
         else:
             summarized_dictionary[k] = summarize(v, model, tokenizer)
-            #print("SUMMARIZED", summarized_dictionary[k])
-    #pred = summarize(example_text, model, tokenizer)
 
     return summarized_dictionary
 
@@ -126,11 +124,15 @@ def write_in_dict(dictionary=None):
 
 
 def main():
-    pp = pprint.PrettyPrinter(indent=4)
     write_in_dict()
-    with open("summarized_dict.json") as jsonFile:
-        summarized_dict = json.load(jsonFile)
-    pp.pprint(summarized_dict)
+    '''
+    # I've added it to print in nice way and read the output to compare before
+    # and after summarization
+    #pp.pprint(summarized_dict)
+    PrettyJson = json.dumps(summarized_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    print("Displaying Pretty Printed JSON Data")
+    print(PrettyJson)
+    '''
 
 if __name__ == '__main__':
     main()

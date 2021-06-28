@@ -89,7 +89,7 @@ def create_dict_for_summarization():
     reg_url_QA = 'https://www.who.int/emergencies/diseases/novel-coronavirus-2019/question-and-answers-hub/q-a-detail/coronavirus-disease-covid-19'
     req_QA = Request(url=reg_url_QA, headers=headers)
     html_QA = urlopen(req_QA).read()
-    parsed_html_QA = BeautifulSoup(html_QA)
+    parsed_html_QA = BeautifulSoup(html_QA, "html.parser")
     for elems in parsed_html_QA.find_all('div', attrs={'class': 'sf-accordion__panel'}):
         questions = elems.find('div', attrs={'class': 'sf-accordion__trigger-panel'}).text
         answers = elems.find('div', attrs={'class': 'sf-accordion__content'}).text
@@ -126,5 +126,15 @@ def main():
     else:
         print(search_info(['covid-variants']))
         print(search_info(['vaccine', 'sinovac_vaccine']))
+    '''
+    # I've added it to print in nice way and read the output to compare before
+    # and after summarization
+    with open("dict_for_summarization.json") as jsonFile:
+        summarized_dict = json.load(jsonFile)
+    #pp.pprint(summarized_dict)
+    PrettyJson = json.dumps(summarized_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    print("Displaying Pretty Printed JSON Data")
+    print(PrettyJson)
+    '''
 if __name__ == "__main__":
     main()
