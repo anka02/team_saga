@@ -22,32 +22,40 @@ from requests.auth import HTTPBasicAuth
 from collections import defaultdict
 from datetime import datetime, timedelta
 import pprint
-
+import threading
 from nlg.create_summarization_dict import create_dict_for_summarization,write_dictionary,DICT_FOR_SUMM_PATH #search_info,
 from nlg.generate_summarization_in_dict import do_summarization_in_dict,DICT_SUM_PATH,write_in_dict
+from threading import Event
 from concurrent.futures import ThreadPoolExecutor
 import time
 import signal
 import sys
 import json
 
+import inspect  # give the file information we get from an exception traceback.
+
+def get_line_info(level=1):
+    return '{}:{}:{}'.format(inspect.stack()[level][1], inspect.stack()[level][2], inspect.stack()[level][3])
+
+def debug_print(*args, **kwargs):
+    print(get_line_info(2), *args, **kwargs)
 
 iso_file = os.path.join(os.path.dirname(__file__),"iso_countries.csv")
 iata_file = os.path.join(os.path.dirname(__file__),"IATA.csv")
 locations_dict = dict()
 airport_dict = defaultdict(dict)
 
+DICTIONARY_FOR_SUMMARIZATION = None
+DICTIONARY_SUMMARIZED = None
 
-#DICTIONARY_FOR_SUMMARIZATION = None
-#DICTIONARY_SUMMARIZED = None
 
-with open(DICT_FOR_SUMM_PATH) as jsonFile:
+'''with open(DICT_FOR_SUMM_PATH) as jsonFile:
     DICTIONARY_FOR_SUMMARIZATION = json.load(jsonFile)
 with open(DICT_SUM_PATH) as jsonFile:
-    DICTIONARY_SUMMARIZED = json.load(jsonFile)
-print(DICTIONARY_SUMMARIZED)
+    DICTIONARY_SUMMARIZED = json.load(jsonFile)'''
 
-executor = ThreadPoolExecutor(max_workers=1)
+
+#executor = ThreadPoolExecutor(max_workers=1)
 
 with open(iso_file, newline='', encoding = 'utf-8') as csvfile_iso:
     isoreader = csv.reader(csvfile_iso)
@@ -61,43 +69,57 @@ with open(iata_file,newline='', encoding = 'utf-8') as csvfile_iata:
 
 
 # To interup update function,otherwise Ctrl+C :
-
-def signal_handler(sig, frame):
-    print('You pressed Ctrl+C!')
-    sys.exit(0)
-
-signal.signal(signal.SIGINT, signal_handler)
-
-'''
 # First time the global variables DICTIONARY_FOR_SUMMARIZATION,DICTIONARY_SUMMARIZED
 # need to be created. It take about 5 mins (because of summarizations). Then this dictionary
 # will be dowlnoded and just every our updated
 # Please add any informational message about loading the program, to .
 
-def update_dictionary(wait = False): # Update dictionary with actual every 20 sec
-    global DICTIONARY_FOR_SUMMARIZATION,DICTIONARY_SUMMARIZED
+def update_dictionary():
+    global DICTIONARY_FOR_SUMMARIZATION, DICTIONARY_SUMMARIZED
     new_dictionary = create_dict_for_summarization()
-    write_dictionary(new_dictionary) # not necessairy could be removed
+    print("Dictionary for summarization has been created")
+    write_dictionary(new_dictionary)  # not necessairy could be removed
+    print("Dictionary for summarization has been written")
+    print("Waiting for summarization process.")
     DICTIONARY_FOR_SUMMARIZATION = new_dictionary
     new_summ_dict = do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION)
+    print("Dictionary with summarized texted has been created")
     DICTIONARY_SUMMARIZED = new_summ_dict
     write_in_dict(new_summ_dict)
-    if wait :
-        time.sleep(3600)
-    executor.submit(update_dictionary,True)
-    print("UPDATE",time.time())
+    print("Dictionary with summarized texted has been written")
+
+
+def thread_update_function(name):
+    print("Thread %s: starting ..."%(name,))
+    while True:
+        print("Thread waiting")
+        update_dictionary()
+        time.sleep(60)
+
+
+def start_update():
+    tr = threading.Thread(target=thread_update_function, args=(1,), daemon=True)
+    tr.start()
+
 if not os.path.isfile(DICT_FOR_SUMM_PATH) or not os.path.isfile(DICT_SUM_PATH):
+    print("Path to dict_for_sum didn't found",DICT_FOR_SUMM_PATH)
+    print("Path to dict_sum didn't found",DICT_SUM_PATH)
+    print("Please wait a bit until the summary will be one. Do not worry, it only takes for the first run through")
     update_dictionary()
+
 else:
     with open(DICT_FOR_SUMM_PATH) as jsonFile:
         DICTIONARY_FOR_SUMMARIZATION = json.load(jsonFile)
+        print("DICTIONARY_FOR_SUMMARIZATION has been loaded")
     with open(DICT_SUM_PATH) as jsonFile:
         DICTIONARY_SUMMARIZED = json.load(jsonFile)
-    executor.submit(update_dictionary,True)
+        print("DICTIONARY_SUMMARIZED has been loaded")
+        print("The action Server is running. Chat-bot is ready to use")
+
+start_update()
+
 
 assert DICTIONARY_FOR_SUMMARIZATION is not None
-
-'''
 
 #
 # class ActionHelloWorld(Action):
@@ -126,7 +148,7 @@ class ActionInfectionNumbers(Action):
 
         entities = tracker.latest_message['entities']
         if not entities :
-            dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
+            dispatcher.utter_message(text="Oops,sorry.The information for country is missing. Please try another country")
             return []
 
         #print("Message : ", entities)
@@ -149,44 +171,49 @@ class ActionInfectionNumbers(Action):
         if date == 'yesterday' or None:
             date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
 
-
-        try:
-            if region == None:
-                PARAMS = {'iso':locations_dict[country],'date': date,'region_province': region}
+        if region is None:
+            if country in locations_dict:
+                PARAMS = {'iso': locations_dict[country],'date': date}
                 URL = "https://covid-api.com/api/reports/total"
                 r = requests.get(url=URL, params=PARAMS)
                 r.raise_for_status()
                 data = r.json()
-                dispatcher.utter_message(text=f"Current confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+                debug_print("DATA JSON: ", data)
+                print(data)
+                dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                                              f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
             else:
-                URL_2 = "https://covid-api.com/api/reports"
-                PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
-                r = requests.get(url=URL_2, params=PARAMS_2)
-                r.raise_for_status()
-                data = r.json()
-                dispatcher.utter_message(text=f"Current confirmed cases in Germany in {region.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases.")
-            #print("DATA JSON: ", data)
+                spell = SpellChecker()
+                country = spell.correction(country)
+                if country in locations_dict:
+                    PARAMS = {'iso': locations_dict[country],'date': date}
+                    print(spell.correction(country))
+                    URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
+                    r = requests.get(url=URL, params=PARAMS)
+                    r.raise_for_status()
+
+                    data = r.json()
+                    debug_print("DATA JSON: ", data)
+
+                    dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                                              f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
+
+                else:
+                    dispatcher.utter_message(
+                        text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
+
+        else:
+            URL_2 = "https://covid-api.com/api/reports"
+            PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
+            r = requests.get(url=URL_2, params=PARAMS_2)
+            r.raise_for_status()
+            data = r.json()
+            dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                                              f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
 
             dispatcher.utter_message(text="Take care of yourself and your family")
             print("This action is from Corona action")
-        except KeyError:
-            try:
-                spell = SpellChecker()
-                PARAMS = {'iso': locations_dict[spell.correction(country)]}
-                print(spell.correction(country))
-                URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
-                r = requests.get(url=URL, params=PARAMS)
-                r.raise_for_status()
 
-                data = r.json()
-                print("DATA JSON: ", data)
-
-                dispatcher.utter_message(text="Take care of yourself and your family")
-
-                print("This action is from Corona action")
-                return []
-            except KeyError:
-                dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
 class ActionTravelRestrictions(Action):
 
@@ -202,7 +229,7 @@ class ActionTravelRestrictions(Action):
             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
             return []
 
-        print("Message:", entities)
+        debug_print("Message:", entities)
 
         country = None
 
@@ -210,7 +237,7 @@ class ActionTravelRestrictions(Action):
             if e['entity'] == 'country':
                 country = e['value'].lower()
 
-        try:
+        if country in airport_dict:
             airport_iata = next(iter(airport_dict[country].items()))[1]
             PARAMS = {'airport': airport_iata}
             r = requests.get(url="https://covid-api.thinklumo.com/data", headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
@@ -226,12 +253,13 @@ class ActionTravelRestrictions(Action):
                     if not_necessary_info not in i[j]:
                         collected_info = j.upper() + ' ' + ''.join(i[j])
                         dispatcher.utter_message(text=collected_info)
-            #print("This action is from Travel Restriction action")
-        except KeyError:
-            try:
-                spell = SpellChecker()
+            print("This action is from Travel Restriction action")
+        else:
+            spell = SpellChecker()
+            country = spell.correction(country)
+            if country in airport_dict:
                 airport_iata = next(iter(airport_dict[country].items()))[1]
-                PARAMS = {'airport': airport_iata[spell.correction(country)]}
+                PARAMS = {'airport': airport_iata}
                 print(spell.correction(country))
                 URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
                 r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
@@ -247,10 +275,9 @@ class ActionTravelRestrictions(Action):
                         if not_necessary_info not in i[j]:
                             collected_info = j.upper() + ' ' + ''.join(i[j])
                             dispatcher.utter_message(text=collected_info)
-                #print("This action is from Travel Restriction action")
-                return []
-            except KeyError:
-                dispatcher.utter_message(text=f"Could not find any entries for country {country}, please check your spelling")
+                print("This action is from Travel Restriction action")
+            else:
+                dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
         return []
 
@@ -268,7 +295,7 @@ class ActionInfectionNumbersCities(Action):
             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
             return []
 
-        print("Message : ", entities)
+        debug_print("Message : ", entities)
         city = None
 
         for e in entities:
@@ -280,7 +307,7 @@ class ActionInfectionNumbersCities(Action):
         r = requests.get(url= URL + city)
 
         data = r.json()
-        print("DATA JSON: ", data)
+        debug_print("DATA JSON: ", data)
 
         if len(data['data']) > 1:
             possible_cities = []
@@ -289,16 +316,47 @@ class ActionInfectionNumbersCities(Action):
 
             dispatcher.utter_message(text="There are multiple cities with a similar name:" + str(possible_cities))
         elif len(data['data']) == 1:
-            print(data)
+            debug_print("DATA", data)
             casenumber = data['data'][0]['confirmed']
-            dispatcher.utter_message(text=f"Current cases in {city.capitalize()} are {casenumber}.")
+            death_numbers = data['data'][0]['dead']
+            dispatcher.utter_message(text=f"Current active cases in {city.capitalize()} are {casenumber} with {death_numbers} death cases.")
             dispatcher.utter_message(text="Take care of yourself and your family")
+        else:
+            dispatcher.utter_message(
+                text=f"Could not find any entries for city {city.capitalize()}, please check your spelling")
 
         #print("This action is from Corona action")
 
         return []
 
 class ActionCoronaInfoSummarize(Action):
+
+    def name(self) -> Text:
+        return "action_corona_info_summarize"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        #entities = tracker.latest_message['entities']
+
+        file_path = Path().resolve()
+        action_path = os.path.join(file_path, "actions")
+
+        with open (os.path.join(action_path, "dict_for_summarization.json")) as summaries:
+            dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
+            dictionary = json.loads(summaries.read())
+        for summary in dictionary.keys():
+            print(f"\t \t {summary}")
+
+        for summary in dictionary.keys():
+            dispatcher.utter_message(summary)
+
+        print("Summarize Action Ran")
+
+        return []
+
+class ActionAccessSummary(Action):
 
     def name(self) -> Text:
         return "action_access_summary"
@@ -308,20 +366,14 @@ class ActionCoronaInfoSummarize(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         entities = tracker.latest_message['entities']
 
-        dispatcher.utter_message("RAN ACCESS")
-
-        file_path = Path().resolve()
-        action_path = os.path.join(file_path, "actions")
-
-        with open(os.path.join(action_path, "dict_for_summarization.json")) as summaries:
-            dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
-            dictionary = json.loads(summaries.read())
-            for summary in dictionary.keys():
-                dispatcher.utter_message(f"\t \t {summary}")
-
         #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
             #base_for_summarization = DICTIONARY_SUMMARIZED[e]
+
+        with open(DICT_SUM_PATH) as jsonFile:
+            DICTIONARY_SUMMARIZED = json.load(jsonFile)
+
         dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'][0])
+
 
         print("Summarize Action Ran")
         for string in DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info']:
