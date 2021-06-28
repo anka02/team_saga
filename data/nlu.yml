@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - good afternoon
@@ -30,7 +28,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -39,7 +36,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -49,7 +45,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -66,7 +61,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -83,32 +77,12 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-
-#- lookup: country
-#  examples: |
-#    - germany
-#    - france
-#    - china
-#    - italy
-#    - united kingdom
-#    - united states
-#    - canada
-#    - mexico
-#    - portugal
-#    - spain
-#    - russia
-#    - poland
-#    - finland
-#    - sweden
-#    - india
-       
 - intent: infection_numbers
   examples: |
     - covid cases in [germany](country) in [Bayern](region) [today](date)
@@ -224,7 +198,6 @@ nlu:
     - covid cases in [hong kong](country)
     - covid cases in [hungary](country)
     - covid cases in [iceland](country)
-    - covid cases in [india](country)
     - covid cases in [indonesia](country)
     - covid cases in [iran](country)
     - covid cases in [iraq](country)
@@ -347,15 +320,27 @@ nlu:
     - covid cases in [yemen](country)
     - covid cases in [zambia](country)
     - covid cases in [zimbabwe](country)
-
-
+    - case numbers in [Latvia](country)
+    - Death numbers in [Germany](country)
+    - corona cases in [Bayern](region)
+    - case numbers in [Saarland](region)
+    - corona cases in [Finland](country)
+    - corona cases in [Saarland](region)
+    - Corona cases in [Saarland](region) [today](date)
+    - Corona cases in [Russia](country) [today](date)
+    - Corona cases in [Russia](country) [yesterday](date)
+    - corona cases [today](date) in [Mexica](country)
+    - corona cases [today](date) in [Mexico](country)
+    - case number in [Bayern](region)
 - intent: travel_restrictions
   examples: |
     - what rules are in [germany](country)
     - what restrictions are in [france](country)
     - what is allowed to do in the covid time in [italy](country)
     - how long is the quarantine in [portugal](country)
-    
+    - whats allowed in [France](country)
+    - Whats allowed in [Russia](country)
+    - whats allowed in [Brazil](country)
 - intent: infection_numbers_by_cities
   examples: |
     - how many corona cases in [Atchison](city)
@@ -376,7 +361,15 @@ nlu:
     - how many corona cases in [Unassigned](city)
     - how many corona cases in [Brunswick](city)
     - tell me the number of cases in [Houston](city)
-
+    - case numbers in [Novosibirsk](city)
+    - deth numbers in [Moscow](city)
+    - case numbers in [Saarbrücken](city)
+    - case numbers in [Moscow](city)
+    - Corona cases in [Saarbrücken](city) [today](date)
+    - corona cases in [London](city)
+    - case number in [Berlin](country)
+    - corona cases in [Dresden](region)
+    - case numbers for [Malaga](country)
 - intent: summarized_info
   examples: |
     - Could you give me more covid info?
@@ -388,7 +381,8 @@ nlu:
     - Info covid please
     - Summaries corona
     - More please
-
+    - More information about COVID summarized
+    - corona info
 - intent: access_summary
   examples: |
     - I want to know about the [covid_overview](summary)
@@ -397,5 +391,5 @@ nlu:
     - [covid-variants](summary)
     - [rapid tests](summary)
     - [symptoms](summary)
-    - [covid_overview](summary)
-    - [covid_overview](summary)
+    - Information about currently available vaccines
+    - vaccine
