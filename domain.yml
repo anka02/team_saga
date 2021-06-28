@@ -1,71 +1,74 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - infection_numbers
-  - travel_restrictions
-  - infection_numbers_by_cities
-  - summarized_info
-  - access_summary
-
-entities:
-  - country
-  - city
-  - summary
-  
-actions:
-  - action_infection_numbers
-  - action_travel_restrictions
-  - action_infection_numbers_by_cities
-  - action_corona_info_summarize
-  - action_access_summary
-
-responses:
-  utter_greet:
-  - text: "Hey! What do you want to ask me?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by SAGA."
-
-  utter_infection_numbers:
-  - text: "Please be careful."
-  
-  utter_travel_restrictions:
-  - text : "Stay informed stay safe."
-
-  utter_bot_information:
-  - text : >
-        You can ask me about a multitude of things all about COVID-19 like:
-          Case numbers for specific countries
-          Case numbers for specific cities
-          Death numbers for specific countries
-          Death numbers for specific cities
-          More information about COVID summarized
-
-
-  utter_info_summarized:
-  -  text: "This is a placeholder for the summarized info"
-
-  
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- infection_numbers:
+    use_entities: true
+- travel_restrictions:
+    use_entities: true
+- infection_numbers_by_cities:
+    use_entities: true
+- summarized_info:
+    use_entities: true
+- access_summary:
+    use_entities: true
+entities:
+- country
+- city
+- summary
+- region
+- date
+slots: {}
+responses:
+  utter_greet:
+  - text: Hey! What do you want to ask me?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by SAGA.
+  utter_infection_numbers:
+  - text: Please be careful.
+  utter_travel_restrictions:
+  - text: Stay informed stay safe.
+  utter_bot_information:
+  - text: |
+      You can ask me about a multitude of things all about COVID-19 like:
+        Case numbers for specific countries
+        Case numbers for specific cities
+        Death numbers for specific countries
+        Death numbers for specific cities
+        More information about COVID summarized
+  utter_info_summarized:
+  - text: This is a placeholder for the summarized info
+actions:
+- action_infection_numbers
+- action_travel_restrictions
+- action_infection_numbers_by_cities
+- action_corona_info_summarize
+- action_access_summary
+forms: {}
+e2e_actions: []
