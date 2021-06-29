@@ -12,6 +12,7 @@ import numpy as np
 import pprint
 import torch
 import pytorch_lightning as pl
+import re
 try:
     from .create_summarization_dict import create_dict_for_summarization
 except ImportError:
@@ -98,19 +99,17 @@ def summarize(input, model, tokenizer):
     return preds
 
 
-# test
-#with open("./Texts/covid-19_variants.txt", "r", encoding="utf-8") as f:
-#    example_text = f.read()
-
 def do_summarization_in_dict(dictionary_for_summarization):
     summarized_dictionary = defaultdict(dict)
     for k,v in dictionary_for_summarization.items():
         if k == 'vaccine':
             for vaccine_name,info in dictionary_for_summarization['vaccine'].items():
-                summarized_dictionary['vaccine'][vaccine_name] = summarize(info, model, tokenizer)
-                #print("SUMMARIZED",summarized_dictionary['vaccine'][vaccine_name])
+                source_link = re.search("(?P<url>https?://[^\s]+)", info).group("url")
+                summarized_dictionary['vaccine'][vaccine_name] = summarize(info, model, tokenizer)[0] + " " + source_link
+
         else:
-            summarized_dictionary[k] = summarize(v, model, tokenizer)
+            source_link = re.search("(?P<url>https?://[^\s]+)", v).group("url")
+            summarized_dictionary[k] = summarize(v, model, tokenizer)[0] + " " + source_link
 
     return summarized_dictionary
 
@@ -125,14 +124,16 @@ def write_in_dict(dictionary=None):
 
 def main():
     write_in_dict()
-    '''
+
     # I've added it to print in nice way and read the output to compare before
     # and after summarization
-    #pp.pprint(summarized_dict)
-    PrettyJson = json.dumps(summarized_dict, indent=4, separators=(',', ': '), sort_keys=True)
+
+    with open ('summarized_dict.json') as jsonFile:
+        created_dict = json.load(jsonFile)
+    PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True)
     print("Displaying Pretty Printed JSON Data")
     print(PrettyJson)
-    '''
+
 
 if __name__ == '__main__':
     main()

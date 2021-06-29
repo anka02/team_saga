@@ -87,6 +87,7 @@ def update_dictionary():
     DICTIONARY_SUMMARIZED = new_summ_dict
     write_in_dict(new_summ_dict)
     print("Dictionary with summarized texted has been written")
+    print("The action Server is running. Chat-bot is ready to use")
 
 
 def thread_update_function(name):
@@ -102,9 +103,8 @@ def start_update():
     tr.start()
 
 if not os.path.isfile(DICT_FOR_SUMM_PATH) or not os.path.isfile(DICT_SUM_PATH):
-    print("Path to dict_for_sum didn't found",DICT_FOR_SUMM_PATH)
-    print("Path to dict_sum didn't found",DICT_SUM_PATH)
-    print("Please wait a bit until the summary will be one. Do not worry, it only takes for the first run through")
+    print("The dictionaries",DICT_FOR_SUMM_PATH,"and",DICT_SUM_PATH, "weren't created yet.")
+    print("Please wait a bit until the summary will be one. Don't worry, it only takes for the first run through.")
     update_dictionary()
 
 else:
@@ -184,9 +184,8 @@ class ActionInfectionNumbers(Action):
                                               f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
             else:
                 spell = SpellChecker()
-                country = spell.correction(country)
                 if country in locations_dict:
-                    PARAMS = {'iso': locations_dict[country],'date': date}
+                    PARAMS = {'iso': locations_dict[spell.correction(country)],'date': date}
                     print(spell.correction(country))
                     URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
                     r = requests.get(url=URL, params=PARAMS)
@@ -194,8 +193,8 @@ class ActionInfectionNumbers(Action):
 
                     data = r.json()
                     debug_print("DATA JSON: ", data)
-
-                    dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                    if len(data) > 0:
+                        dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
                                               f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
 
                 else:
@@ -208,10 +207,14 @@ class ActionInfectionNumbers(Action):
             r = requests.get(url=URL_2, params=PARAMS_2)
             r.raise_for_status()
             data = r.json()
-            dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+            if len(data) > 0:
+                dispatcher.utter_message(text=f"Current active confirmed cases in {region.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
                                               f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
 
-            dispatcher.utter_message(text="Take care of yourself and your family")
+                dispatcher.utter_message(text="Take care of yourself and your family")
+            else:
+                dispatcher.utter_message(
+                    text=f"Could not find any entries for region {region.capitalize()}, please check your spelling")
             print("This action is from Corona action")
 
 
@@ -256,9 +259,8 @@ class ActionTravelRestrictions(Action):
             print("This action is from Travel Restriction action")
         else:
             spell = SpellChecker()
-            country = spell.correction(country)
             if country in airport_dict:
-                airport_iata = next(iter(airport_dict[country].items()))[1]
+                airport_iata = next(iter(airport_dict[spell.correction(country)].items()))[1]
                 PARAMS = {'airport': airport_iata}
                 print(spell.correction(country))
                 URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
@@ -340,18 +342,19 @@ class ActionCoronaInfoSummarize(Action):
 
         #entities = tracker.latest_message['entities']
 
-        file_path = Path().resolve()
-        action_path = os.path.join(file_path, "actions")
+        #file_path = Path().resolve()
+        #action_path = os.path.join(file_path, "actions")
 
-        with open (os.path.join(action_path, "dict_for_summarization.json")) as summaries:
+        with open (DICT_SUM_PATH) as jsonFile:
             dispatcher.utter_message("These are the following information that I have, what do you need? \n \n")
-            dictionary = json.loads(summaries.read())
-        for summary in dictionary.keys():
+            DICTIONARY_SUMMARIZED = json.load(jsonFile)
+            print(DICTIONARY_SUMMARIZED)
+            #dictionary = json.loads(summaries.read())
+        for summary in DICTIONARY_SUMMARIZED.keys():
             print(f"\t \t {summary}")
 
-        for summary in dictionary.keys():
+        for summary in DICTIONARY_SUMMARIZED.keys():
             dispatcher.utter_message(summary)
-
         print("Summarize Action Ran")
 
         return []
@@ -369,15 +372,15 @@ class ActionAccessSummary(Action):
         #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
             #base_for_summarization = DICTIONARY_SUMMARIZED[e]
 
-        with open(DICT_SUM_PATH) as jsonFile:
+        with open (DICT_SUM_PATH) as jsonFile:
             DICTIONARY_SUMMARIZED = json.load(jsonFile)
 
-        dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'][0])
+        dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
 
 
         print("Summarize Action Ran")
-        for string in DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info']:
-            print(string)
+        print(DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
+
 
         return []
 
