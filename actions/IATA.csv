@@ -1,284 +1,1993 @@
-TIRANA,ALBANIA,TIA,LATI
-JEREVAN,ARMENIA,EVN,UDYZ
-BAKU,AZERBAIJAN,GYD,UBBB
-ANTWERP,BELGIUM,ANR,EBAW
-BRUSSELS,BELGIUM,BRU,EBBR
-CHARLEROI,BELGIUM,CRL,EBCI
-LIEGE,BELGIUM,LGG,EBLG
-OSTEND,BELGIUM,EAST,EBOS
-BURGAS,BULGARIA,BOJ,LBBG
-SOFIA,BULGARIA,SOF,LBSF
-WARNA,BULGARIA,VAR,LBWN
-AALBORG,DENMARK,AAL,EKYT
-AARHUS,DENMARK,AAR,EKAH
-BILLUND,DENMARK,BLL,EKBI
-COPENHAGEN,DENMARK,CPH,EKCH
-VÁGAR,DENMARK,FAAE,EKVG
-ALLGAU,GERMANY,FMM,EDJA
-BERLIN,GERMANY,TXL,EDDT
-BREMEN,GERMANY,BRE,EDDW
-DORTMUND,GERMANY,DTM,EDLW
-DRESDEN,GERMANY,DRS,EDDC
-DUSSELDORF,GERMANY,DUS,EDDL
-FRANKFURT,GERMANY,FRA,EDDD
-FRANKFURT-HAHN,GERMANY,HN,EDFH
-FRIEDRICHSHAFEN,GERMANY,FDH,EDNY
-HAMBURG,GERMANY,HAM,EDDH
-HANNOVER,GERMANY,HAJ,EDDV
-BADEN-BADEN,GERMANY,FKB,EDPS
-KARLSRUHE,GERMANY,FKB,EDPS
-COLOGNE-BONN,GERMANY,CGN,EDDK
-LEIPZIG-HALLE,GERMANY,LEJ,EDDP
-MUNICH,GERMANY,MUC,EDDM
-MÜNSTER-OSNABRÜCK,GERMANY,FMO,EDDG
-NUREMBERG,GERMANY,NUE,EDDN
-STUTTGART,GERMANY,STR,EDDS
-WEEZE,GERMANY,NRN,EDLV
-TALLINN,ESTONIA,TLL,EETN
-HELSINKI,FINLAND,HEL,EFHK
-OULU,FINLAND,OUL,EFOU
-ROVANIEMI,FINLAND,RVN,EFRO
-TAMPERE,FINLAND,TMP,EFTP
-TURKU,FINLAND,TKU,EFU
-VAASA,FINLAND,VAA,EFVA
-AJACCIO,FRANCE,AJA,LFKJ
-BASTIA,FRANCE,BIA,LFKB
-BERGERAC,FRANCE,EGC,LFBE
-BIARRITZ,FRANCE,BIQ,LFBZ
-BORDEAUX,FRANCE,BOD,LFBD
-BREST-BRITTANY,FRANCE,BES,LFRB
-LILLE,FRANCE,LIL,LFQQ
-LYON-SAINT-EXUPÉRY,FRANCE,LYS,LFLL
-MARSEILLE,FRANCE,MRS,LFML
-MONTPELLIER,FRANCE,MPL,LFMT
-NANTES,FRANCE,NTE,LFRS
-NICE,FRANCE,NCE,LFMN
-PARIS,FRANCE,CDG,LFPG
-RENNESBRITTANY,FRANCE,RNS,LFRN
-RÉUNION-ROLAND-GARROS,FRANCE,RUN,FMEE
-STRASBOURG,FRANCE,SXB,LFST
-TOULON-HYÈRES,FRANCE,TLN,LFTH
-TOULOUSEBLAGNAC,FRANCE,TLS,LFBO
-KUTAISI,GEORGIA,KUT,UGKO
-TBILISI,GEORGIA,TBS,UGTB
-ATHENS,GREECE,ATH,LGAV
-CHANIA,GREECE,CHQ,LGSA
-HERAKLION,GREECE,HER,LGIR
-CORFU,GREECE,CFU,LGKR
-KOS,GREECE,KGS,LGKO
-MYKONOS,GREECE,JMK,LGMK
-RHODES,GREECE,RHO,LGRP
-SANTORININE,GREECE,JTR,LGSR
-THESSALONIKI,GREECE,SKG,LGTS
-ZAKYNTHOS,GREECE,ZTH,LGZA
-CORK,IRELAND,ORK,EICK
-DUBLIN,IRELAND,DUB,EIDW
-IRELAND-WEST,IRELAND,NOC,EKN
-KERRY,IRELAND,KIR,EIZY
-SHANNON,IRELAND,SNN,ONE
-KEFLAVIK,ICELAND,KEF,BIKF
-ALGHERO,ITALY,AHO,LIEA
-ANCONA,ITALY,AOI,LIPY
-BARI,ITALY,BRI,LIBD
-BERGAMO,ITALY,BGY,LIME
-BOLOGNA,ITALY,BLQ,LIPE
-BRINDISI,ITALY,BDS,LIBR
-COMISO,ITALY,CIY,LICB
-FLORENCE,ITALY,FLR,LIRQ
-GENOA,ITALY,GOA,LIMJ
-LAMEZIATERME,ITALY,SUF,LICA
-MILANLIN,ITALY,LIN,LIML
-NAPLES,ITALY,NAP,PLAIN
-OLBIA-COSTA-SMERALDA,ITALY,OLB,LIEO
-PALERMO,ITALY,PMO,LICJ
-PERUGIA,ITALY,PEG,LIRZ
-PESCARA,ITALY,PSR,LIBP
-PISA,ITALY,PSA,LIRP
-ROMECIAMPINO,ITALY,CIA,LIRA
-ROM-FIUMICINO,ITALY,FCO,LIRF
-TRAPANI,ITALY,TPS,LICK
-TREVISO,ITALY,TSF,LIP
-TURIN,ITALY,TRN,LIMF
-VENICE,ITALY,VCE,LIPZ
-VERONA,ITALY,VRN,LIPX
-ALMATY,KAZAKHSTAN,ALA,UAAA
-NURSULTAN,KAZAKHSTAN,NQZ,UACC
-DUBROVNIK,CROATIA,DBV,LDDU
-PULA,CROATIA,PUY,LDPL
-SPLIT,CROATIA,SPU,LDSP
-ZADAR,CROATIA,ZAD,LDZD
-ZAGREB,CROATIA,ZAG,LDZA
-RIGA,LATVIA,RIX,EVRA
-KAUNAS,LITHUANIA,KUN,EYKA
-VILNIUS,LITHUANIA,VNO,EYVI
-LUXEMBOURG,LUXEMBOURG,LUX,ELLX
-MALTA,MALTA,MLA,LMML
-KISCHINAU,MOLDOVA,KIV,LUKK
-PODGORICA,MONTENEGRO,TGD,LYPG
-TIVAT,MONTENEGRO,TIV,LYTV
-AMSTERDAM,NETHERLANDS,AMS,EHAM
-EINDHOVEN,NETHERLANDS,ONE,EHEH
-GRONINGEN,NETHERLANDS,GRQ,EHGG
-MAASTRICHT-AACHEN,NETHERLANDS,MST,EHBK
-ROTTERDAM-THE-HAGUE,NETHERLANDS,RTM,EHRD
-SKOPJE,MACEDONIA,SKP,LWSK
-ÅLESUND,NORWAY,AES,ENAL
-BERGEN,NORWAY,BGO,ENBR
-BODØ,NORWAY,BOO,ENBO
-HAUGESUND,NORWAY,HAU,ENHD
-KRISTIANSAND,NORWAY,KRS,ENCN
-OSLO,NORWAY,OSL,ENGM
-SANDEFJORD,NORWAY,TRF,ENTO
-STAVANGER,NORWAY,SVG,ENZV
-TROMSO,NORWAY,TOS,ENC
-TRONDHEIM,NORWAY,TRD,ENVA
-GRAZ,AUSTRIA,GRZ,LOWG
-INNSBRUCK,AUSTRIA,INN,LOWI
-KLUENFURT,AUSTRIA,KLU,LOWK
-LINZ,AUSTRIA,LNZ,LOWL
-SALZBURG,AUSTRIA,SZG,LOWS
-VIENNA,AUSTRIA,VIE,LOWW
-BRESLAU,POLAND,WRO,EPWR
-GDANSK,POLAND,GDN,EPGD
-KATOWICE,POLAND,KTW,EPK
-KRAKOW,POLAND,KRK,EPKK
-POSEN,POLAND,POZ,EPPO
-SZCZECIN-GOLENIÓW,POLAND,SZZ,EPSC
-WARSAW,POLAND,WAW,EPWA
-WARSAWMODLIN,POLAND,WMI,EPMO
-FARO,PORTUGAL,FAO,LPFR
-LISBON,PORTUGAL,LIS,LPPT
-MADEIRA,PORTUGAL,FNC,LPMA
-PONTA-DELGADA,PORTUGAL,PDL,LPPD
-PORTO,PORTUGAL,OPO,LPPR
-BUCHAREST-HENRI-COANDA,ROMANIA,OTP,LROP
-CLUJ-NAPOCA,ROMANIA,CLJ,LRCL
-IASI,ROMANIA,IAS,LRIA
-TIMISOARA,ROMANIA,TSR,LRTR
-KOLZOWO,RUSSIA,SVX,USSS
-KRASNODAR,RUSSIA,KRR,URKK
-MOSCOW,RUSSIA,DME,UUDD
-NOVOSIBIRSK,RUSSIA,OVB,UNNT
-SOCHI,RUSSIA,AER,URSS
-ST.PETERSBURG,RUSSIA,LED,ULLI
-GOTHENBURG-LANDVETTER,SWEDEN,GOT,ESGG
-MALMOE,SWEDEN,MMX,ESMS
-STOCKHOLM,SWEDEN,ARN,ESSA
-BASEL-MUELHAUSEN-FREIBURG,SWITZERLAND,BSL,LFSB
-BERN,SWITZERLAND,BRN,LSZB
-GENEVA,SWITZERLAND,GVA,LSGG
-ZURICH,SWITZERLAND,ZRH,LSZH
-BELGRADE,SERBIA,BEG,LYBE
-NIS,SERBIA,INI,LYNI
-BRATISLAVA,SLOVAKIA,BTS,LZIB
-KOSICE,SLOVAKIA,KSC,LZKZ
-LJUBLJANA,SLOVENIA,LJU,LJLJ
-ALICANTE,SPAIN,ALC,LEAL
-ALMERIA,SPAIN,LEI,LEAM
-ASTURIAS,SPAIN,OVD,LEAS
-BARCELONA,SPAIN,BCN,LEBL
-BILBAO,SPAIN,ORGANIC,LEBB
-GIRONA,SPAIN,GRO,LIEGE
-GRAN-CANARIA,SPAIN,LPA,GCLP
-IBIZA,SPAIN,IBZ,BODY
-JEREZ,SPAIN,XRY,LEJR
-LA-PALMA,SPAIN,SPC,GCLA
-LANZAROTE,SPAIN,ACE,GCRR
-MADRIDBARAJAS,SPAIN,MAD,LEMD
-MALAGA,SPAIN,AGP,LEMG
-MENORCA,SPAIN,MAH,LEMH
-PALMA-DE-MALLORCA,SPAIN,PMI,LEPA
-REGIONDE-MURCIA,SPAIN,RMU,LEMI
-REUS,SPAIN,REU,LERS
-SANTANDER,SPAIN,SDR,LEXJ
-SANTIAGO-DE-COMPOSTELA,SPAIN,SCQ,LEST
-SARAGOZA,SPAIN,ZAZ,LEZG
-SEVILLE,SPAIN,SVQ,LEZL
-TENERIFE-NORTH,SPAIN,TFN,GCXO
-TENERIFE-SOUTH,SPAIN,TFS,GCTS
-VALENCIA,SPAIN,VLC,LEVC
-BRNO,CZECH REPUBLIC,BRQ,LKTB
-PRAGUE,CZECH REPUBLIC,PRG,LKPR
-ADANA,TURKEY,ADA,LTAF
-ANKARA,TURKEY,ESB,LTAC
-ANTALYA,TURKEY,AYT,LTAI
-DALAMAN,TURKEY,DLM,LTBS
-ISTANBUL,TURKEY,IS,LTFM
-IZMIRADNAN-MENDERES,TURKEY,ADB,LTBJ
-MILAS-BODRUM,TURKEY,BJV,LTFE
-TRABZON,TURKEY,TZX,LTCG
-CHARKIV,UKRAINE,HRK,UKHH
-KIEVBORYSPIL,UKRAINE,KBP,UKBB
-KIEVSCHOOLJANY,UKRAINE,IEV,UKKK
-LVIV,UKRAINE,LWO,UKLL
-ODESSA,UKRAINE,ODS,UKOO
-BUDAPEST,HUNGARY,BUD,LHBP
-DEBRECEN,HUNGARY,DEB,LHDC
-ABERDEEN,UNITED KINGDOM,AB,EGPD
-BELFASTCITY,UNITED KINGDOM,BHD,EGAC
-BELFAST-INTERNATIONAL,UNITED KINGDOM,BFS,EGAA
-BIRMINGHAM,UNITED KINGDOM,BHX,ETBB
-BRISTOL,UNITED KINGDOM,BRS,EGGD
-CARDIFF,UNITED KINGDOM,CWL,EGFF
-DONCASTER-SHEFFIELD,UNITED KINGDOM,DSA,EGCN
-EASTMIDLANDS,UNITED KINGDOM,EMA,EGNX
-EDINBURGH,UNITED KINGDOM,EDI,EGPH
-EXETER,UNITED KINGDOM,EXT,ETS
-GLASGOW,UNITED KINGDOM,GLA,ECPF
-HUMBERSIDE,UNITED KINGDOM,HUY,EGNJ
-JERSEY,UNITED KINGDOM,JER,EGJJ
-LEEDS-BRADFORD,UNITED KINGDOM,LBA,EGNM
-LIVERPOOL,UNITED KINGDOM,LPL,EGGP
-LONDON,UNITED KINGDOM,LHR,EGLL
-MANCHESTER,UNITED KINGDOM,MAN,EGCC
-MINSK,BELARUS,MSQ,UMMS
-LARNACA,CYPRUS,LCA,LCLK
-PAPHOS,CYPRUS,PFO,LCPH
-DALLAS,USA,DFW
-DENVER,USA,DEN
-CHICAGO,USA,ORD
-LOS-ANGELES,USA,LAX
-SEATTLE,USA,SEA
-MIAMI,USA,MIA
-HOUSTON,USA,IAH
-SAN-FRANCISCO,USA,SFO
-NEW-YORK-CITY,USA,JFK
-DETROIT,USA,DTW
-BOSTON,USA,BOS
-PHILADELPHIA,USA,PHL
-WASHINGTON,USA,DCA
-DALLAS,United States,DFW
-DENVER,United States,DEN
-CHICAGO,United States,ORD
-LOS-ANGELES,United States,LAX
-SEATTLE,United States,SEA
-MIAMI,United States,MIA
-HOUSTON,United States,IAH
-SAN-FRANCISCO,United States,SFO
-NEW-YORK-CITY,United States,JFK
-DETROIT,United States,DTW
-BOSTON,United States,BOS
-PHILADELPHIA,United States,PHL
-WASHINGTON,United States,DCA
-ABERDEEN,ENGLAND,AB,EGPD
-BELFASTCITY,ENGLAND,BHD,EGAC
-BELFAST-INTERNATIONAL,ENGLAND,BFS,EGAA
-BIRMINGHAM,ENGLAND,BHX,ETBB
-BRISTOL,ENGLAND,BRS,EGGD
-CARDIFF,ENGLAND,CWL,EGFF
-DONCASTER-SHEFFIELD,ENGLAND,DSA,EGCN
-EASTMIDLANDS,ENGLAND,EMA,EGNX
-EDINBURGH,ENGLAND,EDI,EGPH
-EXETER,ENGLAND,EXT,ETS
-GLASGOW,ENGLAND,GLA,ECPF
-HUMBERSIDE,ENGLAND,HUY,EGNJ
-JERSEY,ENGLAND,JER,EGJJ
-LEEDS-BRADFORD,ENGLAND,LBA,EGNM
-LIVERPOOL,ENGLAND,LPL,EGGP
-LONDON,ENGLAND,LHR,EGLL
-MANCHESTER,ENGLAND,MAN,EGCC
-AGADIR,MOROCCO,AGA
-CASABLANKA,MOROCCO,CMN
-MARRAKESH,MOROCCO,RAK
-BRAZILIA,BRAZIL,BSB
-MELBURN,AUSTRALIA,MEL
+Denmark,AAR
+Iran,ABD
+Chad,AEH
+United Kingdom,ABZ
+USA,ABR
+Cote d'Ivoire,ABJ
+USA,ABI
+United Arab Emirates,AUH
+Nigeria,ABV
+Egypt,AUE
+Egypt,ABS
+Mexico,ACA
+Ghana,ACC
+Turkey,ADA
+Ethiopia,ADD
+Australia,ADL
+Yemen,ADE
+Turkey,ADF
+Russia,AER
+Niger,AJY
+Morocco,AGA
+Guam,SUM
+South Africa,AGZ
+Puerto Rico,BQN
+Mexico,AGU
+India,AMD
+Papua New Guinea,AYU
+France,AJA
+Japan,AXT
+USA,CAK
+Cyprus,AKT
+United Arab Emirates,AAN
+Egypt,AAC
+Australia,ALH
+USA,ABY
+USA,ALB
+France,LBI
+Denmark,AAL
+USA,ABQ
+Australia,ABX
+Channel Islands,ACI
+Syria,ALP
+Norway,AES
+South Africa,ALJ
+Egypt,HBH
+Egypt,ALY
+USA (LA),ESF
+United Arab Emirates,FJR
+Italy,AHO
+Algeria,ALG
+Morocco,AHU
+Spain,ALC
+Australia,ASP
+South Africa,ADY
+USA,ABE
+Kazakhstan,ALA
+Spain,LEI
+Norway,ALF
+China,AAT
+Switzerland,ACH
+USA,AOO
+USA,AXS
+Japan,ASJ
+USA,AMA
+Papua New Guinea,AZB
+Jordan,AMM
+Jordan,ADJ
+India,ATQ
+Netherlands,AMS
+India,QNB
+USA,ANC
+Italy,AOI
+Andorra,ALV
+Anguilla,AXA
+Comoros (Comores),AJN
+Turkey,ANK
+Turkey,ESB
+Algeria,AAE
+USA,ARB
+France,NCY
+USA,ANB
+Turkey,AYT
+Madagascar,TNR
+Antigua and Barbuda,ANU
+Belgium,ANR
+Japan,AOJ
+Samoa,APW
+USA,ATW
+Jordan,AQJ
+Brazil,AJU
+Russia,ARH
+Tanzania,ARK
+Greece,GPA
+Niger,RLT
+Spain,ACE
+Aruba,AUA
+USA,AVL
+Turkmenistan,ASB
+Eritrea,ASM
+USA,ASE
+Egypt,ATZ
+Kazakhstan,TSE
+Paraguay,ASU
+Egypt,ASW
+Greece,ATH
+Greece,HEW
+USA,AHN
+USA,ATO
+USA,ATL
+USA,ACY
+Canada,YAT
+New Zealand,AKL
+Germany,AGB
+USA,AGS
+USA,AUG
+France,AUR
+USA,AUS
+Indonesia,AYW
+Australia,AYQ
+Australia,AYR
+Spain,BJZ
+Iraq,BGW
+India,IXB
+The Bahamas,NAS
+Pakistan,BHV
+Bahrain,BAH
+USA,BFL
+Azerbaijan,BAK
+Australia,BNK
+USA,BWI
+Australia,ABM
+Mali,BKO
+Central African Republic,BBY
+Brunei,BWN
+Indonesia,BDO
+India,BLR
+Central African Republic,BGU
+Thailand,DMK
+Thailand,BKK
+USA,BGR
+Central African Republic,BGF
+Gambia,BJL
+Pakistan,BNP
+Spain,BCN
+Venezuela,BLA
+Norway,BDU
+Italy,BRI
+Bangladesh,BZL
+India,BDQ
+United Kingdom,BRR
+Colombia,BAQ
+Switzerland,BSL
+Switzerland/France,EAP
+Iraq,BSR
+Guadeloupe,PTP
+Saint Kitts and Nevis,SKB
+France,BIA
+USA,BTR
+Germany,BYU
+USA,BPT
+USA,BKW
+Virgin Islands (British),EIS
+China,PEK
+China,NAY
+Mozambique,BEW
+Lebanon,BEY
+Brazil,BEL
+United Kingdom,BHD
+United Kingdom,BFS
+India,IXG
+Serbia,BEG
+Belize,BZE
+USA,BLI
+Brazil,CNF
+USA,BJI
+United Kingdom,BEB
+Libya,BEN
+Angola,BUG
+USA,BEH
+Central African Republic,BBT
+Italy,BGY
+Norway,BGO
+France,EGC
+Germany,BER
+Germany,SXF
+Germany,TXL
+Germany,THF
+Bermuda,BDA
+Switzerland,BRN
+Switzerland,ZDJ
+USA,BET
+India,BHO
+India,BBI
+France,BIQ
+Spain,BIO
+USA,BIL
+Denmark,BLL
+Malaysia,BTU
+Central African Republic,IRO
+United Kingdom,BHX
+USA,BHM
+Kyrgyzstan,FRU
+USA,BIS
+Guinea-Bissau,BXO
+United Kingdom,BLK
+Australia,BLT
+Malawi,BLZ
+New Zealand,BHE
+South Africa,BFN
+USA,BMI
+USA,BMG
+USA,BLF
+Brazil,BVB
+Burkina Faso,BOY
+Norway,BOO
+Turkey,BJV
+Colombia,BOG
+USA,BOI
+Italy,BLQ
+India,BOM
+Netherlands Antilles,BON
+Canada,YVB
+French Polynesia,BOB
+France,BOD
+USA,BXS
+USA,BOS
+Cote d'Ivoire,BYK
+Bulgaria,BOJ
+United Kingdom,BOH
+Australia,ZBO
+USA,BZN
+USA,BFD
+USA,BRD
+Australia,BMP
+Brazil,BSB
+Slovakia,BTS
+Congo (ROC),BZV
+Germany,BRE
+Italy,VBS
+France,BES
+Central African Republic,BIV
+USA,BDR
+Barbados,BGI
+Italy,BDS
+Australia,BNE
+United Kingdom,BRS
+Norway,BNN
+Australia,BHQ
+USA,BKX
+Australia,BME
+USA,BQK
+Belgium,BRU
+Colombia,BGA
+Romania,BUH
+Romania,OTP
+Hungary,BUD
+Argentina,BUE
+Argentina,EZE
+Argentina,AEP
+Zimbabwe,BFO
+USA,BUF
+Burundi,BJM
+Zimbabwe,BUQ
+USA,BHC
+Australia,BDB
+USA,BUR
+USA,BRL
+USA,BTV
+Australia,BWT
+USA,BTM
+Angola,CAB
+Italy,CAG
+Australia,CNS
+Egypt,CAI
+Chile,CJC
+India,CCU
+Canada,YYC
+Colombia,CLO
+India,CCJ
+France,CLY
+Canada,YCB
+United Kingdom,CBG
+United Kingdom,CAL
+Brazil,CGR
+Australia,CBR
+Mexico,CUN
+France,CEQ
+Saint Vincent & the Grenadines,CIW
+South Africa,CPT
+Venezuela,CCS
+United Kingdom,CWL
+USA,CLD
+Australia,CVQ
+Central African Republic,CRF
+USA,CSN
+Morocco,CAS
+Morocco,CMN
+Dominican Republic,LRM
+Australia,CSI
+USA,CPR
+Fiji,CST
+Colombia,CTG
+Saint Lucia,SLU
+Italy,CTA
+French Guiana,CAY
+Germany,CBU
+Philippines,CEB
+USA,CDC
+USA,CID
+Australia,CED
+Australia,CES
+Russia,KHV
+France,CMF
+USA,CMI
+UNITED STATES OF AMERICA,CMI
+India,IXC
+Jilin, China,CGQ
+Greece,CHQ
+China,CHG
+USA,CHS
+USA,CRW
+USA,CLT
+USA,CHO
+Australia,CXT
+USA,CHA
+Sichuan, China,CTU
+India,MAA
+USA,CYS
+Thailand,CNX
+Japan,QCB
+USA,MDW
+USA,ORD
+USA,CHI
+Mexico,CZA
+USA,CIC
+Mexico,CUU
+Greece,JKH
+Zambia,CIP
+Moldova,KIV
+Russia,HTA
+Japan,CTS
+Pakistan,CJL
+Bangladesh,CGP
+China,CKG
+New Zealand,CHC
+Bahamas,CCZ
+Canada,YYQ
+Cuba,CFG
+USA,CVG
+Mexico,CME
+Venezuela,CGU
+Mexico,CJS
+Mexico,CEN
+Mexico,CVM
+USA,CKB
+Australia,CMQ
+France,CFE
+USA,BKL
+USA,CLE
+Bolivia,CBB
+India,COK
+USA,COD
+USA,KCC
+Australia,CFS
+India,CJB
+Mexico,CLQ
+USA,CLL
+Australia,KCE
+Germany,CGN
+Sri Lanka,CMB
+USA,COS
+USA,CAE
+USA,CSG
+USA,CMH
+Guinea,CKY
+USA,CCR
+USA,CON
+Algeria,CZL
+Romania,CND
+Australia,CPD
+Australia,CTN
+Australia,OOM
+Denmark,CPH
+Argentina,COR
+Spain,ODB
+USA,CDV
+Greece,CFU
+Ireland,ORK
+USA,CRP
+Benin,COO
+United Kingdom,CVT
+England,CVT
+Mexico,CZM
+USA,CGA
+USA,CEC
+Brazil,CGB
+Mexico,CUL
+Netherlands,AMS
+Holland,CUR
+Brazil,CWB
+Philippines,CYU
+Senegal,DKR
+Turkey,DLM
+Australia,DBY
+China,DLC
+USA,DAL
+USA,DFW
+Cote d'Ivoire,DJO
+Syria,DAM
+Saudi Arabien,DMM
+USA,DAN
+Tanzania,DAR
+Australia,DRW
+Australia,DDI
+USA,DAY
+USA,DAB
+USA,DEC
+Canada,YDF
+India,DEL
+Netherlands,HAG
+Turkey,DNZ
+Indonesia,DPS
+USA,DEN
+Pakistan,DSK
+Australia,DRB
+United Kingdom,LDY
+USA,DSM
+USA,DET
+USA,DTW
+USA,DTT
+USA,DVL
+Australia,DPO
+Saudi Arabia,DHA
+Bangladesh,DAC
+Timor Leste,DIL
+USA,DLG
+France,DNR
+France,DLP
+Tunisia,DJE
+Djibouti,JIB
+Tanzania,DOD
+Qatar,DOH
+United Kingdom,DSA
+Ireland,CFN
+Germany,DTM
+USA,DHN
+Cameroon,DLA
+Germany,DRS
+United Arab Emirates,DXB
+UAE,DXB
+Australia,DBO
+Ireland,DUB
+USA,DUJ
+Croatia,DBV
+USA,DBQ
+Germany,DUS
+USA,DLH
+United Kingdom,DND
+New Zealand,DUD
+Australia,DKI
+USA,DRO
+South Africa,DUR
+Tajikistan,DYU
+USA,DUT
+Australia,DYA
+Mayotte,DZA
+South Africa,ELS
+Chile,IPC
+USA,EAU
+UK,EDI
+Canada,YEA
+Canada,YEG
+Canada,YXD
+Iceland,EGS
+Netherlands,EIN
+Dominican Republic,AZS
+Italy,EBA
+Israel,ETH
+Israel,VDA
+USA,EKI
+USA,EKO
+South Africa,ELL
+Egypt,EMY
+USA,ELM
+USA,ELP
+USA,ELY
+Australia,EDR
+Australia,EMD
+Finland,ENF
+Uganda,EBB
+Germany,ERF
+USA,ERI
+Armenia,EVN
+Turkey,ERC
+Turkey,ERZ
+Denmark,EBJ
+USA,ESC
+Australia,EPR
+USA,EUG
+USA,ACV
+USA,EVV
+Norway,EVE
+United Kingdom,EXT
+USA,FAI
+United Kingdom,FIE
+Pakistan,LYP
+USA,FAR
+USA,FMN
+Portugal,FAO
+Denmark,FAE
+USA,FYV
+USA,FAY
+Morocco,FEZ
+France,FSC
+USA,FLG
+Canada,YFO
+USA,FNT
+Italy,FLR
+USA,FLO
+Brazil,FLN
+Norway,FRO
+Canada,YFA
+Brazil,FOR
+Martinique,FDF
+USA,FOD
+USA,FHU
+USA,FLL
+Canada,YMM
+USA,FMY
+USA,RSW
+USA,FRI
+Canada,YSM
+USA,FSM
+Canada,YXJ
+USA,VPS
+USA,FWA
+USA,DFW
+United Kingdom,FOU
+Botswana,FRW
+Germany,FRA
+Germany,HHN
+USA,FKL
+Canada,YFC
+Bahamas,FPO
+Sierra Leone,FNA
+France,FRJ
+USA,FAT
+Germany,FDH
+Spain,FUE
+United Arab Emirates,FJR
+Japan,FUK
+Japan,FKS
+Portugal,FNC
+Botswana,GBE
+USA,GAD
+USA,GNV
+Ireland,GWY
+Canada,YQX
+Cameroon,GOU
+Palestina,GZA
+Turkey,GZT
+Poland,GDN
+Australia,GEX
+Switzerland,GVA
+Italy,GOA
+South Africa,GRJ
+Guyana,GEO
+Australia,GET
+Spain,GRO
+Belgium,GNE
+Gibraltar,GIB
+USA,GCC
+Pakistan,GIL
+Canada,YGX
+Australia,GLT
+United Kingdom,PIK
+United Kingdom,GLA
+USA,GGW
+USA,GDV
+India,GOI
+Brazil,GYN
+Australia,OOL
+Australia,GOO
+Canada,YYR
+Bulgaria,GOZ
+Sweden,GOT
+Australia,GOV
+Bahamas,GHB
+Spain,GRX
+Bahamas,FPO
+USA,GCN
+Cayman Islands,GCM
+USA,GFK
+USA,GJT
+USA,GRR
+USA,GPZ
+Austria,GRZ
+USA,GTF
+Australia,GKL
+USA,GRB
+USA,LWB
+USA,GSO
+USA,GLH
+USA,PGV
+USA,GSP
+Grenada,GND
+France,GNB
+Australia,GFF
+Netherlands,GRQ
+Australia,GTE
+USA,GON
+Mexico,GDL
+Solomon Islands,GSI
+Guam,GUM
+Guangdong, China,CAN
+Brazil,GRU
+Guatemala,GUA
+Ecuador,GYE
+Channel Islands,GCI
+Germany,GTI
+USA,GPT
+Guangxi, China,KWL
+Uganda,ULU
+USA,GUC
+India,GAU
+Pakistan,GWD
+Zimbabwe,GWE
+Australia,GYP
+Japan,HAC
+Guam,GUM
+Israel,HFA
+USA,HNS
+Japan,HKD
+Canada,YHZ
+Canada,YUX
+Germany,HAM
+Australia,HLT
+Canada,YHM
+New Zealand,HLZ
+Australia,HTI
+Norway,HFT
+USA,CMX
+Zhejiang, China,HGH
+Germany,HAJ
+Vietnam,HAN
+Zimbabwe,HRE
+Heilongjiang, China,HRB
+USA,HRL
+Canada,YHR
+USA,HAR
+USA,MDT
+USA,BDL
+Thailand,HDY
+Norway,HAU
+Cuba,HAV
+USA,HVR
+Australia,HIS
+USA,HLN
+Sweden,JHE
+Finland,HEL
+Greece,HER
+Mexico,HMO
+Australia,HVB
+USA,HIB
+USA,HKY
+USA,ITO
+USA,HHH
+Australia,HNK
+Japan,HIJ
+Viet Nam,SGN
+Australia,HBA
+Germany,HOQ
+Cuba,HOG
+Australia,HMH
+USA,HOM
+Hong Kong,HKG
+Hong Kong,ZJK
+Solomon Islands,HIR
+USA,HNL
+USA,HNH
+Portugal,HOR
+USA,HOU
+USA,IAH
+French Polynesia,HUH
+Mexico,HUX
+Viet Nam,HUI
+United Kingdom,HUY
+USA,HTS
+USA,HSV
+Egypt,HRG
+USA,HON
+Zimbabwe,HWN
+USA,HYA
+USA,HYG
+India,HYD
+Pakistan,HDD
+Ibiza/Spain,IBZ
+USA,IDA
+Argentina,IGR
+New Caledonia,ILP
+New Caledonia,IOU
+USA,ILI
+USA,IPL
+New Zealand,IVC
+Korea South,ICN
+USA,IND
+Australia,IGH
+Australia,IFL
+Austria,INN
+USA,INL
+Canada,YEV
+New Zealand,IVC
+United Kingdom,INV
+USA,IYK
+Canada,YFB
+Peru,IQT
+Russia,IKT
+Japan,ISG
+Pakistan,ISB
+United Kingdom,ILY
+Turkey,IST
+Turkey,SAW
+USA,ITH
+Finland,IVL
+Mexico,ZIH
+Turkey,IZM
+Turkey,ADB
+USA,JAC
+USA,JXN
+USA,MJQ
+USA,JAN
+USA,HKS
+USA,MKL
+USA,JAC
+USA,LRF
+USA,NZC
+USA,NIP
+USA,JAX
+USA,CRG
+USA,IJX
+USA,OAJ
+USA,JKV
+Haiti,JAK
+Pakistan,JAG
+Brazil,JCM
+Papua New Guinea,JAQ
+Sri Lanka,JAF
+India,JGB
+India,JAI
+India,JSA
+Indonesia,HLP
+Indonesia,JKT
+Indonesia,CGK
+Afghanistan,JAA
+India,JLR
+Mexico,JAL
+Brazil,JLS
+Marshall Islands,UIT
+Angola,JMB
+"Indonesia ",DJB
+Bulgaria,JAM
+USA,JMS
+USA,JHW
+India,IXJ
+India,JGA
+India,IXW
+Nepal,JKR
+Australia,JAD
+USA,JVL
+Brazil,JNA
+Panama,JQE
+Brazil,JTI
+Peru,JAU
+Indonesia,DJJ
+Saudi Arabia,JED
+USA,JEF
+Haiti,JEE
+Spain,XRY
+Channel Islands,JER
+Israel,JRS
+Bangladesh,JSR
+India,PYB
+Jiangxi, China,JGS
+China,JMU
+China,JGN
+Algeria,GJL
+Ethiopia,JIJ
+China,JIL
+Ethiopia,JIM
+Shandong, China,TNA
+China,JDZ
+China,JHG
+China,JNG
+Uganda,JIN
+China,JJN
+Ethiopia,BCO
+China,JNZ
+Ecuador,JIP
+Nepal,JIR
+China,JIU
+Pakistan,JIW
+Brazil,JCB
+Brazil,JPA
+India,JDH
+Sweden,JKG
+Finland,JOE
+South Africa,JNB
+USA,BGM
+USA,JON
+USA,JST
+Malaysia,JHB
+Brazil,JOI
+Philippines,JOL
+Nepal,JMO
+USA,JBR
+USA,JLN
+India,JRH
+Nigeria,JOS
+Argentina,JSM
+Saudi Arabia,AJF
+Peru,JJI
+South Sudan,JUB
+Germany,JUI
+Brazil,JDF
+Argentina,JUJ
+Australia,JCK
+Peru,JUL
+Nepal,JUM
+Australia,JUN
+USA,JNU
+Argentina,JNI
+Honduras,JUT
+Botswana,JWA
+Finland,JYV
+Afghanistan,KBL
+Japan,KOJ
+Turkey,KCM
+USA,OGG
+Finland,KAJ
+Greece,KLX
+USA,AZO
+Australia,KGI
+Russia,KGD
+USA,FCA
+Sweden,KLR
+Canada,YKA
+USA,MUE
+Nigeria,KAN
+India,KNU
+USA,MCI
+Taiwan,KHH
+USA,JHM
+Pakistan,KHI
+Germany,FKB
+Sweden,KSD
+Greece,AOK
+Australia,KTA
+Turkey,KYS
+Australia,KRB
+Denmark,KRP
+Canada,ZKE
+Sudan,KSL
+Australia,KTR
+Nepal,KTM
+Namibia,MPA
+Finland,KHJ
+USA,MKK
+Greece,KVA
+Turkey,ASR
+Russia,KZN
+Namibia,KMP
+Canada,YLW
+Finland,KEM
+USA,ENA
+United Kingdom,MSE
+Ireland,KIR
+USA,KTN
+USA,EYW
+Saudi Arabia,AHB
+Egypt,UVL
+Ukraine,HRK
+Sudan,KRT
+Pakistan,KDD
+Germany,KEL
+Ukraine,KBP
+Ukraine,IEV
+Rwanda,KGL
+Tanzania,JRO
+USA,ILE
+South Africa,KIM
+King Island,KNS
+USA,AKN
+Australia,KGC
+Jamaica,KIN
+USA,ISO
+Saint Vincent and the Grenadines,SVD
+Congo (DRC),FIH
+Kiribati,CXI
+Norway,KKN
+Iraq,KIK
+United Kingdom,KOI
+Sweden,KRN
+Congo (DRC),FKI
+Finland,KTT
+Zambia,KIW
+Austria,KLU
+USA,LMT
+USA,KLW
+South Africa,KLZ
+Ireland,NOC
+USA,TYS
+Japan,UKB
+Japan,KCZ
+Germany,CGN
+USA,ADQ
+Pakistan,OHT
+Finland,KOK
+India,CCU
+Japan,KMQ
+USA,KOA
+Turkey,KYA
+Cote d'Ivoire,HGO
+Greece,KGS
+Malaysia,BKI
+USA,OTZ
+Australia,KWM
+Poland,KRK
+Norway,KRS
+Sweden,KID
+Norway,KSU
+Malaysia,KUL
+Malaysia,SZB
+Malaysia,KUA
+Malaysia,KCH
+Japan,KMJ
+Australia,KNX
+Finland,KUO
+Japan,KUH
+Canada,YVP
+Canada,YGW
+Finland,KAO
+Kuwait,KWI
+Japan,UKY
+Guinea,LEK
+USA,WLB
+Malaysia,LBU
+Canada,XLB
+Spain,LCG
+USA,LSE
+Papua New Guinea,LAE
+France,LRH
+USA,LAF
+USA,LFT
+Nigeria,LOS
+Canada,YGL
+Pakistan,LHE
+USA,LCH
+USA,HII
+USA,TVL
+Norway,LKL
+Gabon,LBQ
+Italy,SUF
+Italy,LMP
+USA,LNY
+USA,LNS
+United Kingdom,LEQ
+Malaysia,LGK
+France,LAI
+South Africa,HLA
+USA,LAN
+Bolivia,LPB
+Mexico,LAP
+Finland,LPP
+USA,LAR
+USA,LRD
+Cyprus,LCA
+Spain,LPA
+USA,LAS
+USA,LBE
+Australia,LST
+USA,PIB
+Australia,LVO
+USA,LAW
+Mexico,LZC
+Canada,YLR
+Australia,LEA
+USA,LEB
+United Kingdom,LBA
+Australia,LER
+Germany,LEJ
+Netherlands,LEY
+Mexico,BJX
+Australia,LNO
+United Kingdom,LWK
+USA,LWS
+USA,LWT
+USA,LEX
+Gabon,LBV
+Sweden,LDK
+Belgium,LGG
+Pazifik,LIF
+USA,LIH
+France,LIL
+Malawi,LLW
+Peru,LIM
+Cyprus,QLI
+France,LIG
+USA,LNK
+Australia,LDC
+Austria,LNZ
+Congo (DRC),LIQ
+Portugal,LIS
+Australia,LSY
+USA,LIT
+United Kingdom,LPL
+Australia,LZR
+Slovenia,LJU
+Australia,IRG
+Togo,LFW
+Canada,YXU
+United Kingdom,LON
+United Kingdom,LCY
+United Kingdom,LGW
+United Kingdom,LHR
+United Kingdom,LTN
+United Kingdom,STN
+United Kingdom,LDY
+USA,LGB
+USA,LIJ
+USA,ISP
+Australia,LRE
+USA,GGG
+Svalbard/Norway,LYR
+Mexico,LTO
+France,LRT
+USA,LAX
+Mexico,SJD
+Mexico,LMM
+Teneriffa/Spain,TFN
+Croatia (Hrvatska),LSZ
+France,LDE
+USA,SDF
+Angola,LAD
+USA,LBB
+India,LKO
+Namibia,LUD
+Malta,MLA
+Switzerland,LUG
+Sweden,LLA
+Congo (DRC),FBM
+Zambia,LUN
+South Africa,LUJ
+Luxembourg,LUX
+China,LUM
+Egypt,LXR
+Ukraine,LWO
+United Kingdom,LYX
+USA,LYH
+France,LYS
+USA,LYO
+Netherlands,MST
+Brazil,MCP
+China,MFM
+Brazil,MCZ
+Australia,MKY
+USA,MCN
+Philippines,NOP
+Saudi Arabia,MED
+USA,MSN
+India,MAA
+Spain,MAD
+Seychelles,SEZ
+Spain,MAH
+Australia,MTL
+Madagascar,MJN
+Taiwan,MZG
+Equatorial Guinea,SSG
+Spain,AGP
+Turkey,MLX
+Maledives,MLE
+Kenya,MYD
+Sweden,MMA
+Sweden,MMX
+Cote d'Ivoire,MJC
+Nicaragua,MGA
+Brazil,MAO
+United Kingdom,MAN
+USA,MHT
+Myanmar,MDL
+Papua New Guinea,MFO
+French Polynesia,XMH
+Philippines,MNL
+Mexico,ZLO
+Swaziland,MTS
+Mozambique,MPM
+Argentina,MDQ
+Venezuela,MAR
+Niger,MFQ
+Turkey,KCM
+USA,MTH
+Turkey,MQM
+New Caledonia,MEE
+South Africa,MGH
+Venezuela,PMV
+Slovenia,MBX
+Finland,MHQ
+Cameroon,MVR
+USA,MQT
+Morocco,RAK
+Egypt,RMF
+Egypt,MUH
+France,MRS
+Bahamas,MHH
+USA,MVY
+USA,MRB
+Australia,MBH
+Lesotho,MSU
+USA,MCW
+Zimbabwe,MVZ
+Japan,MMJ
+Japan,MYJ
+USA,MTO
+Botswana,MUB
+French Polynesia,MAU
+Mauritius,MRU
+Puerto Rico,MAZ
+Mexico,MZT
+USA,MFE
+Indonesia,MES
+Indonesia,KNO
+Colombia,MDE
+USA,MFR
+Saudi Arabia,MED
+Australia,MKR
+Australia,MEL
+USA,MLB
+Dominica,DOM
+USA,MEM
+Argentina,MDZ
+Indonesia,MDC
+USA,MCE
+Mexico,MID
+USA,MEI
+Australia,MIM
+South Africa,MEZ
+USA,MTM
+France,MZM
+France,ETZ
+Mexico,MXL
+Mexico,MEX
+Mexico,AZP
+Mexico,MEX
+Mexico,NLU
+Zambia,MFU
+USA,MIA
+Pakistan,MWD
+Australia,MMM
+USA,MAF
+US Minor Outlying Islands,MDY
+Finland,MIK
+Italy,MIL
+Italy,LIN
+Italy,MXP
+Italy,BGY
+Australia,MQL
+USA,MLS
+New Zealand,MFN
+USA,MKE
+Mexico,MTT
+Russia,MRV
+USA,MSP
+USA,MOT
+Belarus,MSQ
+Malaysia,MYY
+Pakistan,QML
+USA,MSO
+USA,MHE
+Japan,MMY
+Japan,KMI
+South Africa,MBM
+Gabon,MFF
+USA,MOB
+USA,MOD
+Pakistan,MJD
+Somalia,MGQ
+Namibia,OKU
+USA,MLI
+Kenya,MBA
+Tunisia,MIR
+Canada,YQM
+USA,MLU
+Liberia,MLW
+Liberia,ROB
+Jamaica,MBJ
+Brazil,QGF
+USA,MRY
+Mexico,MTY
+Mexico,NTR
+Uruguay,MVD
+USA,MGM
+France,MPL
+Canada,YMQ
+Canada,YUL
+Canada,YMX
+USA,MTJ
+French Polynesia,MOZ
+Australia,MOV
+Australia,MRZ
+Mexico,MLM
+USA,MGW
+Japan,HNA
+Comoros (Comores),HAH
+Australia,MYA
+Russia,MOW
+Russia,DME
+Russia,SVO
+Russia,VKO
+USA,MWH
+South Africa,MZY
+Bosnia and Herzegovina,OMO
+Iraq,OSM
+Gabon,MJL
+Chad,MQQ
+New Zealand,GTN
+Australia,MGB
+Australia,MMG
+Australia,ISA
+USA,MCL
+Germany,MUC
+Germany,FMO
+France,MLH
+Pakistan,MUX
+Spain,MJV
+Russia,MMK
+Turkey,MSR
+Oman,MCT
+USA,MSL
+USA,MKG
+Pakistan,MFG
+Gabon,MVB
+Greece,JMK
+USA,MYR
+USA,CRE
+India,MYQ
+Greece,MJT
+South Africa,MZF
+Fiji,NAN
+Japan,NGS
+Japan,NGO
+India,NAG
+Kenya,NBO
+Azerbaijan,NAJ
+Thailand,NST
+France,ENC
+Canada,YSR
+China,NNG
+France,NTE
+USA,ACK
+Italy,NAP
+USA,APF
+Australia,NAA
+Australia,NRA
+Greenland,UAK
+USA,BNA
+Bahamas,NAS
+Brazil,NAT
+Fiji/Suva,SUV
+Pakistan,WNS
+Greece,JNX
+Chad,NDJ
+Zambia,NLA
+New Zealand,NSN
+South Africa,NLP
+South Africa,MQP
+St. Kitts and Nevis,NEV
+USA,EWN
+USA,HVN
+USA,MSY
+United Kingdom,NQY
+Egypt,UVL
+USA,JFK
+USA,LGA
+USA,EWR
+USA,NYC
+USA,SWF
+Australia,BEO
+Australia,NTL
+United Kingdom,NCL
+South Africa,NCS
+Australia,ZNE
+USA,PHF
+Cameroon,NGE
+USA,IAG
+Niger,NIM
+France,NCE
+Cyprus,NIC
+Ukraine,NLV
+Japan,KIJ
+France,FNI
+Serbia,INI
+Russia,GOJ
+USA,OME
+Australia,NSA
+Australia,NLK
+USA,ORF
+Canada,YVQ
+Sweden,NRK
+USA,OTH
+Bahamas,ELH
+United Kingdom,NWI
+United Kingdom,EMA
+Mauritania,NDB
+Mauritania,NKC
+New Caledonia,NOU
+Serbia,QND
+Russia,OVB
+Germany,NUE
+Mexico,NLD
+Tonga,TBU
+USA,OAK
+Mexico,OAX
+Denmark,ODE
+Ukraine,ODS
+Sweden,ORB
+Macedonia,OHD
+Japan,OIT
+Japan,OKJ
+Japan,OKA
+USA,OKC
+Italy,OLB
+Australia,OLP
+USA,OMA
+Namibia,OND
+USA,ONT
+Algeria,ORN
+Australia,OAG
+USA,SNA
+Namibia,OMD
+Aruba,AUA
+United Kingdom,KOI
+USA,ORL
+USA,MCO
+Australia,ORS
+Japan,OSA
+Japan,ITM
+Japan,KIX
+USA,OSH
+Croatia (Hrvatska),OSI
+Norway,OSL
+Norway,FBU
+Norway,TRF
+Canada,YOW
+Central African Republic,ODA
+Morocco,OZZ
+South Africa,OUH
+Burkina Faso,OUA
+Morocco,OUD
+Finland,OUL
+United Kingdom,OUK
+Spain,OVD
+USA,OWB
+USA,OXR
+Gabon/Loyautte,UVE
+Germany,PAD
+USA,PAH
+USA,PGA
+American Samoa,PPG
+USA,PKB
+Italy,PMO
+Spain,PMI
+Brazil,PMW
+USA,PMD
+New Zealand,PMR
+USA,PSP
+Panama,PTY
+USA,PFN
+Pakistan,PJG
+Italy,PNL
+French Polynesia (Tahiti),PPT
+Cyprus,PFO
+Australia,PBO
+Suriname,PBM
+France,PAR
+France,CDG
+France,LBG
+France,ORY
+Bhutan,PBH
+USA,PSC
+Pakistan,PSI
+India,PAT
+Thailand,PYX
+France,PUF
+USA,PLN
+Malaysia,PEN
+USA,PDT
+USA,PNS
+USA,PIA
+Colombia,PEI
+France,PGF
+Australia,PER
+Italy,PEG
+Italy,PSR
+Pakistan,PEW
+USA,PSG
+South Africa,PHW
+USA,PHL
+Cambodia,PNH
+USA,PHX
+Thailand,HKT
+USA,PIR
+South Africa,PZB
+South Africa,PTG
+South Africa,NTY
+Italy,PSA
+USA,PIT
+USA,PLB
+South Africa,PBZ
+USA,PIH
+Montenegro,TGD
+Micronesia,PNI
+Guadeloupe,PTP
+Congo (ROC),PNR
+France,PIS
+Puerto Rico,PSE
+Portugal,PDL
+Finland,POR
+USA,CLM
+Haiti,PAP
+Australia,PUG
+South Africa,PLZ
+Gabon,POG
+Nigeria,PHC
+Australia,PHE
+Australia,PTJ
+USA,PWM
+USA,PDX
+Australia,PLO
+Australia,PQQ
+Canada,YPN
+Papua New Guinea,POM
+Portugal,OPO
+Brazil,POA
+Trinidad and Tobago,POS
+Egypt,PSD
+Portugal,PXO
+Brazil,PVH
+Vanuatu,VLI
+USA,POU
+Poland,POZ
+Czech Republic,PRG
+Czech,PRG
+Cape Verde,RAI
+USA,PQI
+South Africa,PRY
+Greece,PVK
+Canada,YXS
+Canada,YPR
+Serbia,PRN
+Australia,PPP
+USA,PVD
+USA,SCC
+Mexico,PBC
+USA,PUB
+Mexico,PXM
+Venezuela,PZO
+Dominican Republic,POP
+Mexico,PVR
+Canada,XPK
+Croatia,PUY
+USA,PUW
+Maharashtra,PNQ
+Chile,PUQ
+Dominican Republic,PUJ
+South Korea,PUS
+North Korea,FNJ
+Canada,YQB
+Australia,UEE
+New Zealand,ZQN
+Pakistan,UET
+Shandong, China,TAO
+France,UIP
+USA,UIN
+Ecuador,UIO
+Morocco,RBA
+Pakistan,RYK
+French Polynesia,RFP
+Canada,YOP
+India,RAJ
+USA,RDU
+India,IXR
+French Polynesia,RGI
+Myanmar,RGN
+USA,RAP
+Cook Island,RAR
+United Arab Emirates,RKT
+Pakistan,RAZ
+Pakistan,RWP
+USA,RDG
+Brazil,REC
+USA,RDD
+USA,RDM
+Italy,REG
+Canada,YQR
+Teneriffa,TFS
+France,RNS
+USA,RNO
+Canada,YRB
+Spain,REU
+Iceland,REK
+Iceland,KEF
+USA,RHI
+Greece,RHO
+South Africa,RCB
+USA,RIC
+Latvia,RIX
+Croatia,RJK
+Italy,RMI
+Brazil,RBR
+Brazil,GIG
+Brazil,SDU
+Brazil,RIO
+Saudi Arabia,RUH
+France,RNE
+USA,ROA
+Honduras,RTB
+USA,RST
+USA,ROC
+Bahamas,RSD
+USA,RKS
+USA,RFD
+Australia,ROK
+USA,RKD
+USA,RWI
+France,RDZ
+Mauritius,RRG
+Denmark,RNN
+Italy,ROM
+Italy,CIA
+Italy,FCO
+Sweden,RNB
+Argentina,ROS
+Russia,RVI
+Russia,ROV
+New Zealand,ROT
+Netherlands,RTM
+Finland,RVN
+Namibia,NDU
+Bulgaria,ROU
+Germany,SCN
+USA,SMF
+Japan,SDS
+USA,MBS
+Pakistan,SDT
+Viet Nam,SGN
+France,SBK
+Reunion,RUN
+Canada,YSJ
+Northern Mariana Islands,SPN
+Cape Verde,SID
+Oman,SLL
+USA,SLE
+USA,SNS
+Ecuador,SNC
+Zimbabwe,SAY
+USA,SBY
+Greece,SKG
+Argentina,SLA
+USA,SLC
+Brazil,SSA
+Austria,SZG
+Russia,KUF
+Uzbekistan,SKD
+Greece,SMI
+Turkey,SZF
+Colombia,ADZ
+USA,SJT
+USA,SAT
+Argentina,BRC
+USA,SAN
+USA,SFO
+Mexico,SJD
+Costa Rica,SJO
+USA,SJC
+Puerto Rico,SJU
+USA,SBP
+Mexico,SLP
+Cote d'Ivoire,SPY
+Honduras,SAP
+Bahamas,ZSA
+El Salvador,SAL
+Spain,EAS
+Yemen,SAH
+Canada,YZP
+USA,SNA
+USA,SBA
+Spain,SPC
+Bolivia,SRZ
+Egypt,SKV
+Portugal,SMA
+USA,SMX
+Spain,SDR
+USA,STS
+Bolivia,SRB
+Brazil,SRA
+Argentina,RSA
+Honduras,SDH
+Colombia,SSL
+Mexico,SRL
+Cuba,SCU
+Chile,SCL
+Spain,SCQ
+Vanuatu,SON
+Dominican Republic,SDQ
+Brazil,SLZ
+Brazil,SAO
+Brazil,CGH
+Brazil,GRU
+Brazil,VCP
+Sao Tome & Principe,TMS
+Japan,SPK
+Japan,OKD
+Japan,CTS
+Bosnia and Herzegovina,SJJ
+Bosnia,SJJ
+Russia,SKX
+USA,SRQ
+Canada,YXE
+Cote d'Ivoire,ZSS
+USA,SAV
+Finland,SVL
+Trinidad and Tobago,TAB
+Australia,NSO
+USA,SCF
+USA,SEA
+Libya,SEB
+Finland,SJY
+Botswana,PKW
+Japan,SDJ
+South Korea,ICN
+South Korea,SEL
+Korea,SEL
+Spain,SVQ
+Tunisia,SFA
+Canada,ZTM
+China,SHA
+China,PVG
+Ireland,SNN
+United Arab Emirates,SHJ
+UAE,SHJ
+Egypt,SSH
+United Kingdom,SZD
+United Kingdom,DSA
+USA,SHD
+Liaoning, China,SHE
+Guangdong, China,SZX
+USA,SHR
+USA,SHV
+Australia,JHQ
+Malaysia,SBW
+USA,SDY
+Bulgaria,SLS
+Ukraine,SIP
+Pakistan,MPD
+Singapore,SIN
+Singapore,QPG
+Singapore,XSP
+Australia,SIX
+USA,SUX
+USA,FSD
+South Africa,SIS
+USA,SIT
+Turkey,VAS
+Egypt,SEW
+USA,SGY
+Pakistan,KDU
+Greece,JSI
+Macedonia,SKP
+Denmark,SKS
+South Africa,SZK
+Ireland,SXL
+Canada,YYD
+Finland,SOT
+Denmark,SGD
+Greenland,SFJ
+Bulgaria,SOF
+Norway,SOG
+United Kingdom,SOU
+USA,SBN
+Canada,XSI
+Australia,SOI
+United Kingdom,SEN
+Croatia (Hrvatska),SPU
+USA,GEG
+South Africa,SBU
+USA,SPI
+USA,SGF
+India,SXR
+Canada,YIF
+Virgin Islands (U.S.),STX
+France,EBU
+USA,SGU
+Canada,YYT
+St. Kitts and Nevis,SKB
+USA,STL
+Saint Lucia,UVF
+Saint Lucia,SLU
+Netherlands Antilles,SXM
+St. Martin (Guadeloupe),SFG
+Russia,LED
+Canada,FSP
+Virgin Islands (U.S.),STT
+Saint Vincent and the Grenadines,SVD
+United Kingdom,STN
+USA,SCE
+Norway,SVG
+USA,HDN
+Poland,SZZ
+Sweden,STO
+Sweden,ARN
+Sweden,BMA
+USA,SCK
+United Kingdom,SYY
+France,SXB
+Australia,KBY
+Germany,STR
+Pakistan,SUL
+Pakistan,SKZ
+United Kingdom,LSI
+USA,SUN
+Sweden,SDL
+Australia,MCY
+Indonesia,SUB
+India,STV
+Fiji,SUV
+Namibia,SWP
+Australia,SYD
+Bangladesh,ZYL
+USA,SYR
+Saudi Arabia,TUU
+Saudi Arabia,TIF
+Taiwan,TPE
+Taiwan,TAY
+China,TYN
+Japan,TAK
+USA,TKA
+USA,TLH
+Estonia,QUF
+Estonia,TLL
+USA,TPA
+Finland,TMP
+Mexico,TAM
+Australia,TMW
+Morocco,TNG
+Australia,TRO
+Bulgaria,TGV
+Uzbekistan,TAS
+Malaysia,TWU
+Georgia,TBS
+New Zealand,TEU
+United Kingdom,MME
+Honduras,TGU
+Iran,THR
+Turkey,TEQ
+Israel,TLV
+USA,TEX
+Australia,TEM
+Spain,TCI
+Spain,TFS
+Spain,TFN
+Australia,TCA
+Portugal,TER
+Brazil,THE
+Uzbekistan,TMZ
+Canada,YXT
+USA,HUF
+USA,TXK
+South Africa,TCU
+Canada,YQD
+Greece,SKG
+USA,TVF
+Greece,JTR
+India,TRV
+Denmark,TED
+Canada,YTH
+USA,KTB
+Canada,YQT
+Australia,TIS
+China,TSN
+Mexico,TIJ
+Indonesia,TOD
+Albania,TIA
+India,TRZ
+Montenegro,TIV
+Trinidad and Tobago,TAB
+Japan,TKS
+Japan,TYO
+Japan,HND
+Japan,NRT
+USA,TOL
+Australia,TPR
+Australia,TWB
+Canada,YTZ
+Canada,YYZ
+Canada,YTO
+British Virgin Islands,TOV
+New Caledonia,TOU
+France,TLS
+Australia,TSV
+Japan,TOY
+Turkey,TZX
+Italy,TPS
+USA,TVC
+Bahamas,TCB
+USA,TTN
+Italy,TSF
+USA,TRI
+Italy,TRS
+Libya,TIP
+Norway,TOS
+Norway,TRD
+Namibia,TSB
+USA,TUS
+USA,TUP
+USA,TUL
+Tunisia,TUN
+Pakistan,TUK
+Italy,TRN
+Finland,TKU
+USA,TCL
+Mexico,TGZ
+USA,TWF
+USA,TYR
+French Polynesia,UAH
+French Polynesia,UAP
+Japan,UBJ
+Brazil,UBA
+Brazil,UDI
+Thailand,UBP
+India,UDR
+Netherlands,UDE
+Thailand,UTH
+Russia,UFA
+Czech Republic,UHE
+Angola,UGO
+Indonesia,UPG
+Russia,UCT
+USA,UKI
+Mongolia,ULN
+Russia,UUD
+China,HLH
+Vanuatu,ULB
+South Korea,USN
+South Africa,ULD
+Sweden,UME
+Canada,YUD
+South Africa,UTT
+USA,UNK
+Saint Vincent and the Grenadines,UNI
+United Kingdom,UNT
+Costa Rica,UPL
+Greenland,JUV
+South Africa,UTN
+USA,UPP
+Canada,YBE
+Uzbekistan,UGC
+Venezuela,URM
+Iran,OMH
+Mexico,UPN
+Brazil,URB
+Brazil,URG
+China,URC
+Afghanistan,URZ
+Argentina,USH
+Thailand,UTP
+USA,UCA
+Honduras,UII
+Greenland,UMD
+Ukraine,UDJ
+Finland,VAA
+Sweden,VXO
+USA,EGE
+Canada,YVO
+USA,VDZ
+USA,VLD
+Spain,VLC
+Venezuela,VLN
+Spain,VLL
+Chile,VAP
+Spain,VDE
+Turkey,VAN
+Canada,YVR
+Cuba,VRA
+India,VNS
+Finland,VRK
+Bulgaria,VAR
+Sweden,VST
+Russia,VLU
+Italy,VCE
+Mexico,VER
+USA,VEL
+USA,VRB
+Italy,VBS
+Italy,VRN
+Canada,YYJ
+Zimbabwe,VFA
+Bulgaria,VID
+Lao PDR,VTE
+Spain,VGO
+Mexico,VSA
+Lithuania,VNO
+Virgin Islands,VIJ
+USA,VIS
+Sweden,VBY
+Spain,VIT
+Brazil,VIX
+South Africa,VYD
+Canada,YWK
+USA,ACT
+Australia,WGA
+USA,ALW
+Wallis and Futuna Islands,WLS
+South Africa,WVB
+Australia,WMB
+Poland,WAW
+USA,BWI
+USA,IAD
+USA,DCA
+USA,WAS
+USA,ALO
+USA,ATY
+USA,CWA
+Australia,WEI
+South Africa,WEL
+New Zealand,WLG
+USA,EAT
+USA,PBI
+USA,WYS
+Germany,GWT
+New Zealand,WHK
+Canada,YXN
+New Zealand,WRE
+USA,HPN
+Canada,YXY
+Australia,HAP
+Australia,WYA
+USA,SPS
+USA,ICT
+United Kingdom,WIC
+Australia,WHM
+Austria,VIE
+Germany,WIE
+USA,AVP
+USA,IPT
+USA,ISL
+USA,ILM
+Lithuania,VNO
+Australia,WUN
+Namibia,ERS
+Namibia,WDH
+Canada,YQG
+Canada,YWG
+USA,OLF
+Australia,WOL
+Australia,UMR
+USA,ORH
+USA,WRL
+USA,WRG
+China,WUH
+Australia,WYN
+Fujian,XMN
+Shaanxi,XIY
+USA,YKM
+USA,YAK
+Russia,YKS
+Japan,GAJ
+Côte d'Ivoire,ASK
+Saudi Arabia,YNB
+Myanmar,RGN
+Cameroon,YAO
+Canada,YZF
+Russia,SVX
+Hubei,YIH
+Japan,YOK
+USA,YUM
+Mexico,ZCL
+Croatia,ZAD
+Croatia,ZAG
+Greece,ZTH
+Spain,ZAZ
+Pakistan,PZH
+Niger,ZND
+Mauritania,OUZ
+Switzerland,ZRH
