@@ -85,19 +85,19 @@ nlu:
     - am I talking to a human?
 - intent: infection_numbers
   examples: |
-    - covid cases in [germany](country) in [Bayern](region) [today](date)
-    - covid cases in [germany](country) in [Baden-Wurttemberg](region) [yesterday](date)
-    - covid cases in [germany](country) in [Brandenburg](region)
-    - covid cases in [germany](country) in [Bremen](region)
+    - covid cases in [Bayern](region) [today](date)
+    - covid cases in [Baden-Wurttemberg](region) [yesterday](date)
+    - covid cases in [Brandenburg](region)
+    - covid cases in [Bremen](region)
     - covid cases in [germany](country) in [Hamburg](region) [2021-04-04](date)
-    - covid cases in [germany](country) in [Hessen](region)
+    - covid cases in [Hessen](region)
     - covid cases in [germany](country) in [Mecklenburg-Vorpommern](region) [2021-04-04](date)
-    - covid cases in [germany](country) in [Niedersachsen](region)
+    - covid cases in [Niedersachsen](region)
     - covid cases in [germany](country) in [Nordrhein-Westfalen](region)
     - covid cases in [germany](country) in [Saarland](region) [2021-04-04](date)
-    - covid cases in [germany](country) in [Sachsen](region)
+    - covid cases in [Sachsen](region)
     - covid cases in [germany](country) in [Sachsen-Anhalt](region)
-    - covid cases in [germany](country) in [Schleswig-Holstein](region)
+    - covid cases in [Schleswig-Holstein](region)
     - covid cases in [germany](country) in [Thuringen](region)
     - corona cases in [china](country) [yesterday](date)
     - infection numbers [france](country) [yesterday](date)
@@ -192,6 +192,7 @@ nlu:
     - covid cases in [guatemala](country)
     - covid cases in [guernsey](country)
     - covid cases in [guinea](country)
+    - covid cases in [papua new guinea](country)
     - covid cases in [guyana](country)
     - covid cases in [haiti](country)
     - covid cases in [honduras](country)
@@ -332,6 +333,8 @@ nlu:
     - corona cases [today](date) in [Mexica](country)
     - corona cases [today](date) in [Mexico](country)
     - case number in [Bayern](region)
+
+
 - intent: travel_restrictions
   examples: |
     - what rules are in [germany](country)
@@ -341,6 +344,10 @@ nlu:
     - whats allowed in [France](country)
     - Whats allowed in [Russia](country)
     - whats allowed in [Brazil](country)
+    - whats allowed in [Great Breatan](country)
+    - Travel restriction in [Spain](country)
+
+
 - intent: infection_numbers_by_cities
   examples: |
     - how many corona cases in [Atchison](city)
@@ -356,21 +363,33 @@ nlu:
     - how many corona cases in [Mesa](city)
     - how many corona cases in [Hill](city)
     - how many corona cases in [Houston](city)
+    - case numbers for [New York](city)
     - how many corona cases in [Panola](city)
     - how many corona cases in [Somervell](city)
     - how many corona cases in [Unassigned](city)
     - how many corona cases in [Brunswick](city)
     - tell me the number of cases in [Houston](city)
     - case numbers in [Novosibirsk](city)
-    - deth numbers in [Moscow](city)
+    - deth numbers in [San Francisco](city)
     - case numbers in [Saarbrücken](city)
     - case numbers in [Moscow](city)
-    - Corona cases in [Saarbrücken](city) [today](date)
+    - corona cases in [Saarbrücken](city)
     - corona cases in [London](city)
-    - case number in [Berlin](country)
-    - corona cases in [Dresden](region)
-    - case numbers for [Malaga](country)
-- intent: summarized_info
+    - case number in [Berlin](city)
+    - corona cases in [Dresden](city)
+    - case numbers in [Malaga](city)
+    - case numbers in [New York](city)
+    - case numbers in [New Jersey](city)
+    - case numbers in [New Orlean](city)
+    - case numbers in [Saint Petersburg](city)
+    - case numbers in [Sao Paulo](city)
+    - case numbers in [Velikiye Luki](city)
+    - case numbers in [Chelyabinsk](city)
+    - case numbers in [Nizhny Novgorod](city)
+    - case numbers in [Berlin Pankow](city)
+    - case numbers in [Berlin Mitte](city)
+
+- intent: corona_info_summarize
   examples: |
     - Could you give me more covid info?
     - I want to know more about covid
@@ -383,6 +402,9 @@ nlu:
     - More please
     - More information about COVID summarized
     - corona info
+    - covid info
+    - what can you tell me about covid-19
+
 - intent: access_summary
   examples: |
     - I want to know about the [covid_overview](summary)
@@ -391,5 +413,5 @@ nlu:
     - [covid-variants](summary)
     - [rapid tests](summary)
     - [symptoms](summary)
-    - Information about currently available vaccines
-    - vaccine
+    - Information about currently available [vaccines](summary)
+    - [vaccine](summary)

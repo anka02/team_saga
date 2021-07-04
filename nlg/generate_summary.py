@@ -36,7 +36,7 @@ except NameError:
     FILE_DIR = Path().resolve()
 
 CKPT_DIR = os.path.join(FILE_DIR, 'checkpoints')
-CKPT_NAME = 'frozen_epoch=0.ckpt'
+CKPT_NAME ='freeze_encoder_epoch=4.ckpt'
 
 # intialize tokenizer and model
 tokenizer = T5Tokenizer.from_pretrained('t5-base')
@@ -88,9 +88,9 @@ def summarize(input, model, tokenizer):
 
     return preds
 
-
+text = os.path.join(os.path.dirname(__file__),'symptoms.txt')
 # test
-with open("./Texts/covid-19_variants.txt", "r", encoding="utf-8") as f:
+with open(text, "r", encoding="utf-8") as f:
     example_text = f.read()
 
 pred = summarize(example_text, model, tokenizer)

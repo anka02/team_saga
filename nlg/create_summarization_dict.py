@@ -110,27 +110,25 @@ def write_dictionary(dictionary=None):
 
 
 
-'''
-def search_info(entities,dictionary_from_text=None): #must be list of strngs
-    if dictionary_from_text is None:
-        with open(DICT_FOR_SUMM_PATH) as jsonFile:
-            dictionary_from_text = json.load(jsonFile)
-    if entities[0] == 'vaccine':
-        return dictionary_from_text[entities[0]][entities[1]]
-    return dictionary_from_text[entities[0]]
-'''
+
+# def search_info(entities,dictionary_from_text=None): #must be list of strngs
+#     if dictionary_from_text is None:
+#         with open(DICT_FOR_SUMM_PATH) as jsonFile:
+#             dictionary_from_text = json.load(jsonFile)
+#     if entities[0] == 'vaccine':
+#         return dictionary_from_text[entities[0]][entities[1]]
+#     return dictionary_from_text[entities[0]]
+
 def main():
     write_dictionary()
     with open("dict_for_summarization.json") as jsonFile:
         created_dict = json.load(jsonFile)
-    #pp.pprint(summarized_dict)
-    PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True, ensure_ascii=False)
-    print("Displaying Pretty Printed JSON Data")
-    print(PrettyJson)
-
-    # else:
-    #     print(search_info(['covid-variants']))
-    #     print(search_info(['vaccine', 'sinovac_vaccine']))
+    # PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True, ensure_ascii=False)
+    # print("Displaying Pretty Printed JSON Data")
+    # print(PrettyJson)
+    # print(created_dict['covid-variants'][0])
+    #
+    # print(created_dict['vaccine']['sinovac_vaccine'][0])
 
 
 

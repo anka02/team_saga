@@ -13,6 +13,7 @@ import pprint
 import torch
 import pytorch_lightning as pl
 import re
+
 try:
     from .create_summarization_dict import create_dict_for_summarization
 except ImportError:
@@ -104,12 +105,13 @@ def do_summarization_in_dict(dictionary_for_summarization):
     for k,v in dictionary_for_summarization.items():
         if k == 'vaccine':
             for vaccine_name,info in dictionary_for_summarization['vaccine'].items():
-                source_link = re.search("(?P<url>https?://[^\s]+)", info).group("url")
-                summarized_dictionary['vaccine'][vaccine_name] = summarize(info, model, tokenizer)[0] + " " + source_link
-
+                summarized_dictionary['vaccine'][vaccine_name] = summarize(info[0], model, tokenizer)
+                # Add link to summarized info
+                summarized_dictionary['vaccine'][vaccine_name].append(info[1])
         else:
-            source_link = re.search("(?P<url>https?://[^\s]+)", v).group("url")
-            summarized_dictionary[k] = summarize(v, model, tokenizer)[0] + " " + source_link
+            summarized_dictionary[k] = summarize(v[0], model, tokenizer)
+            # Add link to summarized info
+            summarized_dictionary[k].append(v[1])
 
     return summarized_dictionary
 
@@ -117,23 +119,23 @@ def do_summarization_in_dict(dictionary_for_summarization):
 def write_in_dict(dictionary=None):
     with open(DICT_SUM_PATH, 'w') as fp:
         if dictionary is None:
-            json.dump(do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION), fp)
+            json.dump(do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION), fp,ensure_ascii=False, indent=4, sort_keys=True)
         else:
-            json.dump(dictionary,fp)
+            json.dump(dictionary,fp,ensure_ascii=False, indent=4, sort_keys=True)
 
 
 def main():
     write_in_dict()
 
-    # I've added it to print in nice way and read the output to compare before
+    # I've added it to print in nice readable way
     # and after summarization
 
-    with open ('summarized_dict.json') as jsonFile:
-        created_dict = json.load(jsonFile)
-    PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True)
-    print("Displaying Pretty Printed JSON Data")
-    print(PrettyJson)
-
+    # with open ('summarized_dict.json') as jsonFile:
+    #     created_dict = json.load(jsonFile)
+    # PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    # print("Displaying Pretty Printed JSON Data")
+    # print(PrettyJson)
+    #print(created_dict)
 
 if __name__ == '__main__':
     main()

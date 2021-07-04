@@ -55,14 +55,23 @@ stories:
     - city: city
   - action: action_infection_numbers_by_cities
 
-- story: Asking about summaries path
+- story: Asking information about summaries full path
   steps:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
-  - intent: summarized_info
-  - action: utter_info_summarized
+  - intent: corona_info_summarize
+  - action: action_corona_info_summarize
+  - action: utter_corona_info_summarize
+  - intent: access_summary
+  - action: action_access_summary
+
+- story: Asking information about summaries path
+  steps:
+  - intent: corona_info_summarize
   - action: action_corona_info_summarize
   - intent: access_summary
+    entities:
+      - summary: summary
   - action: action_access_summary
 
