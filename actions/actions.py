@@ -25,7 +25,8 @@ import atexit
 def kill_background_updates():
     os.system('pkill -9 -f run_background_updates.py')
 
-atexit.register(kill_background_updates)
+if not os.name == 'nt': # check if system is not Windows
+    atexit.register(kill_background_updates)
 
 def get_line_info(level=1):
     return '{}:{}:{}'.format(inspect.stack()[level][1], inspect.stack()[level][2], inspect.stack()[level][3])
@@ -67,7 +68,7 @@ def update_dictionary():
     print("Dictionary for summarization has been created")
     write_dictionary(new_dictionary)  # not necessairy could be removed
     print("Dictionary for summarization has been written")
-    print("Waiting for the summary process. Takes about 5 minutes and requires only one at the first start of the server")
+    print("Waiting for the summary process. Takes about 5 minutes and requires only once at the first start of the server")
     DICTIONARY_FOR_SUMMARIZATION = new_dictionary
     new_summ_dict = do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION)
     print("Dictionary with summarized texted has been created")
@@ -90,8 +91,10 @@ else:
         print("DICTIONARY_SUMMARIZED has been loaded")
         print("The action Server is running. Chat-bot is ready to use")
 
-os.system(background_updates) # running updating process in background
-
+if not os.name == 'nt': # check if the system not Windows
+    os.system(background_updates) # running updating process in background
+else:
+    print("Windows OS does not support shell script updates and will create new files but will not update it.")
 
 assert DICTIONARY_FOR_SUMMARIZATION is not None
 
