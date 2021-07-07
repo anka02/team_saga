@@ -15,7 +15,7 @@ with open(iso_file, newline='', encoding = "utf-8") as csvfile_iso:
 with open(iata_file,newline='', encoding = "utf-8") as csvfile_iata:
     iatareader = csv.reader(csvfile_iata)
     for row in iatareader:
-        airport_dict[row[1].lower()][row[0].lower()] = row[2]
+        airport_dict[row[0].lower()] = row[1]
 
 list_of_missing_country = []
 count = 0

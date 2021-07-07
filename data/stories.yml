@@ -27,7 +27,7 @@ stories:
     - city: city
   - action: action_infection_numbers_by_cities
 
-- story: Asking about summaries path
+- story: Asking information about summaries full path
   steps:
   - intent: greet
   - action: utter_greet
@@ -56,3 +56,4 @@ stories:
   - slot_was_set:
       - vaccine: "az_vaccine"
   - action: action_access_summary_vaccine
+

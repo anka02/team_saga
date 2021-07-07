@@ -31,7 +31,7 @@ intents:
     use_entities: true
 - infection_numbers_by_cities:
     use_entities: true
-- summarized_info:
+- corona_info_summarize:
     use_entities: true
 - access_summary:
     use_entities: true
@@ -115,6 +115,7 @@ responses:
     - payload: /choose_vaccine{{"vaccine":"sinopharm_vaccine?"}}
       title: Sinopharm
     text: Which vaccine are you interested in?
+    
 actions:
 - action_infection_numbers_country
 - action_travel_restrictions
