@@ -52,6 +52,7 @@ DICTIONARY_SUMMARIZED = None
 #     DICTIONARY_SUMMARIZED = json.load(jsonFile)
 
 
+
 with open(iso_file, newline='', encoding = 'utf-8') as csvfile_iso:
     isoreader = csv.reader(csvfile_iso)
     for row in isoreader:
@@ -77,6 +78,23 @@ def update_dictionary():
     print("Dictionary with summarized texted has been written")
     print("The action Server is running. Chat-bot is ready to use")
 
+
+# if not os.path.isfile(DICT_FOR_SUMM_PATH) or not os.path.isfile(DICT_SUM_PATH):
+#     print("The dictionaries",DICT_FOR_SUMM_PATH,"and",DICT_SUM_PATH, "weren't created yet.")
+#     print("Please wait a bit until the summary will be one. Don't worry, it only takes for the first run through.")
+#     update_dictionary()
+
+# else:
+#     with open(DICT_FOR_SUMM_PATH) as jsonFile:
+#         DICTIONARY_FOR_SUMMARIZATION = json.load(jsonFile)
+#         print("DICTIONARY_FOR_SUMMARIZATION has been loaded")
+#     with open(DICT_SUM_PATH) as jsonFile:
+#         DICTIONARY_SUMMARIZED = json.load(jsonFile)
+#         print("DICTIONARY_SUMMARIZED has been loaded")
+#         print("The action Server is running. Chat-bot is ready to use")
+#
+# start_update()
+
 if not os.path.isfile(DICT_FOR_SUMM_PATH) or not os.path.isfile(DICT_SUM_PATH):
     print("The dictionaries",DICT_FOR_SUMM_PATH,"and",DICT_SUM_PATH, "weren't created yet.")
     print("Please wait a bit until the summary will be one. Don't worry, it only takes for the first run through.")
@@ -96,6 +114,7 @@ if not os.name == 'nt': # check if the system not Windows
 else:
     print("Windows OS does not support shell script updates and will create new files but will not update it.")
 
+
 assert DICTIONARY_FOR_SUMMARIZATION is not None
 
 #
@@ -114,10 +133,10 @@ assert DICTIONARY_FOR_SUMMARIZATION is not None
 
 
 
-class ActionInfectionNumbers(Action):
+class ActionInfectionNumbersCountry(Action):
 
     def name(self) -> Text:
-        return "action_infection_numbers"
+        return "action_infection_numbers_country"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -125,7 +144,7 @@ class ActionInfectionNumbers(Action):
 
         entities = tracker.latest_message['entities']
         if not entities :
-            dispatcher.utter_message(text="Oops,sorry.The information for country is missing. Please try another country")
+            dispatcher.utter_message(text="Oops,sorry.The information for city is missing. Please try another city.")
             return []
 
         print("Message : ", entities)
@@ -150,6 +169,7 @@ class ActionInfectionNumbers(Action):
 
         if date == 'yesterday' or None:
             date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
+
 
         if region is None:
             if country in locations_dict:
@@ -180,22 +200,51 @@ class ActionInfectionNumbers(Action):
                         dispatcher.utter_message(
                             text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
-        else:
-            URL_2 = "https://covid-api.com/api/reports"
-            PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
-            r = requests.get(url=URL_2, params=PARAMS_2)
+
+        if country in locations_dict:
+            PARAMS = {'iso': locations_dict[country],'date': date}
+            URL = "https://covid-api.com/api/reports/total"
+            r = requests.get(url=URL, params=PARAMS)
             r.raise_for_status()
             data = r.json()
+            debug_print("DATA JSON: ", data)
+            print(data)
+            dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                                          f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
+        else:
+            spell = SpellChecker()
+            PARAMS = {'iso': locations_dict[spell.correction(country)],'date': date}
+            print(spell.correction(country))
+            URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
+            r = requests.get(url=URL, params=PARAMS)
+            r.raise_for_status()
+            data = r.json()
+
+            
             print(data)
             if len(data['data']) > 0:
                 dispatcher.utter_message(text=f"Current active confirmed cases in {region.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases."
                                               f" The death cases are {data['data'][0]['deaths']} with {data['data'][0]['deaths_diff']} new death cases.")
 
-                dispatcher.utter_message(text="Take care of yourself and your family")
             else:
                 dispatcher.utter_message(
-                    text=f"Could not find any entries for region {region.capitalize()}, please check your spelling")
-            print("This action is from Corona action")
+                    text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
+
+        # else:
+        #     URL_2 = "https://covid-api.com/api/reports"
+        #     PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
+        #     r = requests.get(url=URL_2, params=PARAMS_2)
+        #     r.raise_for_status()
+        #     data = r.json()
+        #     if len(data) > 0:
+        #         dispatcher.utter_message(text=f"Current active confirmed cases in {region.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+        #                                       f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
+        #
+        #         dispatcher.utter_message(text="Take care of yourself and your family")
+        #     else:
+        #         dispatcher.utter_message(
+        #             text=f"Could not find any entries for region {region.capitalize()}, please check your spelling")
+        #     print("This action is from Corona action")
 
 
 class ActionTravelRestrictions(Action):
@@ -357,17 +406,48 @@ class ActionAccessSummary(Action):
         #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
             #base_for_summarization = DICTIONARY_SUMMARIZED[e]
 
-        with open(DICT_SUM_PATH) as jsonFile:
-            try:
-                DICTIONARY_SUMMARIZED = json.load(jsonFile)
-            except Exception as e: # to avoid the error of loading the process of writing into file
-                print("Error of loading summarized_dict.json file",e)
+        with open (DICT_SUM_PATH) as jsonFile:
+            DICTIONARY_SUMMARIZED = json.load(jsonFile)
 
-        for information in DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info']:
-            dispatcher.utter_message(text=information)
-            print(information)
+        #dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
 
-        print("Access Summary Action Ran")
+
+        print("Summarize Action Ran")
+        print(entities)
+        print(DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
+
+        summary_type = tracker.get_slot("summary")
+
+        # if summary_type == "vaccine":
+        #     dispatcher.utter_message(text= "What vaccine are you interested in?",
+        #                              buttons= [
+        #                                  {"payload": '/vaccine_choice{"vaccine":"az_vaccine"}', "title":'Astra Zeneca vaccine'},
+        #                                  {"payload": '/vaccine_choice{"vaccine":"moderna_vaccine"}', "title":'Moderna vaccine'},
+        #                                  {"payload": '/vaccine_choice{"vaccine":"biontech_vaccine"}', "title": 'Biontech vaccine'},
+        #                                  {"payload": '/vaccine_choice{"vaccine":"sinopharm_vaccine"}', "title": 'Sinopharm vaccine'},
+        #
+        #
+        #                                     ]
+        #                              )
+        dispatcher.utter_message(DICTIONARY_SUMMARIZED[summary_type])
 
         return []
+
+
+class ActionAccessSummaryVaccine(Action):
+
+    def name(self) -> Text:
+        return "action_access_summary_vaccine"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        entities = tracker.latest_message['entities']
+
+        with open (DICT_SUM_PATH) as jsonFile:
+            DICTIONARY_SUMMARIZED = json.load(jsonFile)
+
+        vaccine_choice = tracker.get_slot("vaccine")
+        vaccine_summary = DICTIONARY_SUMMARIZED["vaccine"][vaccine_choice]
+        dispatcher.utter_message(vaccine_summary)
 

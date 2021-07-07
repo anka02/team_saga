@@ -1,44 +1,16 @@
 version: "2.0"
 
 stories:
-
-- story: happy path
+- story: infection numbers country path
   steps:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
-  - intent: mood_great
-  - action: utter_happy
-
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_bot_information
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_bot_information
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
-
-- story: infection_numbers path
-  steps:
-  - intent: infection_numbers
+  - intent: infection_numbers_country
     entities:
     - country: country
   - action: utter_infection_numbers 
-  - action: action_infection_numbers
+  - action: action_infection_numbers_country
 
 - story: travel_restrictions path
   steps:
@@ -60,18 +32,28 @@ stories:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
-  - intent: corona_info_summarize
-  - action: action_corona_info_summarize
-  - action: utter_corona_info_summarize
-  - intent: access_summary
-  - action: action_access_summary
-
-- story: Asking information about summaries path
-  steps:
-  - intent: corona_info_summarize
-  - action: action_corona_info_summarize
+  - intent: summarized_info
+  - action: utter_info_summarized
   - intent: access_summary
     entities:
-      - summary: summary
+      - summary: "symptoms"
+  - slot_was_set:
+      - summary: "symptoms"
   - action: action_access_summary
+
+- story: Asking about summaries path vaccines
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: access_summary_vaccine
+  - action: utter_vaccine_choices
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "az_vaccine"
+  - slot_was_set:
+      - vaccine: "az_vaccine"
+  - action: action_access_summary_vaccine
 

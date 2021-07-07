@@ -83,7 +83,7 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-- intent: infection_numbers
+- intent: infection_numbers_country
   examples: |
     - covid cases in [Bayern](region) [today](date)
     - covid cases in [Baden-Wurttemberg](region) [yesterday](date)
@@ -377,6 +377,8 @@ nlu:
     - corona cases in [London](city)
     - case number in [Berlin](city)
     - corona cases in [Dresden](city)
+    - case numbers for [Malaga](city)
+- intent: summarized_info
     - case numbers in [Malaga](city)
     - case numbers in [New York](city)
     - case numbers in [New Jersey](city)
@@ -402,8 +404,10 @@ nlu:
     - More please
     - More information about COVID summarized
     - corona info
+    - summary
     - covid info
     - what can you tell me about covid-19
+
 
 - intent: access_summary
   examples: |
@@ -413,5 +417,11 @@ nlu:
     - [covid-variants](summary)
     - [rapid tests](summary)
     - [symptoms](summary)
+    - Information about currently available vaccines
+    - vaccine
+
+- intent: access_summary_vaccine
+  examples: |
+    - I am interested in the Astra Zeneca vaccine
     - Information about currently available [vaccines](summary)
     - [vaccine](summary)
