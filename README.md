@@ -23,6 +23,10 @@ This work is part of the Software Project: "Language Generation Tasks" at Saarla
 
 ## Instructions
 
+1. Please create a virtual environment on your preferred location, e.g. using Anaconda, and install the required packages by '$ pip install -r requirements.txt' on your virtual environment. Make sure you also have 'jupyter-notebook' installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training.
+2. Clone the repository.
+3. Setup RASA...
+
 # Models and Implementation
 
 ## RASA
