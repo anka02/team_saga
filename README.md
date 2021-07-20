@@ -9,6 +9,10 @@ This work is part of the Software Project: "Language Generation Tasks" at Saarla
 
 ## About
 
+This project implements a Chatbot on `RASA` that is able to answer Covid-19 related questions and queries, such as case numbers in specified locations and travel restrictions and regulations in those locations. It is also capable of creating summarized information on selected topics and questions related to Covid, such as information about vaccines, Covid-19 symptoms and variants. The chatbot will indicate what kind of information it is capable of providing and will guide the user towards meaningful queries in the user interface.
+
+Information about case numbers, restrictions and regulations is queried through an API in real time, ensuring up-to-date information retrieval. General information about Covid-19, such vaccine information is gathered through reputable major websites, such as the WHO. However, as information about Covid-19 is constantly being updated, based on the latest research and evidence, this information might not reflect the most up-to-date knowledge we have acquired about the Covid-19 pandemic.
+
 ## Requirements
 
 * The scripts and notebooks were tested on Python 3.7 for Linux and 3.8 for Mac OS and Windows.
