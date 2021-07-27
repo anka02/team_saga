@@ -54,8 +54,8 @@ In docker container:
 4. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model
 5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/productio/<genarated code>`.
 
-The default docker deployment includes running Rasa X and opens UI Chatbot mode. The configuration of Chatbot's runnung mode could be changed in 
-`entrypoint.sh` file. After any changes in configuration files, you need to rebuild the container.
+The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
+`entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container.
 
 # Models and Implementation
 
