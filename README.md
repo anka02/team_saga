@@ -98,6 +98,19 @@ More information can be found on: https://developer.thinklumo.com.
 
 ### CNN/Daily Mail summarization dataset
 
+Our T5 summarization model was fine-tuned using the CNN / Daily Mail dataset, which consists of news articles crawled from the CNN and Daily Mail websites over a long period of time and human annotated abstractive summaries of those news articles. Even though our training data is not related to Covid-19, the domains of online news articles and online Covid-19 articles / information are close enough stylistically and structurally (in terms of the text) to allow the model to find relevant pieces of information that can be included in the generated summaries.
+
+The dataset can be found from https://huggingface.co/datasets/cnn_dailymail and it can be accesed using the `datasets` python library. (`pip install datasets`)
+
+We apply simple filters to this dataset to remove articles and summaries that are either too long or too short to be representative training examples for
+our task. For further information consult `nlg/t5-fine-tuning.ipynb`.
+
+After filtering out unwanted entries the dataset consists of
+
+* 237,714 training pairs
+* 11,188 validation pairs
+* 9532 test pairs
+
 # Experiments
 
 # Results
