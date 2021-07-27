@@ -30,7 +30,7 @@ or search in App `@covid_19_chat_bot`.
 
 ## Instructions
 
-There are two possibilities to run Rasa Chatbot:
+There are two possibilities to run the Rasa based Chatbot:
 
 On your localhost:
 
@@ -38,11 +38,11 @@ On your localhost:
 2. Install the required packages by `$ pip install -r requirements.txt` on your virtual environment. Make sure you also have `jupyter-notebook` installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training.
 3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 4. Setup Rasa: 
-    If you prefer to run Chatbot in shell, run shell-command `rasa train`, which trains a model 
-    using the NLU data and stories, saves trained model in `./models`. The Action Server need to be started with the extra command `rasa run actions`.
+    If you prefer to run the Chatbot in shell, run shell-command `rasa train`, which trains a model 
+    using the NLU data and stories and saves the trained model in `./models`. The Action Server needs to be started with the extra command `rasa run actions`.
     And then run `rasa run shell`. More Rasa commands could be found here: https://rasa.com/docs/rasa/command-line-interface/. 
-    The deployment of Rasa X allows running training from the browser, which will be open the window automatically on `http://localhost:5005/api`. By default Rasa X
-    use port `5005` on the `localhost`. Click the button `Train`, wait for the model creation and start a conversation.
+    The deployment of Rasa X allows running training from the browser, which will open the window automatically on `http://localhost:5005/api`. By default Rasa X
+    uses port `5005` on the `localhost`. Click the button `Train`, wait for the model creation and start a conversation.
 The first deployment of Rasa Action Server takes about 5-10 minutes (depending on the capacity of the PC) to create the files,
 needed for the summary part, the next deployment takes less than a minute.
 
@@ -50,12 +50,12 @@ In docker container:
 
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
 2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
-3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and included full installation. 
-4. Open Rasa X to train the model for use in NLU part in browser `https://localhost:5002` and then open generated the link `Guest URL` displayed in the terminal 
+3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and includes full installation. 
+4. Open Rasa X to train the model for use in NLU part in browser `https://localhost:5002` and then open the generated link `Guest URL` displayed in the terminal 
 `http://localhost:5002/guest/conversations/productio/<genarated code>`.
     Alternative: download the model from *WE NEED TO UPLOAD IT SOMEWHERE, TO ALLOW OTHERS ACCESS TO THE MODEL* to models/ and then run generated the link `Guest URL`
 
-The default docker deployment includes running Rasa X and opens UI Chatbot mode. The configuration of Chatbot's mode could be changed in 
+The default docker deployment includes running Rasa X and opens the Chatbot UI. The configuration of Chatbot's mode can be changed in 
 `entrypoint.sh`. After any changes in configuration files, you need to rebuild the container.
 
 # Models and Implementation
