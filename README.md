@@ -13,8 +13,8 @@ This project implements a Chatbot using the `Rasa` open source library that is a
 
 Information about case numbers, restrictions and regulations is queried through an API in real time, ensuring up-to-date information retrieval. General information about Covid-19, such vaccine information is gathered through reputable major websites, such as the WHO. However, as information about Covid-19 is constantly being updated, based on the latest research and evidence, this information might not reflect the most up-to-date knowledge we have acquired about the Covid-19 pandemic. 
 
-If you would like to try, you can find our Chatbot in Telegram using the link `https://t.me/covid_19_chat_bot` 
-or search in App `@covid_19_chat_bot`.
+If you wish to try the Chatbot, you can find our Chatbot in Telegram using the link `https://t.me/covid_19_chat_bot` 
+or by searching in the Telegram App `@covid_19_chat_bot`.
 
 ## Requirements
 
