@@ -49,7 +49,7 @@ needed for the summary part, the next deployment takes less than a minute.
 In docker container:
 
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
-2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . *WE NEED TO UPLOAD IT SOMEWHERE, TO ALLOW OTHER ACCESS TO THE MODEL*
+2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and included full installation. 
 4. Open Rasa X to train the model for use in NLU part in browser `https://localhost:5002` and then open generated the link `Guest URL` displayed in the terminal 
 `http://localhost:5002/guest/conversations/productio/<genarated code>`.
