@@ -51,11 +51,11 @@ In docker container:
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
 2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and includes full installation. 
-4. Open Rasa X to train the model for use in NLU part in browser `https://localhost:5002` and then open the generated link `Guest URL` displayed in the terminal 
-`http://localhost:5002/guest/conversations/productio/<genarated code>`.
-    
-The default docker deployment includes running Rasa X and opens the Chatbot UI. The configuration of Chatbot's mode can be changed in 
-`entrypoint.sh`. After any changes in configuration files, you need to rebuild the container.
+4. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model
+5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/productio/<genarated code>`.
+
+The default docker deployment includes running Rasa X and opens UI Chatbot mode. The configuration of Chatbot's runnung mode could be changed in 
+`entrypoint.sh` file. After any changes in configuration files, you need to rebuild the container.
 
 # Models and Implementation
 
