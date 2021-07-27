@@ -80,7 +80,7 @@ To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat
 
 ## Text-to-Text Transfer Transformer (T5)
 
-We use a Text-to-Text Transfer Transformer (T5) (Raffel et al., 2020) model for our summarization task. It closely follows the Transformer architecture introduced by Vaswani et al. (2017) and can be described as an Encoder-Decoder Transformer model.
+We use a Text-to-Text Transfer Transformer (T5) ([Raffel et al., 2020](https://arxiv.org/pdf/1910.10683.pdf)) model for our summarization task. It closely follows the Transformer architecture introduced by Vaswani et al. (2017) and can be described as an Encoder-Decoder Transformer model.
 
 The pretrained T5 model that we fine-tune for our summarization task can be found from https://huggingface.co/transformers/model_doc/t5.html#t5config and is avaiable through the `HuggingFace Transformers` python library (`pip install transformers`).
 
