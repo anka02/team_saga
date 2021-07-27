@@ -1,0 +1,11 @@
+.git
+.gitignore
+.dockerignore
+**/.git
+**/.gitignore
+**/.gitmodules
+Dockerfile*
+docker-build.sh
+docker-run.sh
+__pycache__/
+backup/
