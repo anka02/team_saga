@@ -80,6 +80,10 @@ To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat
 
 ## Text-to-Text Transfer Transformer (T5)
 
+We use a Text-to-Text Transfer Transformer (T5) (Raffel et al., 2020) model for our summarization task. It closely follows the Transformer architecture introduced by Vaswani et al. (2017) and can be described as an Encoder-Decoder Transformer model.
+
+The pretrained T5 model that we fine-tune for our summarization task can be found from https://huggingface.co/transformers/model_doc/t5.html#t5config and is avaiable through the `HuggingFace Transformers` python library (`pip install transformers`).
+
 ## Data
 The summarized Covid-19 information including general information about symptoms, vaccines, advice, etc. are queried from the official website of
  World Health Organization https://www.who.int/ and summarized by the T5 model before providing the information to the user.
@@ -116,3 +120,7 @@ After filtering out unwanted entries the dataset consists of
 # Results
 
 # References
+
+Colin Raffel, Noam M. Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, W. Li, and Peter J. Liu. 2020. Exploring the limits of transfer learning with a unified text-to-text transformer. ArXiv, abs/1910.10683.
+
+Ashish Vaswani, Noam M. Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. ArXiv, abs/1706.03762.
