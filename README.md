@@ -37,7 +37,7 @@ On your localhost:
 1. Please create and activate a virtual environment on your preferred location, e.g. using Anaconda `conda create --name myenv python=3.8`, WINDOWS: `activate myenv`, LINUX and MacOS `conda activate myenv`.
 2. Install the required packages by `$ pip install -r requirements.txt` on your virtual environment. The installation of Rasa X UI could be proceeded just maually. Please run in terminal: `pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple`. 
 Make sure you also have `jupyter-notebook` installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training. 
-3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
+3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing (e.g. `freeze_encoder_epoch=4.ckpt`).
 4. Setup Rasa: 
     If you prefer to run the Chatbot in shell, run shell-command `rasa train`, which trains a model 
     using the NLU data and stories and saves the trained model in `./models`. The Action Server needs to be started with the extra command `rasa run actions` (in other terminal with activated virtual environment).
