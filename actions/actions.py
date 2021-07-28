@@ -528,7 +528,7 @@ class ValidateTravelRestrictionInfectionForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate country value."""
-        country = tracker.latest_message["text"]
+        country = tracker.latest_message["text"].lower()
         if country in airport_dict:
             print(f"Found {country}")
             return {"country": country}
