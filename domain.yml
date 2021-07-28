@@ -41,6 +41,16 @@ intents:
     use_entities: true
 - access_summary_vaccine:
     use_entities: true
+- give_satisfaction:
+    use_entities: true
+- stop_form:
+    use_entities: true
+- exit:
+    use_entities: []
+- summarized_info:
+    use_entities: true
+- QANDA:
+    use_entities: []
 entities:
 - country
 - city
@@ -48,6 +58,7 @@ entities:
 - vaccine
 - region
 - date
+- satisfaction
 slots:
   summary:
     type: rasa.shared.core.slots.TextSlot
@@ -59,7 +70,21 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-
+  satisfaction:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  country:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
 responses:
   utter_greet:
   - text: Hey! What do you want to ask me?
@@ -78,19 +103,38 @@ responses:
   - text: Please be careful.
   utter_travel_restrictions:
   - text: Stay informed stay safe.
+  utter_ask_get_country_infection_form_country:
+  - buttons:
+    - payload: EXIT FORM
+      title: Exit
+    button_type: vertical
+    text: Very well, which country do you want to know the infection numbers for? Click Type and type the country, else, click Exit.
+  utter_ask_get_country_death_form_country:
+  - buttons:
+    - payload: EXIT FORM
+      title: Exit
+    button_type: vertical
+    text: Very well, which country do you want to know the death numbers for? Click Type and type the country, else, click Exit.
+  utter_ask_get_country_travel_restriction_form_country:
+    - buttons:
+      - payload: EXIT FORM
+        title: Exit
+      button_type: vertical
+      text: Very well, which country do you want to know the travel regulations for? Click Type and type the country, else, click Exit.
+
   utter_bot_information:
   - buttons:
     - payload: /infection_numbers_country
       title: Case numbers for a specific country
-    - payload: /infection_numbers_city
-      title: Case numbers for a specific city
     - payload: /death_numbers_country
       title: Death numbers for a specific country
-    - payload: /death_numbers_city
-      title: Death numbers for a specific city
+    - payload: /travel_restrictions
+      title: Travel restrictions for a specific country
     - payload: /summarized_info
       title: Summaries on other information about COVID
+    button_type: vertical
     text: I have a multitude of options to choose from. What topic are you interested in?
+
   utter_info_summarized:
   - buttons:
     - payload: /access_summary{{"summary":"symptoms"}}
@@ -99,12 +143,15 @@ responses:
       title: COVID Overview
     - payload: /access_summary_vaccine
       title: Vaccines
-    - payload: /access_summary{{"summary":"covid_variants"}}
+    - payload: /access_summary{{"summary":"covid-variants"}}
       title: Variants
     - payload: /access_summary{{"summary":"What is COVID-19?"}}
       title: What is COVID-19
+    - payload: /QANDA
+      title: Frequently asked questions
+    button_type: vertical
     text: Which topic do you want to know more about?
-  utter_vaccine_choices:
+  utter_ask_vaccine:
   - buttons:
     - payload: /choose_vaccine{{"vaccine":"az_vaccine"}}
       title: Astra Zeneca
@@ -114,8 +161,36 @@ responses:
       title: Biontech
     - payload: /choose_vaccine{{"vaccine":"sinopharm_vaccine?"}}
       title: Sinopharm
+    button_type: vertical
     text: Which vaccine are you interested in?
-    
+  utter_satisfication_end:
+  - text: Thank you for using the COVID chatbot.
+  utter_ask_satisfaction:
+  - buttons:
+    - payload: /give_satisfaction{{"satisfaction":"positive"}}
+      title: Yes
+    - payload: /give_satisfaction{{"satisfaction":"negative"}}
+      title: No
+    button_type: vertical
+    text: Is this what you wanted?
+
+  utter_QANDA:
+  - buttons:
+    - payload: /access_summary{{"summary":"What are the symptoms of COVID-19?"}}
+      title: What are the symptoms of COVID-19?
+    - payload: /access_summary{{"summary":"Are there long-term effects of COVID-19?"}}
+      title: Are there long-term effects of COVID-19?
+    - payload: /access_summary_vaccine{{"summary":"What happens to people who get COVID-19?"}}
+      title: What happens to people who get COVID-19?
+    - payload: /access_summary{{"summary":"How can we protect others and ourselves if we don't know who is infected?"}}
+      title: How can we protect others and ourselves if we don't know who is infected?
+    - payload: /access_summary{{"summary":"When should I get a test for COVID-19?"}}
+      title: When should I get a test for COVID-19?
+    - payload: /access_summary{{"summary":"What test should I get to see if I have COVID-19?"}}
+      title: What test should I get to see if I have COVID-19?
+    button_type: vertical
+    text: Which question are you interested in?
+
 actions:
 - action_infection_numbers_country
 - action_travel_restrictions
@@ -123,5 +198,32 @@ actions:
 - action_corona_info_summarize
 - action_access_summary
 - action_access_summary_vaccine
-forms: {}
+- action_death_numbers_country
+- validate_get_country_infection_form
+- validate_get_country_death_form
+- validate_get_country_travel_restriction_form
+forms:
+  check_if_happy_form:
+    required_slots:
+      satisfaction:
+      - entity: satisfaction
+        type: from_entity
+      vaccine:
+      - entity: vaccine
+        type: from_entity
+  get_country_infection_form:
+    required_slots:
+      country:
+      - entity: country
+        type: from_text
+  get_country_death_form:
+    required_slots:
+      country:
+      - entity: country
+        type: from_text
+  get_country_travel_restriction_form:
+    required_slots:
+      country:
+      - entity: country
+        type: from_text
 e2e_actions: []

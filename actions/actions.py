@@ -6,8 +6,9 @@
 # nice rasa documentation https://link.springer.com/chapter/10.1007/978-1-4842-4096-0_4
 
 from typing import Any, Text, Dict, List
-from rasa_sdk import Action, Tracker
+from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.types import DomainDict
 from spellchecker import SpellChecker
 import requests
 import csv
@@ -143,9 +144,6 @@ class ActionInfectionNumbersCountry(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         entities = tracker.latest_message['entities']
-        if not entities :
-            dispatcher.utter_message(text="Oops,sorry.The information for city is missing. Please try another city.")
-            return []
 
         print("Message : ", entities)
         country = None
@@ -180,72 +178,76 @@ class ActionInfectionNumbersCountry(Action):
                 data = r.json()
                 debug_print("DATA JSON: ", data)
                 dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
-                                              f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
-            else:
-                spell = SpellChecker()
-                if country not in locations_dict:
-                    PARAMS = {'iso': locations_dict[spell.correction(country)],'date': date,'region_province': region}
-                    print(spell.correction(country))
-                    URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
-                    r = requests.get(url=URL, params=PARAMS)
-                    r.raise_for_status()
+                                        )
 
-                    data = r.json()
-                    debug_print("DATA JSON: ", data)
-                    if len(data) > 0:
-                        dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases."
-                                              f" The death cases are {data['data'][0]['deaths']} with {data['data'][0]['deaths_diff']} new death cases.")
+            # If the user quits during validation with exit button
+            elif country == "EXIT_FORM":
+                pass
+            # else:
+            #     spell = SpellChecker()
+            #     if country not in locations_dict:
+            #         PARAMS = {'iso': locations_dict[spell.correction(country)],'date': date,'region_province': region}
+            #         print(spell.correction(country))
+            #         URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
+            #         r = requests.get(url=URL, params=PARAMS)
+            #         r.raise_for_status()
+            #
+            #         data = r.json()
+            #         debug_print("DATA JSON: ", data)
+            #         if len(data) > 0:
+            #             dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases."
+            #                                   f" The death cases are {data['data'][0]['deaths']} with {data['data'][0]['deaths_diff']} new death cases. HERE 2")
+            #
+            #         else:
+            #             dispatcher.utter_message(
+            #                 text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
-                    else:
-                        dispatcher.utter_message(
-                            text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
 
+class ActionDeathNumbersCountry(Action):
 
-        if country in locations_dict:
-            PARAMS = {'iso': locations_dict[country],'date': date}
-            URL = "https://covid-api.com/api/reports/total"
-            r = requests.get(url=URL, params=PARAMS)
-            r.raise_for_status()
-            data = r.json()
-            debug_print("DATA JSON: ", data)
-            print(data)
-            dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
-                                          f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
-        else:
-            spell = SpellChecker()
-            PARAMS = {'iso': locations_dict[spell.correction(country)],'date': date}
-            print(spell.correction(country))
-            URL = "https://covid-api.com/api/reports/total"  # gives the information just in country
-            r = requests.get(url=URL, params=PARAMS)
-            r.raise_for_status()
-            data = r.json()
+    def name(self) -> Text:
+        return "action_death_numbers_country"
 
-            
-            print(data)
-            if len(data['data']) > 0:
-                dispatcher.utter_message(text=f"Current active confirmed cases in {region.capitalize()} are {data['data'][0]['active']}, with {data['data'][0]['confirmed_diff']} new cases."
-                                              f" The death cases are {data['data'][0]['deaths']} with {data['data'][0]['deaths_diff']} new death cases.")
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-            else:
+        entities = tracker.latest_message['entities']
+
+        print("Message : ", entities)
+        country = None
+        date = None
+        region = None
+
+        for e in entities:
+            if e['entity'] == 'country':
+                country = e['value'].lower()
+                print("country", country)
+            if e['entity'] == 'date':
+                date = e['value']
+                print("date", date)
+            if e['entity'] == 'region':
+                region = e['value'].lower()
+                print("region", region)
+        if date == 'today':
+            # date = datetime.today().strftime('%Y-%m-%d')
+            # as a rule the last update is for yesterday
+            date = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
+
+        if date == 'yesterday' or None:
+            date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
+
+        if region is None:
+            if country in locations_dict:
+                PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+                URL = "https://covid-api.com/api/reports/total"
+                r = requests.get(url=URL, params=PARAMS)
+                r.raise_for_status()
+                data = r.json()
+                debug_print("DATA JSON: ", data)
                 dispatcher.utter_message(
-                    text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
-
-        # else:
-        #     URL_2 = "https://covid-api.com/api/reports"
-        #     PARAMS_2 = {'iso' : 'DEU', 'date': date, 'region_province': region}
-        #     r = requests.get(url=URL_2, params=PARAMS_2)
-        #     r.raise_for_status()
-        #     data = r.json()
-        #     if len(data) > 0:
-        #         dispatcher.utter_message(text=f"Current active confirmed cases in {region.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
-        #                                       f" The death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases.")
-        #
-        #         dispatcher.utter_message(text="Take care of yourself and your family")
-        #     else:
-        #         dispatcher.utter_message(
-        #             text=f"Could not find any entries for region {region.capitalize()}, please check your spelling")
-        #     print("This action is from Corona action")
-
+                    text=f"Current death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
+                )
 
 class ActionTravelRestrictions(Action):
 
@@ -263,7 +265,6 @@ class ActionTravelRestrictions(Action):
 
         debug_print("Message:", entities)
 
-        country = None
 
         for e in entities:
             if e['entity'] == 'country':
@@ -287,30 +288,35 @@ class ActionTravelRestrictions(Action):
                         dispatcher.utter_message(text=collected_info)
             print("This action is from Travel Restriction action")
         else:
-            spell = SpellChecker()
-            if country not in airport_dict:
-                airport_iata = airport_dict[spell.correction(country)]
-                PARAMS = {'airport': airport_iata}
-                print(spell.correction(country))
-                URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
-                r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
-                r.raise_for_status()
-                data = r.json()['covid_info']['entry_exit_info']
-                pp = pprint.PrettyPrinter(indent=4)
-                print("DATA RESTRICTION COVID INFO")
-                pp.pprint(data)
-                parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
-                not_necessary_info = 'No summary available - please follow the link to learn more.'
-                for i in data:
-                    for j in parameters:
-                        if not_necessary_info not in i[j]:
-                            collected_info = j.upper() + ' ' + ''.join(i[j])
-                            dispatcher.utter_message(text=collected_info)
-                print("This action is from Travel Restriction action")
+            if country == "EXIT FORM":
+                pass
             else:
-                dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
+                print("Das ist Country")
 
-        return []
+        #     spell = SpellChecker()
+        #     if country not in airport_dict:
+        #         airport_iata = airport_dict[spell.correction(country)]
+        #         PARAMS = {'airport': airport_iata}
+        #         print(spell.correction(country))
+        #         URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
+        #         r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
+        #         r.raise_for_status()
+        #         data = r.json()['covid_info']['entry_exit_info']
+        #         pp = pprint.PrettyPrinter(indent=4)
+        #         print("DATA RESTRICTION COVID INFO")
+        #         pp.pprint(data)
+        #         parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+        #         not_necessary_info = 'No summary available - please follow the link to learn more.'
+        #         for i in data:
+        #             for j in parameters:
+        #                 if not_necessary_info not in i[j]:
+        #                     collected_info = j.upper() + ' ' + ''.join(i[j])
+        #                     dispatcher.utter_message(text=collected_info)
+        #         print("This action is from Travel Restriction action")
+        #     else:
+        #         dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
+        #
+        # return []
 
 class ActionInfectionNumbersCities(Action):
 
@@ -418,18 +424,7 @@ class ActionAccessSummary(Action):
 
         summary_type = tracker.get_slot("summary")
 
-        # if summary_type == "vaccine":
-        #     dispatcher.utter_message(text= "What vaccine are you interested in?",
-        #                              buttons= [
-        #                                  {"payload": '/vaccine_choice{"vaccine":"az_vaccine"}', "title":'Astra Zeneca vaccine'},
-        #                                  {"payload": '/vaccine_choice{"vaccine":"moderna_vaccine"}', "title":'Moderna vaccine'},
-        #                                  {"payload": '/vaccine_choice{"vaccine":"biontech_vaccine"}', "title": 'Biontech vaccine'},
-        #                                  {"payload": '/vaccine_choice{"vaccine":"sinopharm_vaccine"}', "title": 'Sinopharm vaccine'},
-        #
-        #
-        #                                     ]
-        #                              )
-        dispatcher.utter_message(DICTIONARY_SUMMARIZED[summary_type])
+        dispatcher.utter_message(DICTIONARY_SUMMARIZED[summary_type][0])
 
         return []
 
@@ -449,5 +444,94 @@ class ActionAccessSummaryVaccine(Action):
 
         vaccine_choice = tracker.get_slot("vaccine")
         vaccine_summary = DICTIONARY_SUMMARIZED["vaccine"][vaccine_choice]
-        dispatcher.utter_message(vaccine_summary)
+        dispatcher.utter_message(vaccine_summary[0])
 
+class ValidateGetCountryInfectionForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_get_country_infection_form"
+        #PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+
+    def validate_country(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate country value."""
+        country = tracker.latest_message["text"]
+        print("Starting validating")
+        print(type(country), country)
+        try:
+            PARAMS = {'iso': locations_dict[country.lower()]}
+            URL = "https://covid-api.com/api/reports/total"
+            r = requests.get(url=URL, params=PARAMS)
+            r.raise_for_status()
+            data_countries = r.json()
+            debug_print("DATA JSON: ", data_countries)
+            return {"country": country}
+        #If the country is misspelled, this will throw a key error
+        except KeyError:
+            if country == "EXIT FORM":
+                return {"country": "EXIT_FORM"}
+            else:
+                print(country)
+                print("EXIT FORM")
+                dispatcher.utter_message("I cannot find the country given. Please check your spelling.")
+                return {"country": None}
+
+
+class ValidateGetCountryInfectionForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_get_country_death_form"
+        #PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+
+    def validate_country(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate country value."""
+        country = tracker.latest_message["text"]
+        print("Starting validating")
+        print(type(country), country)
+        try:
+            PARAMS = {'iso': locations_dict[country.lower()]}
+            URL = "https://covid-api.com/api/reports/total"
+            r = requests.get(url=URL, params=PARAMS)
+            r.raise_for_status()
+            data_countries = r.json()
+            debug_print("DATA JSON: ", data_countries)
+            return {"country": country}
+        #If the country is misspelled, this will throw a key error
+        except KeyError:
+            if country == "EXIT FORM":
+                return {"country": "EXIT_FORM"}
+            else:
+                print(country)
+                print("EXIT FORM")
+                dispatcher.utter_message("I cannot find the country given. Please check your spelling.")
+                return {"country": None}
+
+class ValidateTravelRestrictionInfectionForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_get_country_travel_restriction_form"
+        #PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+
+    def validate_country(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate country value."""
+        country = tracker.latest_message["text"]
+        if country in airport_dict:
+            print(f"Found {country}")
+            return {"country": country}
+        else:
+            dispatcher.utter_message("Could not find the given country, please check your spelling.")
+            return {"country": None}

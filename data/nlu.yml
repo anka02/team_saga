@@ -15,6 +15,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
+    - Hello
 - intent: goodbye
   examples: |
     - good afternoon
@@ -261,7 +262,6 @@ nlu:
     - covid cases in [palau](country)
     - covid cases in [palestine](country)
     - covid cases in [panama](country)
-    - covid cases in [papua new guinea](country)
     - covid cases in [paraguay](country)
     - covid cases in [peru](country)
     - covid cases in [philippines](country)
@@ -333,8 +333,8 @@ nlu:
     - corona cases [today](date) in [Mexica](country)
     - corona cases [today](date) in [Mexico](country)
     - case number in [Bayern](region)
-
-
+    - [thailand](country)
+    - [senegal](country)
 - intent: travel_restrictions
   examples: |
     - what rules are in [germany](country)
@@ -346,8 +346,6 @@ nlu:
     - whats allowed in [Brazil](country)
     - whats allowed in [Great Breatan](country)
     - Travel restriction in [Spain](country)
-
-
 - intent: infection_numbers_by_cities
   examples: |
     - how many corona cases in [Atchison](city)
@@ -378,19 +376,6 @@ nlu:
     - case number in [Berlin](city)
     - corona cases in [Dresden](city)
     - case numbers for [Malaga](city)
-- intent: summarized_info
-    - case numbers in [Malaga](city)
-    - case numbers in [New York](city)
-    - case numbers in [New Jersey](city)
-    - case numbers in [New Orlean](city)
-    - case numbers in [Saint Petersburg](city)
-    - case numbers in [Sao Paulo](city)
-    - case numbers in [Velikiye Luki](city)
-    - case numbers in [Chelyabinsk](city)
-    - case numbers in [Nizhny Novgorod](city)
-    - case numbers in [Berlin Pankow](city)
-    - case numbers in [Berlin Mitte](city)
-
 - intent: corona_info_summarize
   examples: |
     - Could you give me more covid info?
@@ -407,8 +392,6 @@ nlu:
     - summary
     - covid info
     - what can you tell me about covid-19
-
-
 - intent: access_summary
   examples: |
     - I want to know about the [covid_overview](summary)
@@ -419,7 +402,6 @@ nlu:
     - [symptoms](summary)
     - Information about currently available vaccines
     - vaccine
-
 - intent: access_summary_vaccine
   examples: |
     - I am interested in the Astra Zeneca vaccine

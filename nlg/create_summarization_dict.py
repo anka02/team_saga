@@ -55,7 +55,7 @@ def create_dict_for_summarization():
     req_bio = Request(url=reg_url_bio, headers=headers)
     html_bio = urlopen(req_bio).read()
     biontech_vaccine = " ".join(text_from_html(html_bio).split()[459:1491])
-    dict_summarization['vaccine']['biomtech_vaccine'] = [biontech_vaccine ,reg_url_bio]
+    dict_summarization['vaccine']['biontech_vaccine'] = [biontech_vaccine ,reg_url_bio]
 
     reg_url_sinopharm = 'https://www.who.int/news-room/feature-stories/detail/the-sinopharm-covid-19-vaccine-what-you-need-to-know'
     req_sinopharm = Request(url=reg_url_sinopharm, headers=headers)
