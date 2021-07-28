@@ -34,15 +34,16 @@ There are two possibilities to run the Rasa based Chatbot:
 
 On your localhost:
 
-1. Please create and activate a virtual environment on your preferred location, e.g. using Anaconda `conda create --name myenv python=3.8`, WINDOWS: `activate myenv`, LINUX and MacOS `source activate`.
-2. Install the required packages by `$ pip install -r requirements.txt` on your virtual environment. Make sure you also have `jupyter-notebook` installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training.
+1. Please create and activate a virtual environment on your preferred location, e.g. using Anaconda `conda create --name myenv python=3.8`, WINDOWS: `activate myenv`, LINUX and MacOS `conda activate myenv`.
+2. Install the required packages by `$ pip install -r requirements.txt` on your virtual environment. The installation of Rasa X UI could be proceeded just maually. Please run in terminal: `pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple`. 
+Make sure you also have `jupyter-notebook` installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training. 
 3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 4. Setup Rasa: 
     If you prefer to run the Chatbot in shell, run shell-command `rasa train`, which trains a model 
-    using the NLU data and stories and saves the trained model in `./models`. The Action Server needs to be started with the extra command `rasa run actions`.
-    And then run `rasa run shell`. More Rasa commands could be found here: https://rasa.com/docs/rasa/command-line-interface/. 
-    The deployment of Rasa X allows running training from the browser, which will open the window automatically on `http://localhost:5005/api`. By default Rasa X
-    uses port `5005` on the `localhost`. Click the button `Train`, wait for the model creation and start a conversation.
+    using the NLU data and stories and saves the trained model in `./models`. The Action Server needs to be started with the extra command `rasa run actions` (in other terminal with activated virtual environment).
+    And then run `rasa shell` to open Chatbot in shell or `rasa x` to open it in browser with UI. More Rasa commands could be found here: https://rasa.com/docs/rasa/command-line-interface/. 
+    The deployment of Rasa X allows running training and configuring the data from the browser, which will open the window automatically on `http://localhost:5005/api` . Please select the `Model` field and click the arrow `Up` to activate the model or click `Train` to train the model and then activate it. Now you are done and conversation could be started in the field `Talk to your bot`. By default Rasa X uses port `5005` on the `localhost`. You can also open the Chatbot in production mode by following the way: `Conersation`,`Share your bot` and open the generated link in another browser window.
+
 The first deployment of Rasa Action Server takes about 5-10 minutes (depending on the capacity of the PC) to create the files,
 needed for the summary part, the next deployment takes less than a minute.
 
@@ -52,10 +53,10 @@ In docker container:
 2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and includes full installation. 
 4. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model.Then select the `Model` field and click the arrow `Up` to activate the model.
-5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/productio/<genarated code>`.
+5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/production/<genarated code>`.
 
 The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
-`entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container.
+`entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container. Note :  On WINDOWS this Docker containershould be configured and running under WSL2.
 
 # Models and Implementation
 
