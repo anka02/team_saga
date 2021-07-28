@@ -11,3 +11,96 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+
+
+  # COUNTRIES INFECTION FORM ACTIVATE
+- rule: Activate form country infection
+  steps:
+  - intent: infection_numbers_country
+  - action: get_country_infection_form
+  - active_loop: get_country_infection_form
+
+  # COUNTRIES INFECTION DEACTIVATE
+- rule: Deactivate infection
+  condition:
+  # Condition that form is active.
+  - active_loop: get_country_infection_form
+  steps:
+  # Form is deactivated
+  - action: get_country_infection_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_infection_numbers_country
+  - action: utter_satisfication_end
+
+
+
+  # COUNTRIES DEATH FORM ACTIVATE
+- rule: Activate form country deaths
+  steps:
+  - intent: death_numbers_country
+  - action: get_country_death_form
+  - active_loop: get_country_death_form
+
+  # COUNTRIES DEATH DEACTIVATE
+- rule: Activate form country deaths
+  condition:
+  # Condition that form is active.
+  - active_loop: get_country_death_form
+  steps:
+  # Form is deactivated
+  - action: get_country_death_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_death_numbers_country
+  - action: utter_satisfication_end
+
+
+
+  # VACCINES START FORM
+- rule: Activate form
+  steps:
+  - intent: access_summary_vaccine
+  - action: check_if_happy_form
+  - active_loop: check_if_happy_form
+
+  # VACCINES DEACTIVATE FORM
+- rule: Get satisfication
+  condition:
+  # Condition that form is active.
+  - active_loop: check_if_happy_form
+  steps:
+  # Form is deactivated
+  - action: check_if_happy_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_access_summary_vaccine
+  - action: utter_satisfication_end
+
+  # TRAVEL RESTRICTION START FORM
+- rule: Activate form travel restr
+  steps:
+  - intent: travel_restrictions
+  - action: get_country_travel_restriction_form
+  - active_loop: get_country_travel_restriction_form
+
+  # VACCINES DEACTIVATE FORM
+- rule: Deactivate form travel restr
+  condition:
+  # Condition that form is active.
+  - active_loop: get_country_travel_restriction_form
+  steps:
+  # Form is deactivated
+  - action: get_country_travel_restriction_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_travel_restrictions
+  - action: utter_satisfication_end

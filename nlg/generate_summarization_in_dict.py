@@ -7,14 +7,18 @@ import random
 import re
 from itertools import chain
 from string import punctuation
-
 import pandas as pd
 import numpy as np
-
+import pprint
 import torch
 import pytorch_lightning as pl
+import re
 
-
+try:
+    from .create_summarization_dict import create_dict_for_summarization
+except ImportError:
+    from create_summarization_dict import create_dict_for_summarization
+from _collections import defaultdict
 
 from transformers import (
     AdamW,
@@ -22,11 +26,18 @@ from transformers import (
     T5Tokenizer
 )
 
-from model_config import T5FineTuner, get_args_dict
+try:
+    from .model_config import T5FineTuner, get_args_dict
+except ImportError:
+    from model_config import T5FineTuner, get_args_dict
 
 # For more effective memory usage
 torch.backends.cudnn.benchmark = True
 torch.backends.cudnn.enabled = True
+'''with open("dict_for_summarization.json") as jsonFile:
+    dictionary_for_summarization = json.load(jsonFile)'''
+DICTIONARY_FOR_SUMMARIZATION = create_dict_for_summarization()
+DICT_SUM_PATH = os.path.join(os.path.dirname(__file__),'summarized_dict.json')
 
 # resolve current directory
 try:
@@ -36,7 +47,7 @@ except NameError:
     FILE_DIR = Path().resolve()
 
 CKPT_DIR = os.path.join(FILE_DIR, 'checkpoints')
-CKPT_NAME ='freeze_encoder_epoch=4.ckpt'
+CKPT_NAME = 'freeze_encoder_epoch=4.ckpt'
 
 # intialize tokenizer and model
 tokenizer = T5Tokenizer.from_pretrained('t5-base')
@@ -88,15 +99,46 @@ def summarize(input, model, tokenizer):
 
     return preds
 
-text = os.path.join(os.path.dirname(__file__),'symptoms.txt')
-# test
-with open(text, "r", encoding="utf-8") as f:
-    example_text = f.read()
 
-pred = summarize(example_text, model, tokenizer)
+def do_summarization_in_dict(dictionary_for_summarization):
+    summarized_dictionary = defaultdict(dict)
+    for k,v in dictionary_for_summarization.items():
+        if k == 'vaccine':
+            for vaccine_name,info in dictionary_for_summarization['vaccine'].items():
+                summarized_dictionary['vaccine'][vaccine_name] = summarize(info[0], model, tokenizer)
+                # Add link to summarized info
+                summarized_dictionary['vaccine'][vaccine_name].append(info[1])
+        else:
+            summarized_dictionary[k] = summarize(v[0], model, tokenizer)
+            # Add link to summarized info
+            summarized_dictionary[k].append(v[1])
 
-print(pred)
+    return summarized_dictionary
 
+
+def write_in_dict(dictionary=None):
+    with open(DICT_SUM_PATH, 'w') as fp:
+        if dictionary is None:
+            json.dump(do_summarization_in_dict(DICTIONARY_FOR_SUMMARIZATION), fp,ensure_ascii=False, indent=4, sort_keys=True)
+        else:
+            json.dump(dictionary,fp,ensure_ascii=False, indent=4, sort_keys=True)
+
+
+def main():
+    write_in_dict()
+
+    # I've added it to print in nice readable way
+    # and after summarization
+
+    # with open ('summarized_dict.json') as jsonFile:
+    #     created_dict = json.load(jsonFile)
+    # PrettyJson = json.dumps(created_dict, indent=4, separators=(',', ': '), sort_keys=True)
+    # print("Displaying Pretty Printed JSON Data")
+    # print(PrettyJson)
+    #print(created_dict)
+
+if __name__ == '__main__':
+    main()
 
 
 

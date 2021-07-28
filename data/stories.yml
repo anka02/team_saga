@@ -1,52 +1,16 @@
 version: "2.0"
-
 stories:
 
-- story: happy path
+- story: Asking about travel restr path country
   steps:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
-  - intent: mood_great
-  - action: utter_happy
-
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_bot_information
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_bot_information
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
-
-- story: infection_numbers path
-  steps:
-  - intent: infection_numbers
-    entities:
-    - country: country
-  - action: utter_infection_numbers 
-  - action: action_infection_numbers
-
-- story: travel_restrictions path
-  steps:
   - intent: travel_restrictions
-    entities:
-    - country: country
-  - action: utter_travel_restrictions
+  - action: get_country_travel_restriction_form
   - action: action_travel_restrictions
+  - action: utter_satisfication_end
+
 
 - story: infection_numbers_by_cities path
   steps:
@@ -55,15 +19,153 @@ stories:
     - city: city
   - action: action_infection_numbers_by_cities
 
-- story: Asking about summaries path
+- story: Asking information about summaries full path
   steps:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
   - intent: summarized_info
   - action: utter_info_summarized
-  - action: action_corona_info_summarize
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - intent: access_summary
+    entities:
+      - summary: "symptoms"
+  - slot_was_set:
+      - summary: "symptoms"
+  - action: action_access_summary
+
+- story: Asking about summaries path vaccines
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: access_summary_vaccine
+  - action: check_if_happy_form
+  - action: action_access_summary_vaccine
+  - action: utter_satisfication_end
+
+
+- story: Asking about infection numbers path country
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: infection_numbers_country
+  - action: get_country_infection_form
+  - action: action_infection_numbers_country
+  - action: utter_satisfication_end
+
+- story: Asking about death numbers path country
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: death_numbers_country
+  - action: get_country_death_form
+  - action: action_death_numbers_country
+  - action: utter_satisfication_end
+
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "Are there long-term effects of COVID-19?"
+  - slot_was_set:
+      - summary: "Are there long-term effects of COVID-19?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "What are the symptoms of COVID-19?"
+  - slot_was_set:
+      - summary: "What are the symptoms of COVID-19?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "What happens to people who get COVID-19?"
+  - slot_was_set:
+      - summary: "What happens to people who get COVID-19?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "How can we protect others and ourselves if we don't know who is infected?"
+  - slot_was_set:
+      - summary: "How can we protect others and ourselves if we don't know who is infected?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "When should I get a test for COVID-19?"
+  - slot_was_set:
+      - summary: "When should I get a test for COVID-19?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
+
+- story: Asking information about QANDA full path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - intent: access_summary
+    entities:
+      - summary: "What test should I get to see if I have COVID-19?"
+  - slot_was_set:
+      - summary: "What test should I get to see if I have COVID-19?"
+  - action: action_access_summary
+  - action: utter_satisfication_end
 
