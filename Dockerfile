@@ -34,7 +34,6 @@ RUN set -xe; \
 
 COPY entrypoint.sh rasa_create_guest_url.py /usr/local/bin/
 COPY actions/ actions/
-COPY models/ models/ 
 COPY nlg nlg/
 COPY data data/
 COPY config.yml \
