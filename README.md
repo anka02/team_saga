@@ -20,7 +20,7 @@ or by searching `@covid_19_chat_bot` in the Telegram App. The chatbot is called 
 
 * The scripts and notebooks were tested on Python 3.7 for Linux and 3.8 for Mac OS and Windows.
   * At the time of testing, `Rasa` python package does not yet support Python 3.8 on Linux.
-* See the **requirements.txt** files for more details on the required packages.
+* See the **requirements-docker.txt** files for more details on the required packages.
 * Using a virtual environment is highly recommended. We used Anaconda.
 
 * The summarization model is already fine-tuned for our task and **does not need training**.
@@ -35,7 +35,7 @@ There are two possibilities to run the Rasa based Chatbot:
 On your localhost:
 
 1. Please create and activate a virtual environment on your preferred location, e.g. using Anaconda `conda create --name myenv python=3.8`, WINDOWS: `activate myenv`, LINUX and MacOS `conda activate myenv`.
-2. Install the required packages by `$ pip install -r requirements.txt` on your virtual environment. The installation of Rasa X UI could be proceeded just maually. Please run in terminal: `pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple`. 
+2. Install the required packages by `$ pip install -r requirements-docker.txt` on your virtual environment. The installation of Rasa X UI could be proceeded just maually. Please run in terminal: `pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple`. 
 Make sure you also have `jupyter-notebook` installed on your virtual environment in case you want to run any of the notebooks, e.g. for further training. 
 3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ . You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing (e.g. `freeze_encoder_epoch=4.ckpt`).
 4. Setup Rasa: 
