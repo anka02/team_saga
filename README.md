@@ -141,7 +141,9 @@ Here we summarize our evaluation results. We report the highest Rouge scores fro
 | Full-model (1)        | **42.44**  | **20.61** | **30.44**  |
 | Freeze both (2)       | 41.29      | 19.56     | 29.39      | 
 | Freeze encoder (3)    | 41.74      | 19.97     | 29.81      | 
-| Freeze embeddings (4) | 42.06      | 20.33     | 30.31      | 
+| Freeze embeddings (4) | 42.06      | 20.33     | 30.31      |
+
+The main finding here is that freezing the weights is not beneficial for the task. Freezing the embeddings has a smaller effect on performance than freezing the encoder. Regardless, The more layers we freeze, the lower the scores we achieve, even when we fine-tune the model longer. 
 
 # References
 
