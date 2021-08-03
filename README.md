@@ -145,6 +145,8 @@ Here we summarize our evaluation results. We report the highest Rouge scores fro
 
 # References
 
+Chin-Yew Lin. 2004.  Rouge: A package for automaticevaluation of summaries. InACL 2004.
+
 Colin Raffel, Noam M. Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, W. Li, and Peter J. Liu. 2020. Exploring the limits of transfer learning with a unified text-to-text transformer. ArXiv, abs/1910.10683.
 
 Ashish Vaswani, Noam M. Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. ArXiv, abs/1706.03762.
