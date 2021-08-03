@@ -116,9 +116,32 @@ After filtering out unwanted entries the dataset consists of
 * 11,188 validation pairs
 * 9532 test pairs
 
+# Chatbot system and UI
+
+
 # Experiments
 
+In order to assess our summarization model we fine-tune the T5 model by using the CNN / Daily Mail dataset. We use the Rouge score (Lin, 2004) metric to evaluate the performance of our model.
+
+We experiment with 4 different conditions.
+
+1. We fine-tune the whole model.
+2. We freeze the weights in the encoder layer and the in the embeddings.
+3. We only freeze the encoder layer weights.
+4. We only freeze the embedding layer weights.
+
+We fine-tune the model for a total of 5 epochs for each condition. We find that in each condition the model achieves the highest Rouge score before the 5th epoch, whereafter the performance only decreases, likely due to over-fitting. Overall, we acquire the best performing model by fine-tunng the whole model. However, the model also shows signs of over-fitting very quicky and we acquire the highest scores by fine-tunng it only 1 epoch, whereafter the performance only decreases.
+
 # Results
+
+Here we summarize our evaluation results. We report the highest Rouge scores from each condition, where the model was trained for 5 epochs. We report on which epoch the model achieved its' highest scores.
+
+| Condition             | Rouge-1    | Rouge-2   | Rouge-L    | Num. Epochs trained |
+| ----------------------| -----------|-----------|------------|---------------------|
+| Full-model (1)        | **42.443** | **20.61** | **30.438** | 1                   |
+| Freeze both (2)       | 41.288     | 19.56     | 29.394     | 2                   |
+| Freeze encoder (3)    | 41.741     | 19.97     | 29.805     | 1                   |
+| Freeze embeddings (4) | 42.062     | 20.328    | 30.305     | 4                   |
 
 # References
 
