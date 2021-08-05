@@ -63,11 +63,11 @@ rules:
 
 
   # VACCINES START FORM
-- rule: Activate form
-  steps:
-  - intent: access_summary_vaccine
-  - action: check_if_happy_form
-  - active_loop: check_if_happy_form
+#- rule: Activate form
+#  steps:
+#  - intent: ac_sum_vac
+#  - action: check_if_happy_form
+#  - active_loop: check_if_happy_form
 
   # VACCINES DEACTIVATE FORM
 - rule: Get satisfication
@@ -81,7 +81,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
-  - action: action_access_summary_vaccine
+  - action: action_ac_sum_vac
   - action: utter_satisfication_end
 
   # TRAVEL RESTRICTION START FORM

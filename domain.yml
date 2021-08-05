@@ -33,13 +33,11 @@ intents:
     use_entities: true
 - corona_info_summarize:
     use_entities: true
-- access_summary:
+- ac_sum:
     use_entities: true
-- acces_summary_vaccine:
-    use_entities: true
+- ac_sum_vac:
+    use_entities: []
 - choose_vaccine:
-    use_entities: true
-- access_summary_vaccine:
     use_entities: true
 - give_satisfaction:
     use_entities: true
@@ -54,13 +52,13 @@ intents:
 entities:
 - country
 - city
-- summary
+- sum
 - vaccine
 - region
 - date
 - satisfaction
 slots:
-  summary:
+  sum:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -89,8 +87,9 @@ responses:
   utter_greet:
   - text: Hey! What do you want to ask me?
   utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
-    text: 'Here is something to cheer you up:'
+  - text: Here is something to cheer you up
+    custom:
+      sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp"
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
@@ -137,20 +136,21 @@ responses:
 
   utter_info_summarized:
   - buttons:
-    - payload: /access_summary{{"summary":"symptoms"}}
+    - payload: /ac_sum{{"sum":"symptoms"}}
       title: Symptoms
-    - payload: /access_summary{{"summary":"covid_overview"}}
+    - payload: /ac_sum{{"sum":"covid_overview"}}
       title: COVID Overview
-    - payload: /access_summary_vaccine
+    - payload: /ac_sum_vac
       title: Vaccines
-    - payload: /access_summary{{"summary":"covid-variants"}}
+    - payload: /ac_sum{{"sum":"covid-variants"}}
       title: Variants
-    - payload: /access_summary{{"summary":"What is COVID-19?"}}
+    - payload: /ac_sum{{"sum":"What is COVID-19?"}}
       title: What is COVID-19
     - payload: /QANDA
       title: Frequently asked questions
     button_type: vertical
     text: Which topic do you want to know more about?
+
   utter_ask_vaccine:
   - buttons:
     - payload: /choose_vaccine{{"vaccine":"az_vaccine"}}
@@ -159,7 +159,7 @@ responses:
       title: Moderna
     - payload: /choose_vaccine{{"vaccine":"biontech_vaccine"}}
       title: Biontech
-    - payload: /choose_vaccine{{"vaccine":"sinopharm_vaccine?"}}
+    - payload: /choose_vaccine{{"vaccine":"sinopharm_vaccine"}}
       title: Sinopharm
     button_type: vertical
     text: Which vaccine are you interested in?
@@ -175,29 +175,29 @@ responses:
     text: Is this what you wanted?
 
   utter_QANDA:
-  - buttons:
-    - payload: /access_summary{{"summary":"What are the symptoms of COVID-19?"}}
-      title: What are the symptoms of COVID-19?
-    - payload: /access_summary{{"summary":"Are there long-term effects of COVID-19?"}}
-      title: Are there long-term effects of COVID-19?
-    - payload: /access_summary_vaccine{{"summary":"What happens to people who get COVID-19?"}}
-      title: What happens to people who get COVID-19?
-    - payload: /access_summary{{"summary":"How can we protect others and ourselves if we don't know who is infected?"}}
-      title: How can we protect others and ourselves if we don't know who is infected?
-    - payload: /access_summary{{"summary":"When should I get a test for COVID-19?"}}
-      title: When should I get a test for COVID-19?
-    - payload: /access_summary{{"summary":"What test should I get to see if I have COVID-19?"}}
-      title: What test should I get to see if I have COVID-19?
-    button_type: vertical
-    text: Which question are you interested in?
+    - buttons:
+        - payload: /ac_sum{{"sum":"What are the symptoms of COVID-19?"}} #/ac_sum{{"sum":
+          title: What are the symptoms of COVID-19?
+        - payload: /ac_sum{{"sum":"Are there long-term effects of COVID-19?"}} #/ac_sum{{"sum":
+          title: Are there long-term effects of COVID-19?
+        - payload: /ac_sum{{"sum":"What happens to people who get COVID-19?"}} #/ac_sum_vac{{"sum":
+          title: What happens to people who get COVID-19?
+        - payload: /ac_sum{{"sum":"How can we protect others?"}} #/acc_sum{{"sum":"How can we protect others?"}}
+          title: How can we protect others?
+        - payload: /ac_sum{{"sum":"When should I get a test for COVID-19?"}} #/ac_sum{{"sum":
+          title: When should I get a test for COVID-19?
+        - payload: /ac_sum{{"sum":"What test should I get if I have COVID-19?"}} #/ac_sum{{"sum":"What test should I get if I have COVID-19?"}}
+          title: What test should I get to see if I have COVID-19?
+      button_type: vertical
+      text: Which question are you interested in?
 
 actions:
 - action_infection_numbers_country
 - action_travel_restrictions
 - action_infection_numbers_by_cities
 - action_corona_info_summarize
-- action_access_summary
-- action_access_summary_vaccine
+- action_ac_sum
+- action_ac_sum_vac
 - action_death_numbers_country
 - validate_get_country_infection_form
 - validate_get_country_death_form
