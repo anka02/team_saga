@@ -53,7 +53,7 @@ In docker container:
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
 2. Please create and activate a virtual environment in your preferred location, e.g. using Anaconda first run `conda create --name myenv python=3.8`,then depending on the system WINDOWS: `activate myenv`, LINUX and MacOS `conda activate myenv`.
 3. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing. Please don't try to unzip the file.
-4. run `docker-build.sh` to create docker container. The building process takes about 9 mins and includes full installation. (Note :  On WINDOWS this Docker container should be configured and running under WSL2.)
+4. run `docker-build.sh` to create docker container. The building process includes the full installation and may take some time depending on your system and internet speed. (Note :  On WINDOWS this Docker container should be configured and running under WSL2.)
 5. run `docker-run.sh` to run docker container.
 6. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model.Then select the `Model` field and click the arrow `Up` to activate the model.
 7. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/production/<genarated code>`.
