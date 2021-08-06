@@ -65,21 +65,7 @@ The default docker deployment includes running Rasa X and opening the Chatbot UI
 ## Rasa
 
 Rasa is an open-source machine learning framework for automated conversations. It is capable of interpreting messages, holding conversations and connecting to messaging channels and APIs.
-The full project includes Rasa open source for training the NLU pipeline, integrating Natural Language Generation (NLG) into the Chatbot, Action Server for implementing custom actions and RASA X as a UI frontend.
-
-To extract information from user messages the NLU pipeline should be able to recognize the user's intent and any entities their message contain. 
-NLU training data consists of example user utterances categorized by intent. The data used in the NLU pipeline is stored in the `data` folder. Rasa uses a number of machine learning tools and models to extract entities and make predictions among other tasks as part of the NLU pipeline. The specific information is stored in the `config.yml` file and any specifications including languages and pipeline keys can be viewed and changed from there.
-
-After receiving a message, the model will predict an action that the assistant should perform next. The Action Server is responsible for the performance of the next action.
-A custom action provided in our chatbot uses an API call and query to fetch Covid-19 related information, which can be further summarized by the trained summarization model that is integrated into the chatbot. When your assistant predicts a custom action, the Rasa server sends a POST request to the action server
-with a JSON payload including the name of the predicted action, the conversation ID, the contents of the tracker and the contents of the domain.
-When the action server finishes running a custom action, it returns a json payload of responses and events. See section `APIs` for details about the request and response payloads.
-The Rasa server then returns the responses to the user and adds the events to the conversation tracker. The implementation of actions is stored in `actions/actions.py`
-The design of the conversation, which assumes that the assistant is asking for specific information, is defined in forms.
-
-Rasa X deploys the user interface and fine-tunes the NLU model through interactive learning. The Rasa X UI consists of layers built on top of Rasa Open Source.
-Moreover, Rasa X can be connected to many popular messaging apps, such as Telegram, Facebook, Slack and  even custom applications. 
-To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat_bot` or search in your Telegram App `@covid_19_chat_bot`.
+The full project includes Rasa open source for training the NLU pipeline, integrating Natural Language Generation (NLG) into the Chatbot, Action Server for implementing custom actions and RASA X as a UI frontend. For more information consult `https://rasa.com/docs/`.
 
 ## Text-to-Text Transfer Transformer (T5)
 
@@ -120,6 +106,19 @@ After filtering out unwanted entries the dataset consists of
 
 # Chatbot system and UI
 
+To extract information from user messages the NLU pipeline should be able to recognize the user's intent and any entities their message contain. 
+NLU training data consists of example user utterances categorized by intent. The data used in the NLU pipeline is stored in the `data` folder. Rasa uses a number of machine learning tools and models to extract entities and make predictions among other tasks as part of the NLU pipeline. The specific information is stored in the `config.yml` file and any specifications including languages and pipeline keys can be viewed and changed from there.
+
+After receiving a message, the model will predict an action that the assistant should perform next. The Action Server is responsible for the performance of the next action.
+A custom action provided in our chatbot uses an API call and query to fetch Covid-19 related information, which can be further summarized by the trained summarization model that is integrated into the chatbot. When your assistant predicts a custom action, the Rasa server sends a POST request to the action server
+with a JSON payload including the name of the predicted action, the conversation ID, the contents of the tracker and the contents of the domain.
+When the action server finishes running a custom action, it returns a json payload of responses and events. See section `APIs` for details about the request and response payloads.
+The Rasa server then returns the responses to the user and adds the events to the conversation tracker. The implementation of actions is stored in `actions/actions.py`
+The design of the conversation, which assumes that the assistant is asking for specific information, is defined in forms.
+
+Rasa X deploys the user interface and fine-tunes the NLU model through interactive learning. The Rasa X UI consists of layers built on top of Rasa Open Source.
+Moreover, Rasa X can be connected to many popular messaging apps, such as Telegram, Facebook, Slack and  even custom applications. 
+To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat_bot` or search in your Telegram App `@covid_19_chat_bot`.
 
 # Experiments
 
