@@ -18,12 +18,12 @@ or by searching `@covid_19_chat_bot` in the Telegram App. The chatbot is called 
 
 ## Requirements
 
-* The scripts and notebooks were tested on Python 3.7 for Linux and 3.8 for Mac OS and Windows.
-  * At the time of testing, `Rasa` python package does not yet support Python 3.8 on Linux.
+* The scripts and notebooks were tested on Python 3.8 for Mac OS and Windows and Linux.
 * See the **requirements-docker.txt** files for more details on the required packages.
 * Using a virtual environment is highly recommended. We used Anaconda.
 
 * The summarization model is already fine-tuned for our task and **does not need training**.
+ * A saved checkpoint can be found from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 * However, it is possible to train the model further using the provided notebooks in the **nlg** folder. 
 * GPU is necessary for training the summarization model, but not strictly necessary for running the chatbot.
 * Average training time for the summarization model ranges from 10-12 hours per epoch, using 4 Geforce GTX Titan GPUs, with 12gb of allocated GPU memory each. Consider a maximum batch size of 8 to avoid memory errors on Cuda.
