@@ -47,7 +47,7 @@ except NameError:
     FILE_DIR = Path().resolve()
 
 CKPT_DIR = os.path.join(FILE_DIR, 'checkpoints')
-CKPT_NAME = 'freeze_encoder_epoch=4.ckpt'
+CKPT_NAME = 'best_checkpoint.ckpt'
 
 # intialize tokenizer and model
 tokenizer = T5Tokenizer.from_pretrained('t5-base')
