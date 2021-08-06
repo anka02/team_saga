@@ -35,7 +35,7 @@ There are two possibilities to run the Rasa based Chatbot:
 On your localhost:
 
 1. Please create and activate a virtual environment in your preferred location, e.g. using Anaconda first run `conda create --name myenv python=3.8`,then depending on the system WINDOWS: `activate myenv`, LINUX and MacOS `conda activate myenv`.
-2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/. You can find a selection of saved checkpoints from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing (e.g. `freeze_encoder_epoch=4.ckpt`). Don't unzip the file.
+2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/. You can find a saved checkpoint in a format that PyTorch can process from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing Please don't try to unzip the file.
 3. Install the required packages by `$ pip install -r requirements-docker.txt` on your virtual environment. The installation of Rasa X UI could be proceeded just maually. Please run in terminal: `pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple` 
 or follow instructions here https://rasa.com/docs/rasa-x/installation-and-setup/install/local-mode. 
 Make sure you also have `jupyter-notebook` installed in your virtual environment in case you want to run any of the notebooks, e.g. for further training. 
@@ -51,7 +51,7 @@ needed for the summary part, the next deployment takes less than a minute.
 In docker container:
 
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
-2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing. (e.g. `freeze_encoder_epoch=4.ckpt`). Don't unzip the file.
+2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing. Please don't try to unzip the file.
 3. run `docker-build.sh` to create docker container. The building process takes about 9 mins and includes full installation. 
 4. run `docker-run.sh` to run docker container.
 5. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model.Then select the `Model` field and click the arrow `Up` to activate the model.
