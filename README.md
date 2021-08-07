@@ -56,18 +56,21 @@ In docker container:
 5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/production/<genarated code>`.
 
 The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
-`entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container. Note :  On WINDOWS this Docker containershould be configured and running under WSL2.
+`entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container. 
+Note :  On WINDOWS this Docker container should be configured and running under WSL2.
 
 # Models and Implementation
-
+![architecture](https://github.com/anka02/team_saga/blob/telegram/images/architecture.png?raw=true)
 ## Rasa
 
 Rasa is an open-source machine learning framework for automated conversations. It is capable of interpreting messages, holding conversations and connecting to messaging channels and APIs.
-The full project includes Rasa open source for training the NLU pipeline, integrating NLG into the Chatbot, Action Server for implementing custom actions and RASA X as a UI frontend.
+The full project includes Rasa open source for training the NLU pipeline, integrating NLG into the Chatbot, Action Server for implementing custom actions. For UI frontend was used build-in RASA X UI and Telegram.
 
+### Rasa NLU
 To extract information from user messages the NLU pipeline should be able to recognize the user's intent and any entities their message contain. 
 NLU training data consists of example user utterances categorized by intent. The data used in the NLU pipeline is stored in the `data` folder. Rasa uses a number of machine learning tools and models to extract entities and make predictions among other tasks as part of the NLU pipeline. The specific information is stored in the `config.yml` file and any specifications including languages and pipeline keys can be viewed and changed from there.
 
+### Rasa Core
 After receiving a message, the model will predict an action that the assistant should perform next. The Action Server is responsible for the performance of the next action.
 A custom action provided in our chatbot uses an API call and query to fetch Covid-19 related information, which can be further summarized by the trained summarization model that is integrated into the chatbot. When your assistant predicts a custom action, the Rasa server sends a POST request to the action server
 with a json payload including the name of the predicted action, the conversation ID, the contents of the tracker and the contents of the domain.
@@ -75,6 +78,7 @@ When the action server finishes running a custom action, it returns a json paylo
 The Rasa server then returns the responses to the user and adds the events to the conversation tracker. The implementation of actions is stored in `actions/actions.py`
 The design of the conversation, which assumes that the assistant is asking for specific information, is defined in forms.
 
+### Rasa X
 Rasa x deploys the user interface and fine-tunes the NLU model through interactive learning. The Rasa X UI consists of layers built on top of Rasa Open Source.
 Moreover, Rasa X can be connected to many popular messaging apps, such as Telegram, Facebook, Slack and  even custom applications. 
 To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat_bot` or search in your Telegram App `@covid_19_chat_bot`.

@@ -184,3 +184,24 @@ stories:
       - sum: "What test should I get if I have COVID-19?"
   - action: action_ac_sum
   - action: utter_satisfication_end
+
+- story: Asking information about summaries then overview
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: ac_sum
+    entities:
+      - sum: "symptoms"
+  - slot_was_set:
+      - sum: "symptoms"
+  - action: action_ac_sum
+  - intent: ac_sum
+    entities:
+      - sum: "covid_overview"
+  - slot_was_set:
+      - sum: "covid_overview"
+  - action: action_ac_sum
+  - action: utter_satisfication_end

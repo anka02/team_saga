@@ -179,7 +179,8 @@ class ActionInfectionNumbersCountry(Action):
                 data = r.json()
                 if len(data['data']) != 0:
                     debug_print("DATA JSON: ", data)
-                    dispatcher.utter_message(text=f"Current active confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases.")
+                    print(data)
+                    dispatcher.utter_message(text=f"Total confirmed cases in {country.capitalize()} are {data['data']['confirmed']}, with {data['data']['confirmed_diff']} new cases.")
                 else:
                     dispatcher.utter_message(
                         text=f"The information about {country.capitalize()} is not available")
@@ -248,8 +249,9 @@ class ActionDeathNumbersCountry(Action):
                 r.raise_for_status()
                 data = r.json()
                 debug_print("DATA JSON: ", data)
+                print(data)
                 dispatcher.utter_message(
-                    text=f"Current death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
+                    text=f"Confirmed death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
                 )
 
 class ActionTravelRestrictions(Action):
