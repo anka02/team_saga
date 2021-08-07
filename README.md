@@ -52,7 +52,7 @@ In docker container:
 1. Install Docker (if it isn't installed) https://docs.docker.com/engine/install/
 2. Clone the repository. Download t5-checkpoint to nlg/checkpoints/ from https://drive.google.com/drive/folders/1q2hrzzbo058B4c3NSG9bw5OwhA6P30Ig?usp=sharing
 3. run `docker-build.sh` and `docker-run.sh`. The building process takes about 9 mins and includes full installation. 
-4. Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model.Then select the `Model` field and click the arrow `Up` to activate the model.
+4. The training process runs automatically. In case if you want to re-train the model: Open Rasa X in browser and type`localhost:5002/login?username=<displayed on the screen>` and in the left drop-out part of the page click `Train` to train the model.Then select the `Model` field and click the arrow `Up` to activate the model.
 5. Open the generated link `Guest URL` displayed in the terminal : `http://localhost:5002/guest/conversations/production/<genarated code>`.
 
 The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
@@ -80,7 +80,9 @@ The design of the conversation, which assumes that the assistant is asking for s
 
 ### Rasa X
 Rasa x deploys the user interface and fine-tunes the NLU model through interactive learning. The Rasa X UI consists of layers built on top of Rasa Open Source.
-Moreover, Rasa X can be connected to many popular messaging apps, such as Telegram, Facebook, Slack and  even custom applications. 
+
+
+Moreover, Rasa can be connected to many popular messaging apps, such as Telegram, Facebook, Slack and  even custom applications. 
 To try our Telegram chatbot go to the following URL: `https://t.me/covid_19_chat_bot` or search in your Telegram App `@covid_19_chat_bot`.
 
 ## Text-to-Text Transfer Transformer (T5)
