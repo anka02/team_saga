@@ -110,7 +110,7 @@ USA,ATL
 USA,ACY
 Canada,YAT
 New Zealand,AKL
-Germany,AGB
+Germany,TXL
 USA,AGS
 USA,AUG
 France,AUR
@@ -156,7 +156,6 @@ Guadeloupe,PTP
 Saint Kitts and Nevis,SKB
 France,BIA
 USA,BTR
-Germany,BYU
 USA,BPT
 USA,BKW
 Virgin Islands (British),EIS
@@ -181,11 +180,7 @@ Central African Republic,BBT
 Italy,BGY
 Norway,BGO
 France,EGC
-Germany,BER
-Germany,SXF
 Germany,TXL
-Germany,THF
-Bermuda,BDA
 Switzerland,BRN
 Switzerland,ZDJ
 USA,BET
@@ -235,7 +230,6 @@ Australia,BMP
 Brazil,BSB
 Slovakia,BTS
 Congo (ROC),BZV
-Germany,BRE
 Italy,VBS
 France,BES
 Central African Republic,BIV
@@ -303,7 +297,6 @@ Colombia,CTG
 Saint Lucia,SLU
 Italy,CTA
 French Guiana,CAY
-Germany,CBU
 Philippines,CEB
 USA,CDC
 USA,CID
@@ -442,10 +435,8 @@ Tanzania,DOD
 Qatar,DOH
 United Kingdom,DSA
 Ireland,CFN
-Germany,DTM
 USA,DHN
 Cameroon,DLA
-Germany,DRS
 United Arab Emirates,DXB
 UAE,DXB
 Australia,DBO
@@ -1948,7 +1939,6 @@ USA,ICT
 United Kingdom,WIC
 Australia,WHM
 Austria,VIE
-Germany,WIE
 USA,AVP
 USA,IPT
 USA,ISL

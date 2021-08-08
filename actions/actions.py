@@ -549,6 +549,3 @@ class ValidateTravelRestrictionInfectionForm(FormValidationAction):
         else:
             dispatcher.utter_message("Could not find the given country, please check your spelling.")
             return {"country": None}
-
-
-
