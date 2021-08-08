@@ -1,52 +1,31 @@
 version: '2.0'
-config:
-  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet:
-    use_entities: true
-- goodbye:
-    use_entities: true
-- affirm:
-    use_entities: true
-- deny:
-    use_entities: true
-- mood_great:
-    use_entities: true
-- mood_unhappy:
-    use_entities: true
-- bot_challenge:
-    use_entities: true
-- infection_numbers_country:
-    use_entities: true
-- infection_numbers_city:
-    use_entities: true
-- death_numbers_country:
-    use_entities: true
-- death_numbers_city:
-    use_entities: true
-- travel_restrictions:
-    use_entities: true
-- infection_numbers_by_cities:
-    use_entities: true
-- corona_info_summarize:
-    use_entities: true
-- ac_sum:
-    use_entities: true
-- ac_sum_vac:
-    use_entities: []
-- choose_vaccine:
-    use_entities: true
-- give_satisfaction:
-    use_entities: true
-- stop_form:
-    use_entities: true
+- give_satisfaction
+- greet
+- infection_numbers_country
+- goodbye
+- affirm
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- infection_numbers_city
+- death_numbers_country
+- death_numbers_city
+- travel_restrictions
+- infection_numbers_by_cities
+- corona_info_summarize
+- access_summary
+- acces_summary_vaccine
+- choose_vaccine
+- access_summary_vaccine
+- stop_form
 - exit:
     use_entities: []
-- summarized_info:
-    use_entities: true
+- summarized_info
 - QANDA:
     use_entities: []
 - access_summary_vaccine:
@@ -54,39 +33,32 @@ intents:
 - access_summary:
     use_entities: true
 entities:
-- country
 - city
-- sum
-- vaccine
-- region
+- country
 - date
+- region
 - satisfaction
 - summary
+- vaccine
+- boolean_answer
 slots:
-  sum:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+  summary:
+    type: text
     influence_conversation: false
   vaccine:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+    type: text
     influence_conversation: false
   satisfaction:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
+    type: text
     influence_conversation: false
   country:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
+    type: text
+    influence_conversation: true
   requested_slot:
-    type: rasa.shared.core.slots.UnfeaturizedSlot
-    initial_value: null
-    auto_fill: true
+    type: unfeaturized
+    influence_conversation: false
+  boolean_answer:
+    type: text
     influence_conversation: false
 responses:
   utter_greet:
@@ -166,7 +138,7 @@ responses:
       title: Sinopharm
     text: Which vaccine are you interested in?
   utter_satisfication_end:
-  - text: Thank you for using the COVID chatbot.
+  - text: Thank you for using the COVID chatbot. You can type /restart to ask about additional information.
   utter_ask_satisfaction:
   - button_type: vertical
     buttons:
@@ -191,16 +163,35 @@ responses:
     - payload: /ac_sum{{"sum":"What test should I get if I have COVID-19?"}}
       title: What test should I get to see if I have COVID-19?
     text: Which question are you interested in?
+  utter_ask_additional_death_numbers_form_boolean_answer:
+  - buttons:
+    - payload: affirm
+      title: Yes
+    - payload: deny
+      title: No
+    button_type: vertical
+    text: Would you also like to know the number of deaths for this country?
+  utter_ask_additional_infection_numbers_form_boolean_answer:
+  - buttons:
+    - payload: affirm
+      title: Yes
+    - payload: deny
+      title: No
+    button_type: vertical
+    text: Would you also like to know the number of infections for this country?
 actions:
+- action_access_summary
+- action_access_summary_vaccine
+- action_corona_info_summarize
+- action_death_numbers_country
+- action_infection_numbers_by_cities
 - action_infection_numbers_country
 - action_travel_restrictions
-- action_infection_numbers_by_cities
-- action_corona_info_summarize
-- action_ac_sum
-- action_ac_sum_vac
-- action_death_numbers_country
-- validate_get_country_infection_form
+- utter_bot_information
+- utter_greet
+- utter_satisfication_end
 - validate_get_country_death_form
+- validate_get_country_infection_form
 - validate_get_country_travel_restriction_form
 forms:
   check_if_happy_form:
@@ -226,4 +217,13 @@ forms:
       country:
       - entity: country
         type: from_text
-e2e_actions: []
+  additional_death_numbers_form:
+    required_slots:
+      boolean_answer:
+      - enitity: boolean_answer
+        type: from_text
+  additional_infection_numbers_form:
+    required_slots:
+      boolean_answer:
+      - enitity: boolean_answer
+        type: from_text

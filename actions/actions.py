@@ -142,10 +142,15 @@ class ActionInfectionNumbersCountry(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        
+        entities = []
 
-        entities = tracker.latest_message['entities']
-
-        print("Message : ", entities)
+        if tracker.latest_message['entities']:
+            entities = tracker.latest_message['entities']
+        else:
+            print("accessed slot")
+            country = tracker.get_slot("country")
+            print(country)
         country = None
         date = None
         region = None
@@ -177,16 +182,15 @@ class ActionInfectionNumbersCountry(Action):
                 r = requests.get(url=URL, params=PARAMS)
                 r.raise_for_status()
                 data = r.json()
-                if len(data['data']) != 0:
-                    debug_print("DATA JSON: ", data)
-                    print(data)
-                    dispatcher.utter_message(text=f"Total confirmed cases in {country.capitalize()} are {data['data']['confirmed']}, with {data['data']['confirmed_diff']} new cases.")
-                else:
-                    dispatcher.utter_message(
-                        text=f"The information about {country.capitalize()} is not available")
+                debug_print("DATA JSON: ", data)
+                dispatcher.utter_message(text=f"Total confirmed cases in {country.capitalize()} are {data['data']['active']}, with {data['data']['confirmed_diff']} new cases."
+                                        )
+
             # If the user quits during validation with exit button
             elif country == "EXIT_FORM":
                 pass
+            else: 
+                dispatcher.utter_message("No country was specified in the previous step.")
             # else:
             #     spell = SpellChecker()
             #     if country not in locations_dict:
@@ -216,23 +220,17 @@ class ActionDeathNumbersCountry(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        entities = tracker.latest_message['entities']
-
-        print("Message : ", entities)
-        country = None
+        if tracker.latest_message['entities']:
+            country = tracker.latest_message['entities'][0]["value"]
+            print(country)
+            print(type(country))
+        else:
+            country = tracker.get_slot("country").lower()
+        
+        print("RAN DEATHS")
         date = None
         region = None
 
-        for e in entities:
-            if e['entity'] == 'country':
-                country = e['value'].lower()
-                print("country", country)
-            if e['entity'] == 'date':
-                date = e['value']
-                print("date", date)
-            if e['entity'] == 'region':
-                region = e['value'].lower()
-                print("region", region)
         if date == 'today':
             # date = datetime.today().strftime('%Y-%m-%d')
             # as a rule the last update is for yesterday
@@ -242,18 +240,31 @@ class ActionDeathNumbersCountry(Action):
             date = (datetime.now() - timedelta(2)).strftime('%Y-%m-%d')
 
         if region is None:
+            print(country)
             if country in locations_dict:
-                PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
-                URL = "https://covid-api.com/api/reports/total"
-                r = requests.get(url=URL, params=PARAMS)
-                r.raise_for_status()
-                data = r.json()
-                debug_print("DATA JSON: ", data)
-                print(data)
-                dispatcher.utter_message(
-                    text=f"Confirmed death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
+                if not tracker.get_slot("boolean_answer"):
+                    PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+                    URL = "https://covid-api.com/api/reports/total"
+                    r = requests.get(url=URL, params=PARAMS)
+                    r.raise_for_status()
+                    data = r.json()
+                    debug_print("DATA JSON: ", data)
+                    dispatcher.utter_message(
+                        text=f"Total death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
                 )
-
+                else:
+                    if tracker.get_slot("boolean_answer") == "affirm":
+                        PARAMS = {'iso': locations_dict[country], 'date': date, 'region_province': region}
+                        URL = "https://covid-api.com/api/reports/total"
+                        r = requests.get(url=URL, params=PARAMS)
+                        r.raise_for_status()
+                        data = r.json()
+                        debug_print("DATA JSON: ", data)
+                        dispatcher.utter_message(
+                            text=f"Total death cases are {data['data']['deaths']} with {data['data']['deaths_diff']} new death cases."
+                           )
+            else:
+                dispatcher.utter_message("No country was specified in the previous step.")
 class ActionTravelRestrictions(Action):
 
     def name(self) -> Text:
@@ -295,8 +306,81 @@ class ActionTravelRestrictions(Action):
         else:
             if country == "EXIT FORM":
                 pass
-            else:
-                print("This is country")
+
+        #     spell = SpellChecker()
+        #     if country not in airport_dict:
+        #         airport_iata = airport_dict[spell.correction(country)]
+        #         PARAMS = {'airport': airport_iata}
+        #         print(spell.correction(country))
+        #         URL = "https://covid-api.thinklumo.com/data" # gives the information just in country
+        #         r = requests.get(url=URL, headers={"x-api-key":"e25f88c29ea2413abe14880d224c8c82"},params=PARAMS)
+        #         r.raise_for_status()
+        #         data = r.json()['covid_info']['entry_exit_info']
+        #         pp = pprint.PrettyPrinter(indent=4)
+        #         print("DATA RESTRICTION COVID INFO")
+        #         pp.pprint(data)
+        #         parameters = ['source', 'quarantine', 'testing', 'travel_restrictions']
+        #         not_necessary_info = 'No summary available - please follow the link to learn more.'
+        #         for i in data:
+        #             for j in parameters:
+        #                 if not_necessary_info not in i[j]:
+        #                     collected_info = j.upper() + ' ' + ''.join(i[j])
+        #                     dispatcher.utter_message(text=collected_info)
+        #         print("This action is from Travel Restriction action")
+        #     else:
+        #         dispatcher.utter_message(text=f"Could not find any entries for country {country.capitalize()}, please check your spelling")
+        #
+        # return []
+
+class ActionInfectionNumbersCities(Action):
+
+    def name(self) -> Text:
+        return "action_infection_numbers_by_cities"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        entities = tracker.latest_message['entities']
+        if not entities:
+            dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
+            return []
+
+        debug_print("Message : ", entities)
+        city = None
+        URL = "https://www.trackcorona.live/api/cities/"
+
+        for e in entities:
+            if e['value'] == 'Hamburg': # because Hamburg is region and city
+                r = requests.get(url=URL + 'hamburg')
+                dispatcher.utter_message(
+                    text=f"Current active cases in Hamburg are {r.json()['data'][0]['confirmed']} with {r.json()['data'][0]['dead']} death cases.")
+                dispatcher.utter_message(text="Take care of yourself and your family")
+                return []
+
+            if e['entity'] == 'city':
+                city = e['value'].lower()
+                r = requests.get(url= URL + city)
+
+        data = r.json()
+        debug_print("DATA JSON: ", data)
+        print("Running infection action")
+        if len(data['data']) > 1:
+            possible_cities = []
+            for location in data['data']:
+                possible_cities.append(location['location'])
+
+            dispatcher.utter_message(text="There are multiple cities with a similar name:" + str(possible_cities))
+        elif len(data['data']) == 1:
+            debug_print("DATA", data)
+            casenumber = data['data'][0]['confirmed']
+            death_numbers = data['data'][0]['dead']
+            dispatcher.utter_message(text=f"Current active cases in {city.capitalize()} are {casenumber} with {death_numbers} death cases.")
+            dispatcher.utter_message(text="Take care of yourself and your family")
+        else:
+            dispatcher.utter_message(
+                text=f"Could not find any entries for city {city.capitalize()}, please check your spelling")
+
 
 # API for cites is closed.
 # class ActionInfectionNumbersCities(Action):
@@ -452,6 +536,7 @@ class ValidateGetCountryInfectionForm(FormValidationAction):
             r = requests.get(url=URL, params=PARAMS)
             r.raise_for_status()
             data_countries = r.json()
+            print("Validating country")
             debug_print("DATA JSON: ", data_countries)
             return {"country": country}
         #If the country is misspelled, this will throw a key error
@@ -487,7 +572,7 @@ class ValidateGetCountryInfectionForm(FormValidationAction):
             r = requests.get(url=URL, params=PARAMS)
             r.raise_for_status()
             data_countries = r.json()
-            debug_print("DATA JSON: ", data_countries)
+            print("Validation for country")
             return {"country": country}
         #If the country is misspelled, this will throw a key error
         except KeyError:

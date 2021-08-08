@@ -70,8 +70,14 @@ stories:
   - action: utter_bot_information
   - intent: infection_numbers_country
   - action: get_country_infection_form
+  - slot_was_set:
+    - country: germany
   - action: action_infection_numbers_country
+  - action: additional_death_numbers_form
+  - action: action_death_numbers_country
   - action: utter_satisfication_end
+  
+
 
 - story: Asking about death numbers path country
   steps:
@@ -80,7 +86,11 @@ stories:
   - action: utter_bot_information
   - intent: death_numbers_country
   - action: get_country_death_form
+  - slot_was_set:
+    - country: germany
   - action: action_death_numbers_country
+  - action: additional_infection_numbers_form
+  - action: action_infection_numbers_country
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -185,23 +195,3 @@ stories:
   - action: action_ac_sum
   - action: utter_satisfication_end
 
-- story: Asking information about summaries then overview
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_bot_information
-  - intent: summarized_info
-  - action: utter_info_summarized
-  - intent: ac_sum
-    entities:
-      - sum: "symptoms"
-  - slot_was_set:
-      - sum: "symptoms"
-  - action: action_ac_sum
-  - intent: ac_sum
-    entities:
-      - sum: "covid_overview"
-  - slot_was_set:
-      - sum: "covid_overview"
-  - action: action_ac_sum
-  - action: utter_satisfication_end

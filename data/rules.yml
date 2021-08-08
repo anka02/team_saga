@@ -12,6 +12,11 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
+- rule: Utter the information at start
+  conversation_start: true
+  steps:
+  - action: utter_greet
+  - action: utter_bot_information
 
 
   # COUNTRIES INFECTION FORM ACTIVATE
@@ -34,8 +39,35 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: action_infection_numbers_country
+  - action: additional_death_numbers_form
+  - action: action_death_numbers_country
   - action: utter_satisfication_end
 
+  # COUNTRIES INFECTION FOLLOWUP ACTIVATE
+- rule: Activate infection followup
+  steps:
+  - action: get_country_infection_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_infection_numbers_country
+  - action: additional_death_numbers_form
+  - active_loop: additional_death_numbers_form
+
+  # COUNTRIES INFECTION FOLLOWUP DEACTIVATE
+- rule: Deactivate followup infection
+  condition:
+  # Condition that form is active.
+  - active_loop: additional_death_numbers_form
+  steps:
+  # Form is deactivated
+  - action: additional_death_numbers_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_death_numbers_country
+  - action: utter_satisfication_end
 
 
   # COUNTRIES DEATH FORM ACTIVATE
@@ -46,7 +78,7 @@ rules:
   - active_loop: get_country_death_form
 
   # COUNTRIES DEATH DEACTIVATE
-- rule: Activate form country deaths
+- rule: deactivate form country deaths
   condition:
   # Condition that form is active.
   - active_loop: get_country_death_form
@@ -58,9 +90,35 @@ rules:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
   - action: action_death_numbers_country
+  - action: additional_infection_numbers_form
+  - action: action_infection_numbers_country
   - action: utter_satisfication_end
 
+  # COUNTRIES DEATH FOLLOWUP ACTIVATE
+- rule: Activate death followup
+  steps:
+  - action: get_country_death_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_death_numbers_country
+  - action: additional_infection_numbers_form
+  - active_loop: additional_infection_numbers_form
 
+  # COUNTRIES DEATH FOLLOWUP DEACTIVATE
+- rule: Deactivate followup death
+  condition:
+  # Condition that form is active.
+  - active_loop: additional_infection_numbers_form
+  steps:
+  # Form is deactivated
+  - action: additional_infection_numbers_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  # The actions we want to run when the form is submitted.
+  - action: action_infection_numbers_country
+  - action: utter_satisfication_end
 
   # VACCINES START FORM
 #- rule: Activate form
