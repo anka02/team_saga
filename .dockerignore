@@ -1,6 +1,8 @@
 .git
 .gitignore
 .dockerignore
+.idea
+/images
 **/.git
 **/.gitignore
 **/.gitmodules

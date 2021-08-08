@@ -61,8 +61,9 @@ In docker container:
 The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
 `entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container.
 
-# Models and Implementation
 
+# Models and Implementation
+![architecture](https://github.com/anka02/team_saga/blob/telegram/images/architecture.png?raw=true)
 ## Rasa
 
 Rasa is an open-source machine learning framework for automated conversations. It is capable of interpreting messages, holding conversations and connecting to messaging channels and APIs.
@@ -83,7 +84,9 @@ We use several REST APIs to query up-to-date Covid-19 information. These include
 * `https://covid-api.com/api/reports/total` (COVID-19 confirmed case numbers by country)
 * `https://covid-api.thinklumo.com/data` (COVID-19 restrictions by country)
 * `https://www.trackcorona.live/api/cities/` (COVID-19 confirmed case numbers by city)
- 
+
+During finalization of the project, the API for city cases went offline, which is why we decided to not use cities for case/death numbers.
+
 `covid-api.com`, is based on public data by **Johns Hopkins CSSE** https://github.com/CSSEGISandData/COVID-19.
 The regulations, travel advisories, and travel restrictions are provided by Lumo's COVID-19 API, which uses IATA airport codes for fetching the location.
 

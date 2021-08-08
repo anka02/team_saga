@@ -97,7 +97,14 @@ def create_dict_for_summarization():
         questions = re.sub(r'\s+', ' ', questions)
         answers = re.sub(r'\s+', ' ', answers)
 
-        dict_summarization[questions.strip()] = [answers.strip() , reg_url_QA]
+        if questions.strip() == "How can we protect others and ourselves if we don't know who is infected?":
+            dict_summarization["How can we protect others?"] = [answers.strip() , reg_url_QA]
+        if questions.strip() == "What test should I get to see if I have COVID-19?":
+            dict_summarization["What test should I get if I have COVID-19?"] = [answers.strip() , reg_url_QA]
+        if len(questions.strip()) <= 46:
+            dict_summarization[questions.strip()] = [answers.strip() , reg_url_QA]
+        else:
+            dict_summarization[questions.strip()[:45]] = [answers.strip(), reg_url_QA]
 
     return dict_summarization
 
@@ -107,7 +114,6 @@ def write_dictionary(dictionary=None):
             json.dump(create_dict_for_summarization(), fp, ensure_ascii=False, indent=4, sort_keys=True)
         else:
             json.dump(dictionary,fp)
-
 
 
 
@@ -129,7 +135,7 @@ def main():
     # print(created_dict['covid-variants'][0])
     #
     # print(created_dict['vaccine']['sinovac_vaccine'][0])
-
+    # print(create_dict_for_summarization())
 
 
 if __name__ == "__main__":

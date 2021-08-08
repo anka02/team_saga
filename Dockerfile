@@ -27,6 +27,8 @@ WORKDIR /usr/src/app
 COPY requirements-docker.txt ./requirements.txt
 
 RUN set -xe; \
+    python -m venv venv; \
+    . venv/bin/activate; \
     python -m pip install --upgrade pip; \
     pip install --no-cache-dir -r requirements.txt; \
     pip install rasa-x --extra-index-url https://pypi.rasa.com/simple; \
@@ -41,6 +43,10 @@ COPY config.yml \
      domain.yml \
      endpoints.yml \
      ./
+
+RUN set -xe; \
+    . venv/bin/activate; \
+    rasa train;
 
 # User configuration
 

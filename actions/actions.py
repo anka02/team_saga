@@ -165,6 +165,7 @@ class ActionInfectionNumbersCountry(Action):
             if e['entity'] == 'region':
                 region = e['value'].lower()
                 print("region", region)
+
         if date == 'today':
             #date = datetime.today().strftime('%Y-%m-%d')
             #as a rule the last update is for yesterday
@@ -380,9 +381,60 @@ class ActionInfectionNumbersCities(Action):
             dispatcher.utter_message(
                 text=f"Could not find any entries for city {city.capitalize()}, please check your spelling")
 
-        print("This action is from Corona action")
 
-        return []
+# API for cites is closed.
+# class ActionInfectionNumbersCities(Action):
+#
+#     def name(self) -> Text:
+#         return "action_infection_numbers_by_cities"
+#
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#
+#         entities = tracker.latest_message['entities']
+#         if not entities:
+#             dispatcher.utter_message(text="Oops,sorry.The information is missing. Please try another country")
+#             return []
+#
+#         debug_print("Message : ", entities)
+#         city = None
+#         URL = "https://www.trackcorona.live/api/cities/"
+#
+#         for e in entities:
+#             if e['value'] == 'Hamburg': # because Hamburg is region and city
+#                 r = requests.get(url=URL + 'hamburg')
+#                 dispatcher.utter_message(
+#                     text=f"Current active cases in Hamburg are {r.json()['data'][0]['confirmed']} with {r.json()['data'][0]['dead']} death cases.")
+#                 dispatcher.utter_message(text="Take care of yourself and your family")
+#                 return []
+#
+#             if e['entity'] == 'city':
+#                 city = e['value'].lower()
+#                 r = requests.get(url= URL + city)
+#
+#         data = r.json()
+#         debug_print("DATA JSON: ", data)
+#
+#         if len(data['data']) > 1:
+#             possible_cities = []
+#             for location in data['data']:
+#                 possible_cities.append(location['location'])
+#
+#             dispatcher.utter_message(text="There are multiple cities with a similar name:" + str(possible_cities))
+#         elif len(data['data']) == 1:
+#             debug_print("DATA", data)
+#             casenumber = data['data'][0]['confirmed']
+#             death_numbers = data['data'][0]['dead']
+#             dispatcher.utter_message(text=f"Current active cases in {city.capitalize()} are {casenumber} with {death_numbers} death cases.")
+#             dispatcher.utter_message(text="Take care of yourself and your family")
+#         else:
+#             dispatcher.utter_message(
+#                 text=f"Could not find any entries for city {city.capitalize()}, please check your spelling")
+#
+#         print("This action is from Corona action")
+#
+#         return []
 
 class ActionCoronaInfoSummarize(Action):
 
@@ -410,10 +462,11 @@ class ActionCoronaInfoSummarize(Action):
 
         return []
 
-class ActionAccessSummary(Action):
+class ActionAcSum(Action):
 
     def name(self) -> Text:
-        return "action_access_summary"
+        return "action_ac_sum"
+        # changed because of callback query to the bot when button is pressed, 1-64 bytes in Telegram
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -422,30 +475,30 @@ class ActionAccessSummary(Action):
         entities = tracker.latest_message['entities']
 
         global DICTIONARY_SUMMARIZED
-        #for e in entities: # e should be list of strings,because of search_info function. Please change the code if it's not the case
-            #base_for_summarization = DICTIONARY_SUMMARIZED[e]
+
 
         with open (DICT_SUM_PATH) as jsonFile:
             DICTIONARY_SUMMARIZED = json.load(jsonFile)
 
-        #dispatcher.utter_message(text=DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
-
 
         print("Summarize Action Ran")
         print(entities)
-        print(DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
+        #print(DICTIONARY_SUMMARIZED['vaccine']['vaccine_general_info'])
 
-        summary_type = tracker.get_slot("summary")
+        summary_type = tracker.get_slot("sum")
+        # changed because of callback query to the bot when button is pressed, 1-64 bytes in Telegram
 
-        dispatcher.utter_message(DICTIONARY_SUMMARIZED[summary_type][0])
+        for text in DICTIONARY_SUMMARIZED[summary_type]:
+            dispatcher.utter_message(text)
 
         return []
 
 
-class ActionAccessSummaryVaccine(Action):
+class ActionAcSumVac(Action):
 
     def name(self) -> Text:
-        return "action_access_summary_vaccine"
+        return "action_ac_sum_vac"
+        # changed because of callback query to the bot when button is pressed, 1-64 bytes in Telegram
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -457,7 +510,9 @@ class ActionAccessSummaryVaccine(Action):
 
         vaccine_choice = tracker.get_slot("vaccine")
         vaccine_summary = DICTIONARY_SUMMARIZED["vaccine"][vaccine_choice]
-        dispatcher.utter_message(vaccine_summary[0])
+
+        for text in vaccine_summary:
+            dispatcher.utter_message(text)
 
 class ValidateGetCountryInfectionForm(FormValidationAction):
     def name(self) -> Text:

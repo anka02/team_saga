@@ -26,25 +26,42 @@ stories:
   - action: utter_bot_information
   - intent: summarized_info
   - action: utter_info_summarized
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "symptoms"
+      - sum: "symptoms"
   - slot_was_set:
-      - summary: "symptoms"
-  - action: action_access_summary
+      - sum: "symptoms"
+  - action: action_ac_sum
+  - action: utter_satisfication_end
 
-- story: Asking about summaries path vaccines
+#- story: Asking about summaries path vaccines
+#  steps:
+#  - intent: greet
+#  - action: utter_greet
+#  - action: utter_bot_information
+#  - intent: summarized_info
+#  - action: utter_info_summarized
+#  - intent: ac_sum_vac
+#  - action: utter_ask_vaccine
+#  - action: action_ac_sum_vac
+#  - action: utter_satisfication_end
+
+- story: Asking about summaries path vaccines full
   steps:
   - intent: greet
   - action: utter_greet
   - action: utter_bot_information
   - intent: summarized_info
   - action: utter_info_summarized
-  - intent: access_summary_vaccine
-  - action: check_if_happy_form
-  - action: action_access_summary_vaccine
+  - intent: ac_sum_vac
+  - action: utter_ask_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "az_vaccine"
+  - slot_was_set:
+      - vaccine: "az_vaccine"
+  - action: action_ac_sum_vac
   - action: utter_satisfication_end
-
 
 - story: Asking about infection numbers path country
   steps:
@@ -76,7 +93,6 @@ stories:
   - action: action_infection_numbers_country
   - action: utter_satisfication_end
 
-
 - story: Asking information about QANDA full path
   steps:
   - intent: greet
@@ -86,12 +102,12 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "Are there long-term effects of COVID-19?"
+      - sum: "Are there long-term effects of COVID-19?"
   - slot_was_set:
-      - summary: "Are there long-term effects of COVID-19?"
-  - action: action_access_summary
+      - sum: "Are there long-term effects of COVID-19?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -103,12 +119,12 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "What are the symptoms of COVID-19?"
+      - sum: "What are the symptoms of COVID-19?"
   - slot_was_set:
-      - summary: "What are the symptoms of COVID-19?"
-  - action: action_access_summary
+      - sum: "What are the symptoms of COVID-19?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -120,12 +136,12 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "What happens to people who get COVID-19?"
+      - sum: "What happens to people who get COVID-19?"
   - slot_was_set:
-      - summary: "What happens to people who get COVID-19?"
-  - action: action_access_summary
+      - sum: "What happens to people who get COVID-19?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -137,12 +153,12 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "How can we protect others and ourselves if we don't know who is infected?"
+      - sum: "How can we protect others?"
   - slot_was_set:
-      - summary: "How can we protect others and ourselves if we don't know who is infected?"
-  - action: action_access_summary
+      - sum: "How can we protect others?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -154,12 +170,12 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "When should I get a test for COVID-19?"
+      - sum: "When should I get a test for COVID-19?"
   - slot_was_set:
-      - summary: "When should I get a test for COVID-19?"
-  - action: action_access_summary
+      - sum: "When should I get a test for COVID-19?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -171,12 +187,11 @@ stories:
   - action: utter_info_summarized
   - intent: QANDA
   - action: utter_QANDA
-  - intent: access_summary
+  - intent: ac_sum
     entities:
-      - summary: "What test should I get to see if I have COVID-19?"
+      - sum: "What test should I get if I have COVID-19?"
   - slot_was_set:
-      - summary: "What test should I get to see if I have COVID-19?"
-  - action: action_access_summary
+      - sum: "What test should I get if I have COVID-19?"
+  - action: action_ac_sum
   - action: utter_satisfication_end
-
 
