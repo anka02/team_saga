@@ -64,7 +64,7 @@ Note :  On WINDOWS this Docker container should be configured and running under 
 ## Rasa
 
 Rasa is an open-source machine learning framework for automated conversations. It is capable of interpreting messages, holding conversations and connecting to messaging channels and APIs.
-The full project includes Rasa open source for training the NLU pipeline, integrating NLG into the Chatbot, Action Server for implementing custom actions. For UI frontend was used build-in RASA X UI and Telegram.
+The full project includes Rasa open source for training the NLU pipeline, integrating NLG into the Chatbot, Action Server for implementing custom actions. The RASA X UI and Telegram were used for the front-end.
 
 ### Rasa NLU
 To extract information from user messages the NLU pipeline should be able to recognize the user's intent and any entities their message contain. 
@@ -100,7 +100,9 @@ We use several APIs to query up-to-date Covid-19 information. These include:
 * `https://covid-api.com/api/reports/total` (COVID-19 confirmed case numbers by country)
 * `https://covid-api.thinklumo.com/data` (COVID-19 restrictions by country)
 * `https://www.trackcorona.live/api/cities/` (COVID-19 confirmed case numbers by city)
- 
+
+During finalization of the project, the API for city cases went offline, which is why we decided to not use cities for case/death numbers.
+
 `covid-api.com`, is based on public data by **Johns Hopkins CSSE** https://github.com/CSSEGISandData/COVID-19.
 The regulations, travel advisories, and travel restrictions are provided by Lumo's COVID-19 API, which uses IATA airport codes for fetching the location.
 
