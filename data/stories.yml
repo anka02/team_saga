@@ -31,7 +31,7 @@ stories:
       - sum: "symptoms"
   - slot_was_set:
       - sum: "symptoms"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 #- story: Asking about summaries path vaccines
@@ -60,7 +60,42 @@ stories:
       - vaccine: "az_vaccine"
   - slot_was_set:
       - vaccine: "az_vaccine"
-  - action: action_ac_sum_vac
+  - action: action_access_summary_vaccine
+  - action: utter_satisfication_end
+
+- story: Asking about summaries path vaccines full 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: ac_sum_vac
+  - action: utter_ask_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "az_vaccine"
+  - slot_was_set:
+      - vaccine: "az_vaccine"
+  - action: action_access_summary_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "moderna_vaccine"
+  - slot_was_set:
+      - vaccine: "moderna_vaccine"
+  - action: action_access_summary_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "biontech_vaccine"
+  - slot_was_set:
+      - vaccine: "biontech_vaccine"
+  - action: action_access_summary_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "sinopharm_vaccine"
+  - slot_was_set:
+      - vaccine: "sinopharm_vaccine"
+  - action: action_access_summary_vaccine
   - action: utter_satisfication_end
 
 - story: Asking about infection numbers path country
@@ -107,7 +142,7 @@ stories:
       - sum: "Are there long-term effects of COVID-19?"
   - slot_was_set:
       - sum: "Are there long-term effects of COVID-19?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -124,7 +159,7 @@ stories:
       - sum: "What are the symptoms of COVID-19?"
   - slot_was_set:
       - sum: "What are the symptoms of COVID-19?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -141,7 +176,7 @@ stories:
       - sum: "What happens to people who get COVID-19?"
   - slot_was_set:
       - sum: "What happens to people who get COVID-19?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -158,7 +193,7 @@ stories:
       - sum: "How can we protect others?"
   - slot_was_set:
       - sum: "How can we protect others?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -175,7 +210,7 @@ stories:
       - sum: "When should I get a test for COVID-19?"
   - slot_was_set:
       - sum: "When should I get a test for COVID-19?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
 - story: Asking information about QANDA full path
@@ -192,6 +227,49 @@ stories:
       - sum: "What test should I get if I have COVID-19?"
   - slot_was_set:
       - sum: "What test should I get if I have COVID-19?"
-  - action: action_ac_sum
+  - action: action_access_summary
   - action: utter_satisfication_end
 
+- story: Asking information about summaries then overview
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_bot_information
+  - intent: summarized_info
+  - action: utter_info_summarized
+  - intent: ac_sum
+    entities:
+      - sum: "symptoms"
+  - slot_was_set:
+      - sum: "symptoms"
+  - action: action_access_summary
+  - intent: ac_sum
+    entities:
+      - sum: "covid_overview"
+  - slot_was_set:
+      - sum: "covid_overview"
+  - action: action_access_summary
+  - intent: ac_sum_vac
+  - action: utter_ask_vaccine
+  - intent: choose_vaccine
+    entities:
+      - vaccine: "az_vaccine"
+  - slot_was_set:
+      - vaccine: "az_vaccine"
+  - action: action_access_summary_vaccine
+  - intent: ac_sum
+    entities:
+    - sum: "variants"
+  - slot_was_set:
+      - sum: "variants"
+  - action: action_access_summary
+  - intent: ac_sum
+    entities:
+    - sum: "What is COVID-19"
+  - slot_was_set:
+    - sum: "What is COVID-19"
+  - action: action_access_summary
+  - action: utter_info_summarized
+  - intent: QANDA
+  - action: utter_QANDA
+  - action: utter_satisfication_end
