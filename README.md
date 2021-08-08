@@ -1,4 +1,4 @@
-# Covid Chatbot with text Summarization
+# Covid-19 Chatbot for Up-to-dateInformation Retrieval and Long Text Summarization.
 
 ## team_saga
 
