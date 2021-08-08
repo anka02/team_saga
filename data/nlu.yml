@@ -16,6 +16,7 @@ nlu:
     - goodevening
     - good afternoon
     - Hello
+    - Hi
 - intent: goodbye
   examples: |
     - good afternoon
@@ -335,6 +336,8 @@ nlu:
     - case number in [Bayern](region)
     - [thailand](country)
     - [senegal](country)
+    - [germany](country)
+    - [germany](country)
 - intent: travel_restrictions
   examples: |
     - what rules are in [germany](country)
