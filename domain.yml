@@ -49,6 +49,10 @@ intents:
     use_entities: true
 - QANDA:
     use_entities: []
+- access_summary_vaccine:
+    use_entities: true
+- access_summary:
+    use_entities: true
 entities:
 - country
 - city
@@ -57,6 +61,7 @@ entities:
 - region
 - date
 - satisfaction
+- summary
 slots:
   sum:
     type: rasa.shared.core.slots.TextSlot
@@ -87,9 +92,9 @@ responses:
   utter_greet:
   - text: Hey! What do you want to ask me?
   utter_cheer_up:
-  - text: Here is something to cheer you up
-    custom:
-      sticker: "https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp"
+  - custom:
+      sticker: https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp
+    text: Here is something to cheer you up
   utter_did_that_help:
   - text: Did that help you?
   utter_happy:
@@ -103,26 +108,26 @@ responses:
   utter_travel_restrictions:
   - text: Stay informed stay safe.
   utter_ask_get_country_infection_form_country:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: EXIT FORM
       title: Exit
-    button_type: vertical
     text: Very well, which country do you want to know the infection numbers for? Click Type and type the country, else, click Exit.
   utter_ask_get_country_death_form_country:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: EXIT FORM
       title: Exit
-    button_type: vertical
     text: Very well, which country do you want to know the death numbers for? Click Type and type the country, else, click Exit.
   utter_ask_get_country_travel_restriction_form_country:
-    - buttons:
-      - payload: EXIT FORM
-        title: Exit
-      button_type: vertical
-      text: Very well, which country do you want to know the travel regulations for? Click Type and type the country, else, click Exit.
-
+  - button_type: vertical
+    buttons:
+    - payload: EXIT FORM
+      title: Exit
+    text: Very well, which country do you want to know the travel regulations for? Click Type and type the country, else, click Exit.
   utter_bot_information:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: /infection_numbers_country
       title: Case numbers for a specific country
     - payload: /death_numbers_country
@@ -131,11 +136,10 @@ responses:
       title: Travel restrictions for a specific country
     - payload: /summarized_info
       title: Summaries on other information about COVID
-    button_type: vertical
     text: I have a multitude of options to choose from. What topic are you interested in?
-
   utter_info_summarized:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: /ac_sum{{"sum":"symptoms"}}
       title: Symptoms
     - payload: /ac_sum{{"sum":"covid_overview"}}
@@ -148,11 +152,10 @@ responses:
       title: What is COVID-19
     - payload: /QANDA
       title: Frequently asked questions
-    button_type: vertical
     text: Which topic do you want to know more about?
-
   utter_ask_vaccine:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: /choose_vaccine{{"vaccine":"az_vaccine"}}
       title: Astra Zeneca
     - payload: /choose_vaccine{{"vaccine":"moderna_vaccine"}}
@@ -161,36 +164,33 @@ responses:
       title: Biontech
     - payload: /choose_vaccine{{"vaccine":"sinopharm_vaccine"}}
       title: Sinopharm
-    button_type: vertical
     text: Which vaccine are you interested in?
   utter_satisfication_end:
   - text: Thank you for using the COVID chatbot.
   utter_ask_satisfaction:
-  - buttons:
+  - button_type: vertical
+    buttons:
     - payload: /give_satisfaction{{"satisfaction":"positive"}}
       title: Yes
     - payload: /give_satisfaction{{"satisfaction":"negative"}}
       title: No
-    button_type: vertical
     text: Is this what you wanted?
-
   utter_QANDA:
-    - buttons:
-        - payload: /ac_sum{{"sum":"What are the symptoms of COVID-19?"}} #/ac_sum{{"sum":
-          title: What are the symptoms of COVID-19?
-        - payload: /ac_sum{{"sum":"Are there long-term effects of COVID-19?"}} #/ac_sum{{"sum":
-          title: Are there long-term effects of COVID-19?
-        - payload: /ac_sum{{"sum":"What happens to people who get COVID-19?"}} #/ac_sum_vac{{"sum":
-          title: What happens to people who get COVID-19?
-        - payload: /ac_sum{{"sum":"How can we protect others?"}} #/acc_sum{{"sum":"How can we protect others?"}}
-          title: How can we protect others?
-        - payload: /ac_sum{{"sum":"When should I get a test for COVID-19?"}} #/ac_sum{{"sum":
-          title: When should I get a test for COVID-19?
-        - payload: /ac_sum{{"sum":"What test should I get if I have COVID-19?"}} #/ac_sum{{"sum":"What test should I get if I have COVID-19?"}}
-          title: What test should I get to see if I have COVID-19?
-      button_type: vertical
-      text: Which question are you interested in?
-
+  - button_type: vertical
+    buttons:
+    - payload: /ac_sum{{"sum":"What are the symptoms of COVID-19?"}}
+      title: What are the symptoms of COVID-19?
+    - payload: /ac_sum{{"sum":"Are there long-term effects of COVID-19?"}}
+      title: Are there long-term effects of COVID-19?
+    - payload: /ac_sum{{"sum":"What happens to people who get COVID-19?"}}
+      title: What happens to people who get COVID-19?
+    - payload: /ac_sum{{"sum":"How can we protect others?"}}
+      title: How can we protect others?
+    - payload: /ac_sum{{"sum":"When should I get a test for COVID-19?"}}
+      title: When should I get a test for COVID-19?
+    - payload: /ac_sum{{"sum":"What test should I get if I have COVID-19?"}}
+      title: What test should I get to see if I have COVID-19?
+    text: Which question are you interested in?
 actions:
 - action_infection_numbers_country
 - action_travel_restrictions
