@@ -54,7 +54,7 @@ def create_dict_for_summarization():
     reg_url_bio = 'https://www.who.int/news-room/feature-stories/detail/who-can-take-the-pfizer-biontech-covid-19--vaccine'
     req_bio = Request(url=reg_url_bio, headers=headers)
     html_bio = urlopen(req_bio).read()
-    biontech_vaccine = " ".join(text_from_html(html_bio).split()[459:1491])
+    biontech_vaccine = " ".join(text_from_html(html_bio).split()[456:1488])
     dict_summarization['vaccine']['biontech_vaccine'] = [biontech_vaccine ,reg_url_bio]
 
     reg_url_sinopharm = 'https://www.who.int/news-room/feature-stories/detail/the-sinopharm-covid-19-vaccine-what-you-need-to-know'
