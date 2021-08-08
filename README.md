@@ -110,7 +110,7 @@ After filtering out unwanted entries the dataset consists of
 
 # Chatbot system and UI
 
-![UI](https://github.com/anka02/team_saga/blob/telegram/images/Telegram.png?raw=true =250x250)
+![UI](https://github.com/anka02/team_saga/blob/telegram/images/Telegram.png?raw=true | width=100)
 
 To extract information from user messages the NLU pipeline should be able to recognize the user's intent and any entities their message contain. 
 NLU training data consists of example user utterances categorized by intent. The data used in the NLU pipeline is stored in the `data` folder. Rasa uses a number of machine learning tools and models to extract entities and make predictions among other tasks as part of the NLU pipeline. The specific information is stored in the `config.yml` file and any specifications including languages and pipeline keys can be viewed and changed from there.
