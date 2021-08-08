@@ -221,7 +221,7 @@ class ActionDeathNumbersCountry(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         if tracker.latest_message['entities']:
-            country = tracker.latest_message['entities'][0]["value"]
+            country = tracker.latest_message['entities'][0]["value"].lower()
             print(country)
             print(type(country))
         else:
@@ -462,10 +462,10 @@ class ActionCoronaInfoSummarize(Action):
 
         return []
 
-class ActionAcSum(Action):
+class ActionAccessSummary(Action):
 
     def name(self) -> Text:
-        return "action_ac_sum"
+        return "action_access_summary"
         # changed because of callback query to the bot when button is pressed, 1-64 bytes in Telegram
 
     def run(self, dispatcher: CollectingDispatcher,
@@ -494,10 +494,10 @@ class ActionAcSum(Action):
         return []
 
 
-class ActionAcSumVac(Action):
+class ActionAccessSummaryVaccine(Action):
 
     def name(self) -> Text:
-        return "action_ac_sum_vac"
+        return "action_access_summary_vaccine"
         # changed because of callback query to the bot when button is pressed, 1-64 bytes in Telegram
 
     def run(self, dispatcher: CollectingDispatcher,
@@ -527,7 +527,7 @@ class ValidateGetCountryInfectionForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate country value."""
-        country = tracker.latest_message["text"]
+        country = tracker.latest_message["text"].lower()
         print("Starting validating")
         print(type(country), country)
         try:
@@ -563,7 +563,7 @@ class ValidateGetCountryInfectionForm(FormValidationAction):
         domain: DomainDict,
     ) -> Dict[Text, Any]:
         """Validate country value."""
-        country = tracker.latest_message["text"]
+        country = tracker.latest_message["text"].lower()
         print("Starting validating")
         print(type(country), country)
         try:

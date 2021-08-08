@@ -18,10 +18,9 @@ intents:
 - travel_restrictions
 - infection_numbers_by_cities
 - corona_info_summarize
-- access_summary
-- acces_summary_vaccine
+- ac_sum
+- ac_sum_vac
 - choose_vaccine
-- access_summary_vaccine
 - stop_form
 - exit:
     use_entities: []
@@ -42,7 +41,7 @@ entities:
 - vaccine
 - boolean_answer
 slots:
-  summary:
+  sum:
     type: text
     influence_conversation: false
   vaccine:

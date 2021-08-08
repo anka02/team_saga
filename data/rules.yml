@@ -139,7 +139,7 @@ rules:
   - slot_was_set:
     - requested_slot: null
   # The actions we want to run when the form is submitted.
-  - action: action_ac_sum_vac
+  - action: action_access_summary_vaccine
   - action: utter_satisfication_end
 
   # TRAVEL RESTRICTION START FORM
