@@ -61,6 +61,10 @@ In docker container:
 The default docker deployment includes running Rasa X and opening the Chatbot UI. The configuration of the Chatbot UIs mode can be changed in the 
 `entrypoint.sh` file. After making any changes in the configuration files, you need to rebuild the container.
 
+Telegram bot useful commands:
+
+ - To start the conversation or enter the main menu please greet the chatbot with `Hi`, `Hello` or any other greetings.
+ - To restart chatbot type `/restart`
 
 # Models and Implementation
 ![architecture](https://github.com/anka02/team_saga/blob/telegram/images/architecture.png?raw=true)
